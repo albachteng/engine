@@ -8,8 +8,10 @@ int main() {
   em.addEntity("bullet");
   em.addEntity("enemy");
   em.addEntity("player");
-  //   std::cout << em.getEntities("bullet").at(0) << std::endl;
-  // std::cout << em.getEntities("enemy").at(0) << std::endl;
+  std::cout << em.m_toAdd.front() << std::endl;
+  em.update();
+  std::cout << em.getEntities("bullet").front() << std::endl;
+  std::cout << em.getEntities("enemy").front() << std::endl;
   sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Test");
   while (window.isOpen()) {
     sf::Event event;
