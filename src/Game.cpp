@@ -3,6 +3,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 
+void Game::init(const std::string &config) {};
 Game::Game(const std::string &config) {
   init(config);
   m_window.create(sf::VideoMode(1280, 720), "title");
@@ -43,9 +44,34 @@ void Game::sRender() {
 };
 
 void Game::sMovement() {
+  Vec2f size = (Vec2f)m_window.getSize();
+  float height = size.y;
+  float width = size.x;
+  std::cout << "hello hello" << std::endl;
   for (auto &e : m_entityManager.getEntities()) {
+    float radius = e->get<CShape>().circle.getRadius();
     auto &transform = e->get<CTransform>();
     transform.pos += transform.vel;
+    if (transform.pos.x > width - radius) {
+      // move back, reverse vel
+      transform.pos.x = width - radius;
+      transform.vel.x *= -1.0f;
+    }
+    if (transform.pos.x < radius) {
+      // move back, reverse vel
+      transform.pos.x = radius;
+      transform.vel.x *= -1.0f;
+    }
+    if (transform.pos.y > height - radius) {
+      // move back, reverse vel
+      transform.pos.y = height - radius;
+      transform.vel.y *= -1.0f;
+    }
+    if (transform.pos.y < radius) {
+      // move back, reverse vel
+      transform.pos.y = radius;
+      transform.vel.y *= -1.0f;
+    }
   }
 };
 

@@ -1,68 +1,27 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/System/Vector2.hpp>
+#include "../include/Component.h"
 
-typedef sf::Vector2f Vec2f;
+CTransform::CTransform() = default;
+CTransform::CTransform(const Vec2f &p, const Vec2f &v, float a)
+    : pos(p), vel(v), angle(a){};
 
-class Component {
-public:
-  bool exists = false;
+CShape::CShape() = default;
+CShape::CShape(float radius, size_t points, const sf::Color &fill,
+               const sf::Color &outline, float thickness)
+    : circle(radius, points) {
+  circle.setFillColor(fill);
+  circle.setOutlineColor(outline);
+  circle.setOutlineThickness(thickness);
+  circle.setOrigin(radius, radius);
 };
 
-class CTransform : public Component {
-public:
-  Vec2f pos = {0.0, 0.0};
-  Vec2f vel = {0.0, 0.0};
-  float angle = 0;
-  CTransform() = default;
-  CTransform(const Vec2f &p, const Vec2f &v, float a)
-      : pos(p), vel(v), angle(a){};
-};
+CCollision::CCollision() = default;
+CCollision::CCollision(float r) : radius(r){};
 
-class CShape : public Component {
-public:
-  sf::CircleShape circle;
-  CShape() = default;
-  CShape(float radius, size_t points, const sf::Color &fill,
-         const sf::Color &outline, float thickness)
-      : circle(radius, points) {
-    circle.setFillColor(fill);
-    circle.setOutlineColor(outline);
-    circle.setOutlineThickness(thickness);
-    circle.setOrigin(radius, radius);
-  }
-};
+CScore::CScore() = default;
+CScore::CScore(int s) : score(s){};
 
-class CCollision : public Component {
-private:
-public:
-  float radius = 0;
-  CCollision() = default;
-  CCollision(float r) : radius(r){};
-};
+CLifespan::CLifespan() = default;
+CLifespan::CLifespan(int totalLifespan)
+    : lifespan(totalLifespan), remaining(totalLifespan){};
 
-class CScore : public Component {
-public:
-  int score = 0;
-  CScore() = default;
-  CScore(int s) : score(s){};
-};
-
-class CLifespan : public Component {
-public:
-  int lifespan = 0;
-  int remaining = 0;
-  CLifespan() = default;
-  CLifespan(int totalLifespan)
-      : lifespan(totalLifespan), remaining(totalLifespan){};
-};
-
-class CInput : public Component {
-public:
-  bool up = false;
-  bool down = false;
-  bool left = false;
-  bool right = false;
-  bool shoot = false;
-  CInput() = default;
-};
+CInput::CInput() = default;

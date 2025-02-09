@@ -1,28 +1,25 @@
-CC=g++
+CC = g++
+IDIR = ../include
+CFLAGS = -I$(IDIR)
 
-IDIR =../include
-CFLAGS=-I$(IDIR)
+OBJDIR = obj
+LIBDIR = ../lib
 
-ODIR=obj
-LDIR =../lib
+LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 
-LIBS=-lsfml-graphics -lsfml-window -lsfml-system
+# List source files
+SRC = $(wildcard *.cpp)
+OBJ = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
 
-_DEPS = Game.h
-DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
-
-_OBJ = test.o
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
-
-
-$(ODIR)/%.o: %.cpp $(DEPS)
+# Ensure obj directory exists before compiling
+$(OBJDIR)/%.o: %.cpp
+	mkdir -p $(OBJDIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 test: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
-
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
-
+	rm -f $(OBJDIR)/*.o test
+ 

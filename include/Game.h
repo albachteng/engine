@@ -1,4 +1,5 @@
-#include "../src/EntityManager.cpp"
+#pragma once
+#include "../include/EntityManager.h"
 #include <SFML/Graphics.hpp>
 
 struct Config {};
@@ -15,8 +16,8 @@ private:
   bool m_paused = false;
   bool m_running = true;
 
-  void init(const std::string &path) {};
-  void setPaused(bool paused) { m_paused = paused; };
+  void init(const std::string &path);
+  void setPaused(bool paused);
   void spawnEnemy();
 
 public:
