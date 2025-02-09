@@ -1,4 +1,4 @@
-#include "include/Game.h"
+#include "../include/Game.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>

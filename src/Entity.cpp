@@ -1,4 +1,4 @@
-#include "Component.cpp"
+#include "./Component.cpp"
 #include <string>
 #include <tuple>
 

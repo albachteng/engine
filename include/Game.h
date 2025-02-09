@@ -1,4 +1,4 @@
-#include "EntityManager.cpp"
+#include "../src/EntityManager.cpp"
 #include <SFML/Graphics.hpp>
 
 struct Config {};
