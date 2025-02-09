@@ -1,4 +1,5 @@
 CC=g++
+
 IDIR =../include
 CFLAGS=-I$(IDIR)
 
@@ -7,18 +8,18 @@ LDIR =../lib
 
 LIBS=-lsfml-graphics -lsfml-window -lsfml-system
 
-_DEPS = 
+_DEPS = Game.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = test.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
-$(ODIR)/%.o: %.c $(DEPS)
+$(ODIR)/%.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-testmake: test.o
-	$(CC) test.cpp -o test $(LIBS)
+test: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 
