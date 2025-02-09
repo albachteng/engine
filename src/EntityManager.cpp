@@ -23,7 +23,6 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
 
 void EntityManager::update() {
 
-  std::cout << "updating" << std::endl;
   for (auto e : m_toAdd) {
     std::cout << "pushing entity in update: " << e->tag() << std::endl;
     m_entities.push_back(e);

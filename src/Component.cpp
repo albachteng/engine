@@ -25,3 +25,8 @@ CLifespan::CLifespan(int totalLifespan)
     : lifespan(totalLifespan), remaining(totalLifespan){};
 
 CInput::CInput() = default;
+
+CBoundingBox::CBoundingBox(const Vec2f &size)
+    : size(size), halfsize(Vec2f{size.x / 2.0f, size.y / 2.0f}){};
+
+CGravity::CGravity() = default;
