@@ -1,4 +1,4 @@
-#include "../include/Entity.h"
+#include "../include/Entity.hpp"
 #include <string>
 
 size_t Entity::id() const { return m_id; };
