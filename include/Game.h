@@ -18,7 +18,7 @@ private:
 
   void init(const std::string &path);
   void setPaused(bool paused);
-  void spawnEnemy();
+  void spawnPlayer();
 
 public:
   Game(const std::string &config);
@@ -26,5 +26,6 @@ public:
   void sMovement();
   void sRender();
   void sCollision();
-  void sInput();
+  void sInput(sf::Event event);
+  void sGravity();
 };

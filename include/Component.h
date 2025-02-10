@@ -59,3 +59,16 @@ public:
   bool shoot = false;
   CInput();
 };
+
+class CBoundingBox : public Component {
+public:
+  Vec2f size;
+  Vec2f halfsize;
+  CBoundingBox(const Vec2f &s);
+};
+
+class CGravity : public Component {
+public:
+  Vec2f gravity = {0.0, 9.8f};
+  CGravity();
+};

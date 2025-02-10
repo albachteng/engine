@@ -2,7 +2,8 @@
 #include "Component.h"
 #include <tuple>
 
-typedef std::tuple<CTransform, CShape, CCollision, CInput, CScore, CLifespan>
+typedef std::tuple<CTransform, CShape, CCollision, CInput, CScore, CLifespan,
+                   CGravity>
     ComponentTuple;
 
 class Entity {
@@ -23,7 +24,7 @@ public:
   const std::string &tag() const;
 
   template <typename T> T &get() { return std::get<T>(m_components); };
-  template <typename T> bool has() const { return get<T>().exists; }
+  template <typename T> bool has() { return get<T>().exists; }
   template <typename T, typename... TArgs> T &add(TArgs &&...mArgs) {
     auto &component = get<T>();
     component = T(std::forward<TArgs>(mArgs)...);
