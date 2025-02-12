@@ -1,6 +1,8 @@
 #pragma once
+#include "../include/BaseScene.h"
 #include "../include/EntityManager.h"
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 struct Config {};
 
@@ -19,6 +21,7 @@ private:
   void init(const std::string &path);
   void setPaused(bool paused);
   void spawnPlayer();
+  std::shared_ptr<Scene> currentScene();
 
 public:
   Game(const std::string &config);
