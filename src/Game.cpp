@@ -1,4 +1,5 @@
 #include "../include/Game.h"
+#include "../include/Action.hpp"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
@@ -121,46 +122,20 @@ void Game::sInput(sf::Event event) {
 
   CInput &input = player->get<CInput>();
 
-  if (event.type == sf::Event::KeyPressed) {
+  if (event.type == sf::Event::KeyPressed ||
+      event.type == sf::Event::KeyReleased) {
     std::cout << "Key Pressed: " << event.key.code << std::endl;
-    switch (event.key.code) {
-    case sf::Keyboard::W:
-      input.up = true;
-      break;
-    case sf::Keyboard::A:
-      input.left = true;
-      break;
-    case sf::Keyboard::S:
-      input.down = true;
-      break;
-    case sf::Keyboard::D:
-      input.right = true;
-      break;
-    case sf::Keyboard::P:
-      m_paused = !m_paused;
-      break;
-    default:
-      break;
-    }
-  }
 
-  if (event.type == sf::Event::KeyReleased) {
-    std::cout << "Key Released: " << event.key.code << std::endl;
-    switch (event.key.code) {
-    case sf::Keyboard::W:
-      input.up = false;
-      break;
-    case sf::Keyboard::A:
-      input.left = false;
-      break;
-    case sf::Keyboard::S:
-      input.down = false;
-      break;
-    case sf::Keyboard::D:
-      input.right = false;
-      break;
-    default:
-      break;
+    if (currentScene()->getActionMap().find(event.key.code) ==
+        currentScene()->getActionMap().end()) {
+      return;
     }
+
+    const std::string actionType =
+        (event.type == sf::Event::KeyPressed) ? "START" : "END";
+
+    Action action(currentScene()->getActionMap().at(event.key.code),
+                  actionType);
+    currentScene()->doAction(action);
   }
 };
