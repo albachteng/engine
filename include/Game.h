@@ -1,6 +1,6 @@
 #pragma once
-#include "../include/BaseScene.h"
 #include "../include/EntityManager.h"
+#include "../include/GameScene.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 
@@ -17,11 +17,12 @@ private:
   int m_currentFrame = 0;
   bool m_paused = false;
   bool m_running = true;
+  std::shared_ptr<GameScene> m_currentScene;
 
   void init(const std::string &path);
   void setPaused(bool paused);
   void spawnPlayer();
-  std::shared_ptr<Scene> currentScene();
+  std::shared_ptr<GameScene> currentScene();
 
 public:
   Game(const std::string &config);

@@ -1,14 +1,18 @@
 #pragma once
-#include <string>
+#include <any>
 
 class Action {
-  std::string m_name = "NONE";
-  std::string m_type = "NONE";
+  std::any m_name;
+  std::any m_type;
 
 public:
   Action() = default;
-  Action(const std::string &name, const std::string &type)
-      : m_name(name), m_type(type){};
-  const std::string &name() { return m_name; };
-  const std::string &type() { return m_type; };
+  template <typename T, typename U>
+  Action(T name, U type) : m_name(name), m_type(type){};
+  template <typename T> const T &name() const {
+    return std::any_cast<const T &>(m_name);
+  };
+  template <typename T> const T &type() const {
+    return std::any_cast<const T &>(m_type);
+  };
 };

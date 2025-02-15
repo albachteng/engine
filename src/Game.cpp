@@ -1,5 +1,5 @@
 #include "../include/Game.h"
-#include "../include/Action.hpp"
+#include "../include/GameScene.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
@@ -12,6 +12,8 @@ Game::Game(const std::string &config) {
   m_window.create(sf::VideoMode(1280, 720), "title");
   m_window.setFramerateLimit(60);
 }; // read in config file
+
+std::shared_ptr<GameScene> Game::currentScene() { return m_currentScene; };
 
 void Game::run() {
   spawnPlayer();
@@ -134,8 +136,7 @@ void Game::sInput(sf::Event event) {
     const std::string actionType =
         (event.type == sf::Event::KeyPressed) ? "START" : "END";
 
-    Action action(currentScene()->getActionMap().at(event.key.code),
-                  actionType);
+    SceneActions action(currentScene()->getActionMap().at(event.key.code));
     currentScene()->doAction(action);
   }
 };
