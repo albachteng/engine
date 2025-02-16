@@ -21,7 +21,6 @@ private:
   Renderer *m_renderer;
 
   void init(const std::string &path);
-  void setPaused(bool paused);
   std::shared_ptr<Entity> spawnPlayer();
   std::shared_ptr<GameScene> currentScene();
 
