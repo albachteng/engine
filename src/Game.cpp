@@ -7,16 +7,18 @@
 #include <ostream>
 
 void Game::init(const std::string &config) {};
+
 Game::Game(const std::string &config) {
   init(config);
   m_window.create(sf::VideoMode(1280, 720), "title");
   m_window.setFramerateLimit(60);
+  m_currentScene = std::make_shared<GameScene>(spawnPlayer());
+  m_currentScene->init();
 }; // read in config file
 
 std::shared_ptr<GameScene> Game::currentScene() { return m_currentScene; };
 
 void Game::run() {
-  spawnPlayer();
   while (m_window.isOpen() && m_running) {
     m_entityManager.update();
     std::shared_ptr<Entity> player =
@@ -36,12 +38,13 @@ void Game::run() {
   }
 };
 
-void Game::spawnPlayer() {
+std::shared_ptr<Entity> Game::spawnPlayer() {
   auto e = m_entityManager.addEntity("player");
   e->add<CShape>(50.0, 5, sf::Color::Red, sf::Color::White, 3.0);
   e->add<CTransform>(Vec2f{200.0, 200.0}, Vec2f{3.0, 3.0}, 45.0);
   e->add<CInput>();
   e->add<CGravity>();
+  return e;
 };
 
 void Game::sRender() {
@@ -69,21 +72,6 @@ void Game::sMovement() {
     float radius = e->get<CShape>().circle.getRadius();
     auto &transform = e->get<CTransform>();
     transform.pos += transform.vel;
-    if (e->has<CInput>()) {
-      CInput &input = e->get<CInput>();
-      if (input.up) {
-        transform.vel += Vec2f{0.0f, -2.0f};
-      }
-      if (input.down) {
-        transform.vel += Vec2f{0.0f, 2.0f};
-      }
-      if (input.left) {
-        transform.vel += Vec2f{-2.0f, 0.0f};
-      }
-      if (input.right) {
-        transform.vel += Vec2f{2.0f, 0.0f};
-      }
-    }
     if (transform.pos.x > width - radius) {
       // move back, reverse vel
       transform.pos.x = width - radius;
@@ -108,35 +96,53 @@ void Game::sMovement() {
 };
 
 void Game::sInput(sf::Event event) {
-  auto players = m_entityManager.getEntities("player");
-
-  if (players.empty()) {
-    std::cerr << "No player entity found!" << std::endl;
-    return;
-  }
-
-  std::shared_ptr<Entity> player = players.front();
-
-  if (!player->has<CInput>()) {
-    std::cerr << "Player entity is missing CInput component!" << std::endl;
-    return;
-  }
-
-  CInput &input = player->get<CInput>();
-
-  if (event.type == sf::Event::KeyPressed ||
-      event.type == sf::Event::KeyReleased) {
-    std::cout << "Key Pressed: " << event.key.code << std::endl;
-
-    if (currentScene()->getActionMap().find(event.key.code) ==
-        currentScene()->getActionMap().end()) {
-      return;
+  auto scene = currentScene();
+  auto actionOpt = scene->getAction(event.key.code);
+  std::cout << "Code at sInput: " << event.key.code << std::endl;
+  if (actionOpt.has_value()) {
+    auto action = actionOpt.value();
+    switch (event.type) {
+    case sf::Event::KeyPressed:
+      currentScene()->doAction(action, ActionType::PRESSED);
+      break;
+    case sf::Event::KeyReleased:
+      currentScene()->doAction(action, ActionType::RELEASED);
+    default:
+      break;
     }
-
-    const std::string actionType =
-        (event.type == sf::Event::KeyPressed) ? "START" : "END";
-
-    SceneActions action(currentScene()->getActionMap().at(event.key.code));
-    currentScene()->doAction(action);
   }
 };
+
+// void Game::sInput(sf::Event event) {
+// auto players = m_entityManager.getEntities("player");
+//
+// if (players.empty()) {
+// std::cerr << "No player entity found!" << std::endl;
+// return;
+// }
+//
+// std::shared_ptr<Entity> player = players.front();
+//
+// if (!player->has<CInput>()) {
+// std::cerr << "Player entity is missing CInput component!" << std::endl;
+// return;
+// }
+//
+// CInput &input = player->get<CInput>();
+//
+// if (event.type == sf::Event::KeyPressed ||
+// event.type == sf::Event::KeyReleased) {
+// std::cout << "Key Pressed: " << event.key.code << std::endl;
+//
+// if (currentScene()->getActionMap().find(event.key.code) ==
+// currentScene()->getActionMap().end()) {
+// return;
+// }
+//
+// const std::string actionType =
+// (event.type == sf::Event::KeyPressed) ? "START" : "END";
+//
+// SceneActions action(currentScene()->getActionMap().at(event.key.code));
+// currentScene()->doAction(action);
+// }
+// };
