@@ -12,11 +12,11 @@ void GameScene::init() {
   std::cout << sf::Keyboard::Key::S << "S" << std::endl;
   std::cout << sf::Keyboard::Key::D << "D" << std::endl;
   std::cout << sf::Keyboard::Key::P << "P" << std::endl;
-  registerAction(sf::Keyboard::Key::W, SceneActions::UP);
-  registerAction(sf::Keyboard::Key::A, SceneActions::LEFT);
-  registerAction(sf::Keyboard::Key::S, SceneActions::DOWN);
-  registerAction(sf::Keyboard::Key::D, SceneActions::RIGHT);
-  registerAction(sf::Keyboard::Key::P, SceneActions::PAUSE);
+  registerAction(static_cast<int>(sf::Keyboard::W), SceneActions::UP);
+  registerAction(static_cast<int>(sf::Keyboard::A), SceneActions::LEFT);
+  registerAction(static_cast<int>(sf::Keyboard::S), SceneActions::DOWN);
+  registerAction(static_cast<int>(sf::Keyboard::D), SceneActions::RIGHT);
+  registerAction(static_cast<int>(sf::Keyboard::P), SceneActions::PAUSE);
 };
 
 void GameScene::handleAction(const SceneActions &action,

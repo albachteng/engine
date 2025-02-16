@@ -25,7 +25,7 @@ void Game::run() {
         m_entityManager.getEntities("player").front();
     // std::cout << player->has<CInput>() << std::endl;
     // run systems
-    sGravity();
+    // sGravity();
     sMovement();
     sRender();
     m_currentFrame++;
