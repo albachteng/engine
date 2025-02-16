@@ -1,5 +1,6 @@
 #include "../include/Game.h"
 #include "../include/GameScene.h"
+#include "../include/SFMLRenderer.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
@@ -12,6 +13,7 @@ Game::Game(const std::string &config) {
   init(config);
   m_window.create(sf::VideoMode(1280, 720), "title");
   m_window.setFramerateLimit(60);
+  m_renderer = new SFMLRenderer(m_window);
   m_currentScene = std::make_shared<GameScene>(spawnPlayer());
   m_currentScene->init();
 }; // read in config file
@@ -23,10 +25,10 @@ void Game::run() {
     m_entityManager.update();
     std::shared_ptr<Entity> player =
         m_entityManager.getEntities("player").front();
-    // std::cout << player->has<CInput>() << std::endl;
-    // run systems
     // sGravity();
-    sMovement();
+    if (!currentScene()->isPaused()) {
+      sMovement();
+    }
     sRender();
     m_currentFrame++;
     sf::Event event;
@@ -43,20 +45,11 @@ std::shared_ptr<Entity> Game::spawnPlayer() {
   e->add<CShape>(50.0, 5, sf::Color::Red, sf::Color::White, 3.0);
   e->add<CTransform>(Vec2f{200.0, 200.0}, Vec2f{3.0, 3.0}, 45.0);
   e->add<CInput>();
-  e->add<CGravity>();
+  // e->add<CGravity>();
   return e;
 };
 
-void Game::sRender() {
-  m_window.clear(sf::Color::Black);
-  for (auto e : m_entityManager.getEntities()) {
-    e->get<CShape>().circle.setPosition(e->get<CTransform>().pos);
-    e->get<CTransform>().angle += 1.0f;
-    e->get<CShape>().circle.setRotation(e->get<CTransform>().angle);
-    m_window.draw(e->get<CShape>().circle);
-  };
-  m_window.display();
-};
+void Game::sRender() { m_renderer->render(m_entityManager.getEntities()); };
 
 void Game::sGravity() {
   for (auto e : m_entityManager.getEntities()) {
@@ -69,28 +62,29 @@ void Game::sMovement() {
   float height = size.y;
   float width = size.x;
   for (auto &e : m_entityManager.getEntities()) {
+    e->get<CTransform>().angle += 1.0f;
     float radius = e->get<CShape>().circle.getRadius();
     auto &transform = e->get<CTransform>();
     transform.pos += transform.vel;
     if (transform.pos.x > width - radius) {
       // move back, reverse vel
       transform.pos.x = width - radius;
-      transform.vel.x *= -1.0f;
+      transform.vel.x *= -0.9f;
     }
     if (transform.pos.x < radius) {
       // move back, reverse vel
       transform.pos.x = radius;
-      transform.vel.x *= -1.0f;
+      transform.vel.x *= -0.9f;
     }
     if (transform.pos.y > height - radius) {
       // move back, reverse vel
       transform.pos.y = height - radius;
-      transform.vel.y *= -1.0f;
+      transform.vel.y *= -0.9f;
     }
     if (transform.pos.y < radius) {
       // move back, reverse vel
       transform.pos.y = radius;
-      transform.vel.y *= -1.0f;
+      transform.vel.y *= -0.9f;
     }
   }
 };
@@ -98,7 +92,6 @@ void Game::sMovement() {
 void Game::sInput(sf::Event event) {
   auto scene = currentScene();
   auto actionOpt = scene->getAction(event.key.code);
-  std::cout << "Code at sInput: " << event.key.code << std::endl;
   if (actionOpt.has_value()) {
     auto action = actionOpt.value();
     switch (event.type) {
@@ -112,37 +105,3 @@ void Game::sInput(sf::Event event) {
     }
   }
 };
-
-// void Game::sInput(sf::Event event) {
-// auto players = m_entityManager.getEntities("player");
-//
-// if (players.empty()) {
-// std::cerr << "No player entity found!" << std::endl;
-// return;
-// }
-//
-// std::shared_ptr<Entity> player = players.front();
-//
-// if (!player->has<CInput>()) {
-// std::cerr << "Player entity is missing CInput component!" << std::endl;
-// return;
-// }
-//
-// CInput &input = player->get<CInput>();
-//
-// if (event.type == sf::Event::KeyPressed ||
-// event.type == sf::Event::KeyReleased) {
-// std::cout << "Key Pressed: " << event.key.code << std::endl;
-//
-// if (currentScene()->getActionMap().find(event.key.code) ==
-// currentScene()->getActionMap().end()) {
-// return;
-// }
-//
-// const std::string actionType =
-// (event.type == sf::Event::KeyPressed) ? "START" : "END";
-//
-// SceneActions action(currentScene()->getActionMap().at(event.key.code));
-// currentScene()->doAction(action);
-// }
-// };

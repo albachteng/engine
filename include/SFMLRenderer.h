@@ -4,8 +4,11 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 class SFMLRenderer : public Renderer {
+private:
+  sf::RenderWindow &m_window;
 
 public:
-  explicit SFMLRenderer();
-  void render(sf::RenderWindow &window, EntityVec entities);
+  explicit SFMLRenderer(sf::RenderWindow &window);
+  void render();
+  void render(const EntityVec &entities);
 };

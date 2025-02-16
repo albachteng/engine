@@ -38,6 +38,7 @@ void GameScene::handleAction(const SceneActions &action,
       break;
     case SceneActions::PAUSE:
       std::cout << "PAUSED" << std::endl;
+      togglePaused();
       break;
     default:
       break;
@@ -60,3 +61,7 @@ void GameScene::handleAction(const SceneActions &action,
     }
   }
 };
+
+void GameScene::togglePaused() { m_paused = !m_paused; };
+
+bool GameScene::isPaused() { return m_paused; };

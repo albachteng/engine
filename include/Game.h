@@ -1,6 +1,7 @@
 #pragma once
 #include "../include/EntityManager.h"
 #include "../include/GameScene.h"
+#include "Renderer.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 
@@ -15,13 +16,13 @@ private:
   Config m_config;
   sf::Clock m_deltaClock;
   int m_currentFrame = 0;
-  bool m_paused = false;
   bool m_running = true;
   std::shared_ptr<GameScene> m_currentScene;
+  Renderer *m_renderer;
 
   void init(const std::string &path);
   void setPaused(bool paused);
-  void spawnPlayer();
+  std::shared_ptr<Entity> spawnPlayer();
   std::shared_ptr<GameScene> currentScene();
 
 public:

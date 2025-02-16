@@ -3,15 +3,23 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-SFMLRenderer::SFMLRenderer(){};
+SFMLRenderer::SFMLRenderer(sf::RenderWindow &window) : m_window(window){};
 
-void SFMLRenderer::render(sf::RenderWindow &window, EntityVec entities) {
-  window.clear();
+void SFMLRenderer::render() {
+  m_window.clear();
+  // render default scene/background, etc.
+  m_window.display();
+}
 
+void SFMLRenderer::render(const EntityVec &entities) {
+  m_window.clear(sf::Color::Black);
   for (auto &e : entities) {
     if (e->has<CShape>()) {
-      window.draw(e->get<CShape>().circle);
+      e->get<CShape>().circle.setPosition(e->get<CTransform>().pos);
+      e->get<CShape>().circle.setRotation(e->get<CTransform>().angle);
+      m_window.draw(e->get<CShape>().circle);
+      // other drawables, sprites, mesh, etc.
     }
   }
-  window.display();
-};
+  m_window.display();
+}
