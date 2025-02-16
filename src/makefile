@@ -1,14 +1,14 @@
 CC = g++
 IDIR = ../include
-CFLAGS = -I$(IDIR)
+CFLAGS = -I$(IDIR) -Wall -Wextra
 
 OBJDIR = obj
 LIBDIR = ../lib
 
-LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+LIBS = -lGL -lGLEW -lsfml-graphics -lsfml-window -lsfml-system
 
 # List source files
-SRC = $(wildcard *.cpp)
+SRC = $(wildcard *.cpp) ./glad.c
 OBJ = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
 
 # Ensure obj directory exists before compiling

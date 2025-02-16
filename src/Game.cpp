@@ -1,5 +1,6 @@
 #include "../include/Game.h"
 #include "../include/GameScene.h"
+#include "../include/OpenGLRenderer.hpp"
 #include "../include/SFMLRenderer.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -13,7 +14,7 @@ Game::Game(const std::string &config) {
   init(config);
   m_window.create(sf::VideoMode(1280, 720), "title");
   m_window.setFramerateLimit(60);
-  m_renderer = new SFMLRenderer(m_window);
+  m_renderer = new OpenGLRenderer(m_window);
   m_currentScene = std::make_shared<GameScene>(spawnPlayer());
   m_currentScene->init();
 }; // read in config file
