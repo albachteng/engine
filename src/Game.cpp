@@ -100,16 +100,32 @@ void Game::sMovement() {
 void Game::sInput(sf::Event event, float deltaTime) {
   auto scene = currentScene();
   auto actionOpt = scene->getAction(event.key.code);
-  if (actionOpt.has_value()) {
-    auto action = actionOpt.value();
-    switch (event.type) {
-    case sf::Event::KeyPressed:
+  switch (event.type) {
+  case sf::Event::KeyPressed: {
+    if (actionOpt.has_value()) {
+      auto action = actionOpt.value();
       currentScene()->doAction(action, ActionType::PRESSED, deltaTime);
-      break;
-    case sf::Event::KeyReleased:
-      currentScene()->doAction(action, ActionType::RELEASED, deltaTime);
-    default:
-      break;
     }
+    break;
+  }
+  case sf::Event::KeyReleased: {
+    if (actionOpt.has_value()) {
+      auto action = actionOpt.value();
+      currentScene()->doAction(action, ActionType::RELEASED, deltaTime);
+    }
+    break;
+  }
+  case sf::Event::MouseMoved: {
+    static float lastX = event.mouseMove.x;
+    static float lastY = event.mouseMove.y;
+    float xOffset = event.mouseMove.x - lastX;
+    float yOffset = event.mouseMove.y - lastY;
+    lastX = event.mouseMove.x;
+    lastY = event.mouseMove.y;
+    currentScene()->doMouseAction(xOffset, yOffset);
+    break;
+  }
+  default:
+    break;
   }
 };

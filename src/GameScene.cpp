@@ -48,6 +48,9 @@ void GameScene::handleAction(const SceneActions &action, const ActionType &type,
   }
 };
 
+void GameScene::doMouseAction(float xOffset, float yOffset) {
+  m_camera->processMouse(xOffset, yOffset);
+}
 // void GameScene::handleAction(const SceneActions &action,
 // const ActionType &type) {
 // auto &transform = m_player->get<CTransform>();

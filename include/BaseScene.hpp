@@ -10,8 +10,8 @@ protected:
   // Use std::any to allow different enums in derived classes
   std::map<int, ActionName> m_actionMap;
   // Entity m_player;
-  virtual void handleAction(const ActionName &action,
-                            const ActionType &type) = 0;
+  virtual void handleAction(const ActionName &action, const ActionType &type,
+                            float deltaTime) = 0;
 
 public:
   virtual ~BaseScene() = default;
@@ -32,7 +32,10 @@ public:
     return std::nullopt; // Return empty if key not found
   }
 
-  void doAction(const ActionName &action, const ActionType &type) {
-    handleAction(action, type);
+  void doAction(const ActionName &action, const ActionType &type,
+                float deltaTime) {
+    handleAction(action, type, deltaTime);
   }
+
+  void doMouseAction(float xOffset, float yOffset);
 };

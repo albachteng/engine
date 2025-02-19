@@ -30,6 +30,6 @@ public:
   void sMovement();
   void sRender();
   void sCollision();
-  void sInput(sf::Event event);
+  void sInput(sf::Event event, float deltaTime);
   void sGravity();
 };
