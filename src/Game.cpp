@@ -2,6 +2,7 @@
 #include "../include/GameScene.h"
 #include "../include/OpenGLRenderer.hpp"
 #include "../include/SFMLRenderer.h"
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
@@ -14,9 +15,9 @@ Game::Game(const std::string &config) {
   init(config);
   m_window.create(sf::VideoMode(1280, 720), "title");
   m_window.setFramerateLimit(60);
-  m_renderer = new OpenGLRenderer(m_window);
   m_currentScene = std::make_shared<GameScene>(spawnPlayer());
   m_currentScene->init();
+  m_renderer = new OpenGLRenderer(m_currentScene->camera(), m_window);
 }; // read in config file
 
 std::shared_ptr<GameScene> Game::currentScene() { return m_currentScene; };
@@ -24,20 +25,26 @@ std::shared_ptr<GameScene> Game::currentScene() { return m_currentScene; };
 void Game::run() {
   while (m_window.isOpen() && m_running) {
     m_entityManager.update();
-    std::shared_ptr<Entity> player =
-        m_entityManager.getEntities("player").front();
-    // sGravity();
-    if (!currentScene()->isPaused()) {
-      sMovement();
-    }
-    sRender();
-    m_currentFrame++;
     sf::Event event;
     while (m_window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed)
+      if (event.type == sf::Event::Closed) {
         m_window.close();
-      sInput(event);
+      }
+      float deltaTime = m_deltaClock.restart().asSeconds();
+      sInput(event, deltaTime);
     }
+
+    m_window.clear(sf::Color::Black);
+
+    if (!currentScene()->isPaused()) {
+      sMovement();
+      // sGravity();
+      // other pausable systems
+    }
+
+    sRender();
+    m_window.display();
+    m_currentFrame++;
   }
 };
 
@@ -90,17 +97,17 @@ void Game::sMovement() {
   }
 };
 
-void Game::sInput(sf::Event event) {
+void Game::sInput(sf::Event event, float deltaTime) {
   auto scene = currentScene();
   auto actionOpt = scene->getAction(event.key.code);
   if (actionOpt.has_value()) {
     auto action = actionOpt.value();
     switch (event.type) {
     case sf::Event::KeyPressed:
-      currentScene()->doAction(action, ActionType::PRESSED);
+      currentScene()->doAction(action, ActionType::PRESSED, deltaTime);
       break;
     case sf::Event::KeyReleased:
-      currentScene()->doAction(action, ActionType::RELEASED);
+      currentScene()->doAction(action, ActionType::RELEASED, deltaTime);
     default:
       break;
     }

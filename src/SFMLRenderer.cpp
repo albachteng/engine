@@ -6,13 +6,10 @@
 SFMLRenderer::SFMLRenderer(sf::RenderWindow &window) : m_window(window){};
 
 void SFMLRenderer::render() {
-  m_window.clear();
   // render default scene/background, etc.
-  m_window.display();
 }
 
 void SFMLRenderer::render(const EntityVec &entities) {
-  m_window.clear(sf::Color::Black);
   for (auto &e : entities) {
     if (e->has<CShape>()) {
       e->get<CShape>().circle.setPosition(e->get<CTransform>().pos);
@@ -21,5 +18,4 @@ void SFMLRenderer::render(const EntityVec &entities) {
       // other drawables, sprites, mesh, etc.
     }
   }
-  m_window.display();
 }
