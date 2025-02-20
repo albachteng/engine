@@ -2,8 +2,8 @@
 #include "Component.h"
 #include <tuple>
 
-typedef std::tuple<CTransform, CShape, CCollision, CInput, CScore, CLifespan,
-                   CGravity>
+typedef std::tuple<CTransform, CTransform3D, CShape, CCollision, CInput, CScore,
+                   CLifespan, CGravity, CTriangle>
     ComponentTuple;
 
 class Entity {

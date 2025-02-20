@@ -4,10 +4,13 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 SFMLRenderer::SFMLRenderer(sf::RenderWindow &window) : m_window(window){};
+SFMLRenderer::~SFMLRenderer(){};
 
 void SFMLRenderer::render() {
   // render default scene/background, etc.
 }
+
+void SFMLRenderer::init() {};
 
 void SFMLRenderer::render(const EntityVec &entities) {
   for (auto &e : entities) {

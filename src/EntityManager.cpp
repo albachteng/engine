@@ -17,7 +17,6 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
   auto e = std::shared_ptr<Entity>(new Entity(m_totalEntities++, tag));
   std::cout << "adding entity with tag: " << tag << std::endl;
   m_toAdd.push_back(e); // delay for iterator invalidation
-  std::cout << "success?" << std::endl;
   return e;
 };
 

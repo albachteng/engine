@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <glm/ext/vector_float3.hpp>
 
 typedef sf::Vector2f Vec2f;
 
@@ -17,6 +18,16 @@ public:
   float angle = 0;
   CTransform();
   CTransform(const Vec2f &p, const Vec2f &v, float a);
+};
+
+class CTransform3D : public Component {
+public:
+  glm::vec3 position = {0.0f, 0.0f, 0.0f};
+  glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
+  glm::vec3 scale = {0.0f, 0.0f, 0.0f};
+  CTransform3D();
+  CTransform3D(const glm::vec3 &position, const glm::vec3 &rotation,
+               const glm::vec3 &scale);
 };
 
 class CShape : public Component {
@@ -71,4 +82,16 @@ class CGravity : public Component {
 public:
   Vec2f gravity = {0.0, 9.8f};
   CGravity();
+};
+
+struct CTriangle : public Component {
+  // A simple triangle in 3D (9 floats: 3 vertices, each with x, y, z)
+public:
+  std::vector<float> vertices = {
+      -0.5f, -0.5f, 0.0f, // bottom left
+      0.5f,  -0.5f, 0.0f, // bottom right
+      0.0f,  0.5f,  0.0f  // top center
+  };
+  CTriangle();
+  // Optionally, add indices, colors, etc.
 };

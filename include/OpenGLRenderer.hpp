@@ -14,7 +14,7 @@ public:
   ~OpenGLRenderer();
   std::shared_ptr<Camera> m_camera;
 
-  void init();
+  void init() override;
   void render() override;
   void render(const EntityVec &entities) override;
   std::shared_ptr<Camera> camera();

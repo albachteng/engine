@@ -23,6 +23,7 @@ Game::Game(const std::string &config) {
 std::shared_ptr<GameScene> Game::currentScene() { return m_currentScene; };
 
 void Game::run() {
+  spawnTriangle();
   while (m_window.isOpen() && m_running) {
     m_entityManager.update();
     sf::Event event;
@@ -54,6 +55,14 @@ std::shared_ptr<Entity> Game::spawnPlayer() {
   e->add<CTransform>(Vec2f{200.0, 200.0}, Vec2f{3.0, 3.0}, 45.0);
   e->add<CInput>();
   // e->add<CGravity>();
+  return e;
+};
+
+std::shared_ptr<Entity> Game::spawnTriangle() {
+  auto e = m_entityManager.addEntity("triangle");
+  e->add<CTransform3D>(glm::vec3{1.0f, 1.0f, 0.0f}, glm::vec3{0.0f},
+                       glm::vec3{1.0f});
+  e->add<CTriangle>();
   return e;
 };
 

@@ -46,6 +46,7 @@ OpenGLRenderer::~OpenGLRenderer() {
 };
 
 void OpenGLRenderer::init() {
+  std::cout << "init called" << std::endl;
   // compile shaders
   unsigned int vertexShader =
       compileShader(vertexShaderSource, GL_VERTEX_SHADER);
@@ -69,30 +70,23 @@ void OpenGLRenderer::init() {
 
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
-  setupTriangle();
+  // setupTriangle();
+  std::cout << "setupTriangle is commented out" << std::endl;
   glEnable(GL_DEPTH_TEST);
 };
 
-// example: set up a simple triangle
+// TODO: move triangle setup into entity manager
 void OpenGLRenderer::setupTriangle() {
-  float vertices[] = {
-      -0.5f, -0.5f, 0.0f, // bottom left
-      0.5f,  -0.5f, 0.0f, // bottom right
-      0.0f,  0.5f,  0.0f, // top center
-  };
-
-  // glm::mat4 model = glm::mat4(1.0f); // identity matrix for model?
-  glm::mat4 model =
-      glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-  glGenVertexArrays(1, &VAO);
-  glGenBuffers(1, &VBO);
-  glBindVertexArray(VAO);
-  glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
-  glEnableVertexAttribArray(0);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindVertexArray(0);
+  // float vertices[] = {
+  //     -0.5f, -0.5f, 0.0f, // bottom left
+  //     0.5f,  -0.5f, 0.0f, // bottom right
+  //     0.0f,  0.5f,  0.0f, // top center
+  // };
+  //
+  // glm::mat4 model =
+  //     glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+  // glGenVertexArrays(1, &VAO);
+  // glGenBuffers(1, &VBO);
 };
 
 void OpenGLRenderer::render() {};
@@ -102,24 +96,53 @@ void OpenGLRenderer::render(const EntityVec &entities) {
   glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // dark grey-green
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glUseProgram(shaderProgram);
+  for (const auto &e : entities) {
+    if (e->has<CTriangle>() && e->has<CTransform3D>()) {
+      auto &triangle = e->get<CTriangle>();
+      auto &transform = e->get<CTransform3D>();
 
-  // setup matrices
-  glm::mat4 model =
-      glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-  glm::mat4 view = m_camera->getViewMatrix();
-  glm::mat4 projection = m_camera->getProjectionMatrix(1280.0f / 720.0f);
+      std::cout << "do we have a triangle?" << std::endl;
+      // generating buffers on the fly, improve in the future
+      glGenVertexArrays(1, &VAO);
+      glGenBuffers(1, &VBO);
+      glBindVertexArray(VAO);
+      glBindBuffer(GL_ARRAY_BUFFER, VBO);
+      glBufferData(GL_ARRAY_BUFFER, triangle.vertices.size() * sizeof(float),
+                   triangle.vertices.data(), GL_STATIC_DRAW);
+      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+                            (void *)0);
+      glEnableVertexAttribArray(0);
 
-  // update uniform locations
-  GLint modelLoc = glad_glGetUniformLocation(shaderProgram, "model");
-  GLint viewLoc = glad_glGetUniformLocation(shaderProgram, "view");
-  GLint projLoc = glad_glGetUniformLocation(shaderProgram, "projection");
-  glad_glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-  glad_glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-  glad_glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+      // TODO: model matrix to be computed based on entity's CTransform
+      glm::mat4 model = glm::mat4(1.0f);
+      model = glm::translate(model, transform.position);
+      model = glm::rotate(model, glm::radians(transform.rotation.x),
+                          glm::vec3(1.0f, 0.0f, 0.0f));
+      model = glm::rotate(model, glm::radians(transform.rotation.y),
+                          glm::vec3(0.0f, 1.0f, 0.0f));
+      model = glm::rotate(model, glm::radians(transform.rotation.z),
+                          glm::vec3(0.0f, 0.0f, 1.0f));
+      model = glm::scale(model, transform.scale);
+      glm::mat4 view = m_camera->getViewMatrix();
+      glm::mat4 projection = m_camera->getProjectionMatrix(1280.0f / 720.0f);
 
-  glBindVertexArray(VAO);
-  glDrawArrays(GL_TRIANGLES, 0, 3);
-  glBindVertexArray(0);
+      // update uniform locations
+      GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
+      GLint viewLoc = glGetUniformLocation(shaderProgram, "view");
+      GLint projLoc = glGetUniformLocation(shaderProgram, "projection");
+      glad_glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+      glad_glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+      glad_glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+      // draw call
+      glDrawArrays(GL_TRIANGLES, 0, 3);
+
+      glBindBuffer(GL_ARRAY_BUFFER, 0);
+      glBindVertexArray(0);
+      // glBindVertexArray(VAO);
+      glDeleteVertexArrays(1, &VAO);
+    }
+  }
 };
 
 // shader compilation helper

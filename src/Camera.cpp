@@ -43,7 +43,7 @@ void Camera::processKeyboard(char direction, float deltaTime) {
 
 // TODO: move this into scene action processing
 void Camera::processMouse(float xOffset, float yOffset) {
-  float sensitivity = 0.1f;
+  float sensitivity = 0.05f;
   yaw += xOffset * sensitivity;
   pitch += yOffset * sensitivity;
 

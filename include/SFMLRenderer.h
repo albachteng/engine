@@ -9,6 +9,8 @@ private:
 
 public:
   explicit SFMLRenderer(sf::RenderWindow &window);
-  void render();
-  void render(const EntityVec &entities);
+  ~SFMLRenderer();
+  void init() override;
+  void render() override;
+  void render(const EntityVec &entities) override;
 };
