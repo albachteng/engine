@@ -17,7 +17,8 @@ Game::Game(const std::string &config) {
   m_window.setFramerateLimit(60);
   m_currentScene = std::make_shared<GameScene>(spawnPlayer());
   m_currentScene->init();
-  m_renderer = new OpenGLRenderer(m_currentScene->camera(), m_window);
+  m_renderer =
+      new OpenGLRenderer(m_currentScene->cameraController().camera(), m_window);
 }; // read in config file
 
 std::shared_ptr<GameScene> Game::currentScene() { return m_currentScene; };
@@ -79,7 +80,10 @@ void Game::sMovement() {
   float height = size.y;
   float width = size.x;
   for (auto &e : m_entityManager.getEntities()) {
-    e->get<CTransform>().angle += 1.0f;
+    if (e->has<CTransform>())
+      e->get<CTransform>().angle += 1.0f;
+    if (e->has<CTransform3D>())
+      e->get<CTransform3D>().rotation += glm::vec3{1.0f, 1.0f, 1.0f};
     float radius = e->get<CShape>().circle.getRadius();
     auto &transform = e->get<CTransform>();
     transform.pos += transform.vel;
@@ -117,21 +121,22 @@ void Game::sInput(sf::Event event, float deltaTime) {
     }
     break;
   }
-  case sf::Event::KeyReleased: {
-    if (actionOpt.has_value()) {
-      auto action = actionOpt.value();
-      currentScene()->doAction(action, ActionType::RELEASED, deltaTime);
-    }
-    break;
-  }
+  // case sf::Event::KeyReleased: {
+  //   if (actionOpt.has_value()) {
+  //     auto action = actionOpt.value();
+  //     currentScene()->doAction(action, ActionType::RELEASED, deltaTime);
+  //   }
+  //   break;
+  // }
   case sf::Event::MouseMoved: {
-    static float lastX = event.mouseMove.x;
-    static float lastY = event.mouseMove.y;
+    static float lastX = m_window.getSize().x / 2;
+    static float lastY = m_window.getSize().y / 2;
     float xOffset = event.mouseMove.x - lastX;
-    float yOffset = event.mouseMove.y - lastY;
+    float yOffset = lastY - event.mouseMove.y; // inverted Y
     lastX = event.mouseMove.x;
     lastY = event.mouseMove.y;
-    currentScene()->doMouseAction(xOffset, yOffset);
+    currentScene()->doAction(SceneActions::MOUSE_MOVE, ActionType::PRESSED,
+                             deltaTime, xOffset, yOffset);
     break;
   }
   default:

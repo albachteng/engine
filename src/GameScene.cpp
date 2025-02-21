@@ -4,8 +4,10 @@
 #include <memory>
 
 GameScene::GameScene(const std::shared_ptr<Entity> &player)
-    : m_player(player),
-      m_camera(std::make_shared<Camera>(glm::vec3{0.0f, 0.0f, 3.0f})){};
+    : m_player(player), m_cameraController(std::make_shared<Camera>(
+                            glm::vec3{0.0f, 0.0f, 3.0f})){};
+
+CameraController GameScene::cameraController() { return m_cameraController; };
 
 void GameScene::init() {
   std::cout << "Init fired in GameScene" << std::endl;
@@ -14,33 +16,34 @@ void GameScene::init() {
   std::cout << sf::Keyboard::Key::S << "S" << std::endl;
   std::cout << sf::Keyboard::Key::D << "D" << std::endl;
   std::cout << sf::Keyboard::Key::P << "P" << std::endl;
-  registerAction(static_cast<int>(sf::Keyboard::W), SceneActions::UP);
+  registerAction(static_cast<int>(sf::Keyboard::W), SceneActions::FORWARD);
   registerAction(static_cast<int>(sf::Keyboard::A), SceneActions::LEFT);
-  registerAction(static_cast<int>(sf::Keyboard::S), SceneActions::DOWN);
+  registerAction(static_cast<int>(sf::Keyboard::S), SceneActions::BACK);
   registerAction(static_cast<int>(sf::Keyboard::D), SceneActions::RIGHT);
   registerAction(static_cast<int>(sf::Keyboard::P), SceneActions::PAUSE);
 };
 
-std::shared_ptr<Camera> GameScene::camera() { return m_camera; };
-
 void GameScene::handleAction(const SceneActions &action, const ActionType &type,
-                             float deltaTime) {
+                             float deltaTime, float xOffset, float yOffset) {
   if (type == ActionType::PRESSED) {
     switch (action) {
-    case SceneActions::UP:
-      m_camera->processKeyboard('W', deltaTime);
+    case SceneActions::FORWARD:
+      m_cameraController.handleKeyboard(CameraMovement::FORWARD, deltaTime);
       break;
     case SceneActions::LEFT:
-      m_camera->processKeyboard('A', deltaTime);
+      m_cameraController.handleKeyboard(CameraMovement::LEFT, deltaTime);
       break;
-    case SceneActions::DOWN:
-      m_camera->processKeyboard('S', deltaTime);
+    case SceneActions::BACK:
+      m_cameraController.handleKeyboard(CameraMovement::BACK, deltaTime);
       break;
     case SceneActions::RIGHT:
-      m_camera->processKeyboard('D', deltaTime);
+      m_cameraController.handleKeyboard(CameraMovement::RIGHT, deltaTime);
       break;
     case SceneActions::PAUSE:
-      m_camera->processKeyboard('P', deltaTime);
+      togglePaused();
+      break;
+    case SceneActions::MOUSE_MOVE:
+      m_cameraController.handleMouse(xOffset, yOffset);
       break;
     default:
       break;
@@ -49,7 +52,7 @@ void GameScene::handleAction(const SceneActions &action, const ActionType &type,
 };
 
 void GameScene::doMouseAction(float xOffset, float yOffset) {
-  m_camera->processMouse(xOffset, yOffset);
+  m_cameraController.handleMouse(xOffset, yOffset);
 }
 
 // void GameScene::handleAction(const SceneActions &action,

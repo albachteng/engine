@@ -1,4 +1,5 @@
 #include "../include/Camera.h"
+#include "../include/GameScene.h"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/vector_float3.hpp>
 #include <glm/geometric.hpp>
@@ -19,25 +20,33 @@ glm::mat4 Camera::getProjectionMatrix(float aspectRatio) const {
 };
 
 // TODO: move this into scene action processing
-void Camera::processKeyboard(char direction, float deltaTime) {
+void Camera::processKeyboard(CameraMovement movement, float deltaTime) {
   std::cout << "in process keyboard" << std::endl;
   float speed = 2.5f * deltaTime;
   std::cout << "speed: " << speed << std::endl;
-  if (direction == 'W') {
+  switch (movement) {
+  case CameraMovement::FORWARD: {
     std::cout << "W" << std::endl;
     position += speed * front;
+    break;
   }
-  if (direction == 'S') {
+  case CameraMovement::BACK: {
     std::cout << "S" << std::endl;
     position -= speed * front;
+    break;
   }
-  if (direction == 'A') {
+  case CameraMovement::LEFT: {
     std::cout << "A" << std::endl;
     position -= glm::normalize(glm::cross(front, up)) * speed;
+    break;
   }
-  if (direction == 'D') {
+  case CameraMovement::RIGHT: {
     std::cout << "D" << std::endl;
     position += glm::normalize(glm::cross(front, up)) * speed;
+    break;
+  }
+  default:
+    break;
   }
 };
 

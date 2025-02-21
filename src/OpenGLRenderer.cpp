@@ -1,7 +1,6 @@
 #include "../include/OpenGLRenderer.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <glm/ext/matrix_float4x4.hpp>
-#include <glm/ext/vector_float3.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <memory>
@@ -30,7 +29,8 @@ std::shared_ptr<Camera> OpenGLRenderer::camera() { return m_camera; };
 
 OpenGLRenderer::OpenGLRenderer(std::shared_ptr<Camera> camera,
                                sf::RenderWindow &window)
-    : m_window(window), m_camera(camera) {
+    : m_camera(camera), m_window(window) {
+  // m_camera = *new Camera(glm::vec3{1.0f, 1.0f, 0.0f});
   m_window.setActive(true); // active opengl context
   if (!gladLoadGL()) {
     std::cerr << "Failed to initialize OpenGL!" << std::endl;
@@ -101,7 +101,6 @@ void OpenGLRenderer::render(const EntityVec &entities) {
       auto &triangle = e->get<CTriangle>();
       auto &transform = e->get<CTransform3D>();
 
-      std::cout << "do we have a triangle?" << std::endl;
       // generating buffers on the fly, improve in the future
       glGenVertexArrays(1, &VAO);
       glGenBuffers(1, &VBO);
@@ -113,7 +112,6 @@ void OpenGLRenderer::render(const EntityVec &entities) {
                             (void *)0);
       glEnableVertexAttribArray(0);
 
-      // TODO: model matrix to be computed based on entity's CTransform
       glm::mat4 model = glm::mat4(1.0f);
       model = glm::translate(model, transform.position);
       model = glm::rotate(model, glm::radians(transform.rotation.x),
