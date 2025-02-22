@@ -16,10 +16,15 @@ $(OBJDIR)/%.o: %.cpp
 	mkdir -p $(OBJDIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+$(OBJDIR)/%d: %.cpp
+	$(CC) -MM -MT $(OBJDIR)/$*.o $(CFLAGS) $< > $(OBJDIR)/$*.d
+
+-include $(OBJDIR)/*.d
+
 test: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJDIR)/*.o test
+	rm -f $(OBJDIR)/*.o $(OBJDIR)/*.d test
  
