@@ -10,19 +10,23 @@
 const char *vertexShaderSource = R"(
 #version 330 core
 layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aColor;
+out vec3 currColor;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
 void main() {
   gl_Position = projection * view * model * vec4(aPos, 1.0);
+  currColor = aColor;
 })";
 
 const char *fragmentShaderSource = R"(
 #version 330 core
+in vec3 currColor;
 out vec4 FragColor;
 void main() {
-  FragColor = vec4(0.5, 0.2, 0.8, 1.0);
+  FragColor = vec4(currColor, 1.0);
 })";
 
 std::shared_ptr<Camera> OpenGLRenderer::camera() { return m_camera; };
@@ -71,7 +75,6 @@ void OpenGLRenderer::init() {
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
   // setupTriangle();
-  std::cout << "setupTriangle is commented out" << std::endl;
   glEnable(GL_DEPTH_TEST);
 };
 
@@ -101,16 +104,25 @@ void OpenGLRenderer::render(const EntityVec &entities) {
       auto &triangle = e->get<CTriangle>();
       auto &transform = e->get<CTransform3D>();
 
+      std::cout << "vertex data size: " << triangle.vertices.size()
+                << std::endl;
+      for (auto v : triangle.vertices) {
+        std::cout << v << " ";
+      }
+      std::cout << std::endl;
       // generating buffers on the fly, improve in the future
       glGenVertexArrays(1, &VAO);
       glGenBuffers(1, &VBO);
       glBindVertexArray(VAO);
       glBindBuffer(GL_ARRAY_BUFFER, VBO);
-      glBufferData(GL_ARRAY_BUFFER, triangle.vertices.size() * sizeof(float),
+      glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(float),
                    triangle.vertices.data(), GL_STATIC_DRAW);
-      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
                             (void *)0);
       glEnableVertexAttribArray(0);
+      glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+                            (void *)(3 * sizeof(float)));
+      glEnableVertexAttribArray(1);
 
       glm::mat4 model = glm::mat4(1.0f);
       model = glm::translate(model, transform.position);

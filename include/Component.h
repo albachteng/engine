@@ -24,7 +24,7 @@ class CTransform3D : public Component {
 public:
   glm::vec3 position = {0.0f, 0.0f, 0.0f};
   glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
-  glm::vec3 scale = {0.0f, 0.0f, 0.0f};
+  glm::vec3 scale = {1.0f, 1.0f, 1.0f};
   CTransform3D();
   CTransform3D(const glm::vec3 &position, const glm::vec3 &rotation,
                const glm::vec3 &scale);
@@ -84,13 +84,14 @@ public:
   CGravity();
 };
 
-struct CTriangle : public Component {
+class CTriangle : public Component {
   // A simple triangle in 3D (9 floats: 3 vertices, each with x, y, z)
 public:
   std::vector<float> vertices = {
-      -0.5f, -0.5f, 0.0f, // bottom left
-      0.5f,  -0.5f, 0.0f, // bottom right
-      0.0f,  0.5f,  0.0f  // top center
+      // vertices		  // colors
+      -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+      0.5f,  -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom right
+      0.0f,  0.5f,  0.0f, 0.0f, 1.0f, 0.0f  // top center
   };
   CTriangle();
   // Optionally, add indices, colors, etc.

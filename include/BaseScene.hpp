@@ -11,7 +11,8 @@ protected:
   std::map<int, ActionName> m_actionMap;
   // Entity m_player;
   virtual void handleAction(const ActionName &action, const ActionType &type,
-                            float deltaTime) = 0;
+                            float deltaTime = 0.0f, float xOffset = 0.0f,
+                            float yOffset = 0.0f) = 0;
 
 public:
   virtual ~BaseScene() = default;
@@ -33,8 +34,9 @@ public:
   }
 
   void doAction(const ActionName &action, const ActionType &type,
-                float deltaTime) {
-    handleAction(action, type, deltaTime);
+                float deltaTime = 0.0f, float xOffset = 0.0f,
+                float yOffset = 0.0f) {
+    handleAction(action, type, deltaTime, xOffset, yOffset);
   }
 
   void doMouseAction(float xOffset, float yOffset);
