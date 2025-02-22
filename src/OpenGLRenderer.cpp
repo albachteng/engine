@@ -11,22 +11,33 @@ const char *vertexShaderSource = R"(
 #version 330 core
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aColor;
+
 out vec3 currColor;
+out vec4 ViewPos;
+
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
 void main() {
   gl_Position = projection * view * model * vec4(aPos, 1.0);
+  ViewPos = view * model * vec4(aPos, 1.0);
   currColor = aColor;
 })";
 
 const char *fragmentShaderSource = R"(
 #version 330 core
+in vec4 ViewPos;
 in vec3 currColor;
+
 out vec4 FragColor;
+
+float near = 0.1;
+float far = 15;
+
 void main() {
-  FragColor = vec4(currColor, 1.0);
+    float depth = (-ViewPos.z - near) / (far - near);
+    FragColor = vec4(vec3(depth) * currColor, 1.0);
 })";
 
 std::shared_ptr<Camera> OpenGLRenderer::camera() { return m_camera; };
@@ -104,12 +115,6 @@ void OpenGLRenderer::render(const EntityVec &entities) {
       auto &triangle = e->get<CTriangle>();
       auto &transform = e->get<CTransform3D>();
 
-      std::cout << "vertex data size: " << triangle.vertices.size()
-                << std::endl;
-      for (auto v : triangle.vertices) {
-        std::cout << v << " ";
-      }
-      std::cout << std::endl;
       // generating buffers on the fly, improve in the future
       glGenVertexArrays(1, &VAO);
       glGenBuffers(1, &VBO);

@@ -23,7 +23,7 @@ private:
   void init(const std::string &path);
   std::shared_ptr<Entity> spawnPlayer();
   std::shared_ptr<GameScene> currentScene();
-  std::shared_ptr<Entity> spawnTriangle();
+  void spawnTriangle();
 
 public:
   Game(const std::string &config);

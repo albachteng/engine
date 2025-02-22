@@ -5,6 +5,7 @@ CFLAGS = -I$(IDIR) -Wall -Wextra
 OBJDIR = obj
 LIBDIR = ../lib
 
+# link libraries
 LIBS = -lGL -lGLEW -lsfml-graphics -lsfml-window -lsfml-system
 
 # List source files
@@ -16,9 +17,11 @@ $(OBJDIR)/%.o: %.cpp
 	mkdir -p $(OBJDIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+# generate dependency files
 $(OBJDIR)/%d: %.cpp
 	$(CC) -MM -MT $(OBJDIR)/$*.o $(CFLAGS) $< > $(OBJDIR)/$*.d
 
+# include the dependencies 
 -include $(OBJDIR)/*.d
 
 test: $(OBJ)

@@ -59,12 +59,18 @@ std::shared_ptr<Entity> Game::spawnPlayer() {
   return e;
 };
 
-std::shared_ptr<Entity> Game::spawnTriangle() {
-  auto e = m_entityManager.addEntity("triangle");
-  e->add<CTransform3D>(glm::vec3{1.0f, 1.0f, 0.0f}, glm::vec3{0.0f},
-                       glm::vec3{1.0f});
-  e->add<CTriangle>();
-  return e;
+void Game::spawnTriangle() {
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      for (int k = 0; k < 3; k++) {
+        auto e = m_entityManager.addEntity("triangle");
+        e->add<CTransform3D>(
+            glm::vec3{i * 2 * 1.0f, j * 3 * 1.0f, k * 4 * 1.0f},
+            glm::vec3{0.0f}, glm::vec3{1.0f});
+        e->add<CTriangle>();
+      }
+    }
+  }
 };
 
 void Game::sRender() { m_renderer->render(m_entityManager.getEntities()); };

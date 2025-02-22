@@ -85,7 +85,8 @@ public:
 };
 
 class CTriangle : public Component {
-  // A simple triangle in 3D (9 floats: 3 vertices, each with x, y, z)
+  // A simple triangle in 3D
+  // 18 floats: 3 vertices, each with x, y, z, R, G, B float values
 public:
   std::vector<float> vertices = {
       // vertices		  // colors
