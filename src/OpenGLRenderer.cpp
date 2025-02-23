@@ -45,7 +45,6 @@ std::shared_ptr<Camera> OpenGLRenderer::camera() { return m_camera; };
 OpenGLRenderer::OpenGLRenderer(std::shared_ptr<Camera> camera,
                                sf::RenderWindow &window)
     : m_camera(camera), m_window(window) {
-  // m_camera = *new Camera(glm::vec3{1.0f, 1.0f, 0.0f});
   m_window.setActive(true); // active opengl context
   if (!gladLoadGL()) {
     std::cerr << "Failed to initialize OpenGL!" << std::endl;
@@ -89,20 +88,6 @@ void OpenGLRenderer::init() {
   glEnable(GL_DEPTH_TEST);
 };
 
-// TODO: move triangle setup into entity manager
-void OpenGLRenderer::setupTriangle() {
-  // float vertices[] = {
-  //     -0.5f, -0.5f, 0.0f, // bottom left
-  //     0.5f,  -0.5f, 0.0f, // bottom right
-  //     0.0f,  0.5f,  0.0f, // top center
-  // };
-  //
-  // glm::mat4 model =
-  //     glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-  // glGenVertexArrays(1, &VAO);
-  // glGenBuffers(1, &VBO);
-};
-
 void OpenGLRenderer::render() {};
 
 // render a single triangle
@@ -129,6 +114,7 @@ void OpenGLRenderer::render(const EntityVec &entities) {
                             (void *)(3 * sizeof(float)));
       glEnableVertexAttribArray(1);
 
+      // matrix transforms for model, view and projection space
       glm::mat4 model = glm::mat4(1.0f);
       model = glm::translate(model, transform.position);
       model = glm::rotate(model, glm::radians(transform.rotation.x),
@@ -154,7 +140,6 @@ void OpenGLRenderer::render(const EntityVec &entities) {
 
       glBindBuffer(GL_ARRAY_BUFFER, 0);
       glBindVertexArray(0);
-      // glBindVertexArray(VAO);
       glDeleteVertexArrays(1, &VAO);
     }
   }

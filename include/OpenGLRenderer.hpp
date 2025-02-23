@@ -21,7 +21,5 @@ public:
 private:
   sf::RenderWindow &m_window;
   unsigned int VAO, VBO, shaderProgram;
-
-  void setupTriangle();
   unsigned int compileShader(const char *source, GLenum type);
 };
