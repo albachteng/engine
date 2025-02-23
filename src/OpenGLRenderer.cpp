@@ -1,4 +1,5 @@
 #include "../include/OpenGLRenderer.hpp"
+#include "../include/FileLoader.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <glm/ext/matrix_float4x4.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -7,38 +8,11 @@
 #include <ostream>
 
 // sample vertex and fragment shaders:
-const char *vertexShaderSource = R"(
-#version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aColor;
+const char *vertexShaderSource =
+    FileLoader::loadFileAsCharPtr("./ColorShader.vert");
 
-out vec3 currColor;
-out vec4 ViewPos;
-
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
-
-void main() {
-  gl_Position = projection * view * model * vec4(aPos, 1.0);
-  ViewPos = view * model * vec4(aPos, 1.0);
-  currColor = aColor;
-})";
-
-const char *fragmentShaderSource = R"(
-#version 330 core
-in vec4 ViewPos;
-in vec3 currColor;
-
-out vec4 FragColor;
-
-float near = 0.1;
-float far = 15;
-
-void main() {
-    float depth = (-ViewPos.z - near) / (far - near);
-    FragColor = vec4(vec3(depth) * currColor, 1.0);
-})";
+const char *fragmentShaderSource =
+    FileLoader::loadFileAsCharPtr("./DepthFragment.frag");
 
 std::shared_ptr<Camera> OpenGLRenderer::camera() { return m_camera; };
 

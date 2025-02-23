@@ -16,4 +16,4 @@ public:
   loadFileAsUniqueCharPtr(const std::string &path);
 };
 
-// TODO: ChunkedFileLoader and/or CachedFileLoader
+// TODO: ChunkedFileLoader, CachedFileLoader, shader hot reloading?
