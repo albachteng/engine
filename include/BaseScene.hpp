@@ -1,4 +1,5 @@
 #pragma once
+#include "InputEvent.hpp"
 #include <any>
 #include <iostream>
 #include <map>
@@ -18,6 +19,9 @@ public:
   virtual ~BaseScene() = default;
 
   virtual void init() = 0; // Derived classes register actions here
+
+  virtual void processInput(const InputEvent &type, float xOffset = 0.0f,
+                            float yOffset = 0.0f, float deltaTime = 0.0f) = 0;
 
   std::map<int, ActionName> getActionMap() { return m_actionMap; };
 

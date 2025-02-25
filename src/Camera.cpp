@@ -20,28 +20,24 @@ glm::mat4 Camera::getProjectionMatrix(float aspectRatio) const {
 };
 
 // TODO: move this into scene action processing
-void Camera::processKeyboard(CameraMovement movement, float deltaTime) {
+void Camera::move(CameraMovement movement, float deltaTime) {
   std::cout << "in process keyboard" << std::endl;
   float speed = 2.5f * deltaTime;
   std::cout << "speed: " << speed << std::endl;
   switch (movement) {
   case CameraMovement::FORWARD: {
-    std::cout << "W" << std::endl;
     position += speed * front;
     break;
   }
   case CameraMovement::BACK: {
-    std::cout << "S" << std::endl;
     position -= speed * front;
     break;
   }
   case CameraMovement::LEFT: {
-    std::cout << "A" << std::endl;
     position -= glm::normalize(glm::cross(front, up)) * speed;
     break;
   }
   case CameraMovement::RIGHT: {
-    std::cout << "D" << std::endl;
     position += glm::normalize(glm::cross(front, up)) * speed;
     break;
   }
@@ -51,7 +47,7 @@ void Camera::processKeyboard(CameraMovement movement, float deltaTime) {
 };
 
 // TODO: move this into scene action processing
-void Camera::processMouse(float xOffset, float yOffset) {
+void Camera::rotate(float xOffset, float yOffset) {
   float sensitivity = 0.05f;
   yaw += xOffset * sensitivity;
   pitch += yOffset * sensitivity;
