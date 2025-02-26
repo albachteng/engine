@@ -21,6 +21,8 @@ public:
   // to avoid breaking polymorphism, dangerous
   // not all scenes will require a player pointer
   GameScene(const std::shared_ptr<Entity> &player = nullptr);
+  GameScene(const std::shared_ptr<InputController> inputController,
+            const std::shared_ptr<Entity> &player = nullptr);
   void init() override;
   void togglePaused();
   bool isPaused();
@@ -28,6 +30,9 @@ public:
   std::shared_ptr<CameraController> cameraController();
   std::shared_ptr<InputController> inputController();
   void handleEvent(const sf::Event &event);
+  void handleAction(const SceneActions &action, const ActionType &type,
+                    float deltaTime = 0.0f, float xOffset = 0.0f,
+                    float yOffset = 0.0f) override;
 
 protected:
   void processInput(const InputEvent &event, float xOffset = 0.0f,

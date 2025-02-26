@@ -15,10 +15,12 @@ Game::Game(const std::string &config) {
   init(config);
   m_window.create(sf::VideoMode(1280, 720), "title");
   m_window.setFramerateLimit(60);
-  m_currentScene = std::make_shared<GameScene>(spawnPlayer());
+  std::shared_ptr<InputController> inputController =
+      std::make_shared<InputController>();
+  m_currentScene = std::make_shared<GameScene>(inputController, spawnPlayer());
   m_currentScene->init();
-  m_renderer =
-      new OpenGLRenderer(m_currentScene->cameraController().camera(), m_window);
+  m_renderer = new OpenGLRenderer(m_currentScene->cameraController()->camera(),
+                                  m_window);
 }; // read in config file
 
 std::shared_ptr<GameScene> Game::currentScene() { return m_currentScene; };

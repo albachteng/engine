@@ -3,11 +3,12 @@
 #include <iostream>
 #include <memory>
 
-GameScene::GameScene(const std::shared_ptr<Entity> &player)
-    : m_player(player),
+GameScene::GameScene(const std::shared_ptr<InputController> inputController,
+                     const std::shared_ptr<Entity> &player)
+    : m_player(player), m_inputController(inputController),
       m_cameraController(std::make_shared<CameraController>(
           std::make_shared<Camera>(glm::vec3{0.0f, 0.0f, 3.0f}),
-          std::make_shared<InputController>())) {
+          inputController)) {
 
   m_cameraController->registerControls();
   // m_inputController.bindInput();
@@ -48,3 +49,6 @@ void GameScene::processInput(const InputEvent &event, float xOffset,
 void GameScene::togglePaused() { m_paused = !m_paused; };
 
 bool GameScene::isPaused() { return m_paused; };
+
+void GameScene::handleAction(const SceneActions &action, const ActionType &type,
+                             float deltaTime, float xOffset, float yOffset) {};

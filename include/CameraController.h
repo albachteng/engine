@@ -11,7 +11,6 @@ private:
 public:
   CameraController(std::shared_ptr<Camera> camera,
                    std::shared_ptr<IInputController> input);
-  // void processAction(ActionType action);
   void handleEvent(const InputEvent &event, float x = 0.0f, float y = 0.0f,
                    float deltaTime = 0.0f);
   void registerControls();
