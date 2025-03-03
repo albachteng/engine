@@ -13,8 +13,7 @@ public:
   virtual void
   registerAxisListener(const InputEvent &event,
                        std::function<void(float, float)> listener) = 0;
-  virtual void handleEvent(const InputEvent &event, float x = 0.0f,
-                           float y = 0.0f, float deltaTime = 0.0f) = 0;
+  virtual void handleEvent(const InputEvent &event, float deltaTime = 0.0f) = 0;
 };
 
 class InputController : public IInputController {
@@ -37,11 +36,12 @@ public:
     m_axisListeners[event] = listener;
   };
 
-  void handleEvent(const InputEvent &event, float x = 0.0f, float y = 0.0f,
-                   float deltaTime = 0.0f) override {
+  void handleEvent(const InputEvent &event, float deltaTime = 0.0f) override {
     if (m_listeners.find(event) != m_listeners.end())
       m_listeners[event](deltaTime);
-    if (m_axisListeners.find(event) != m_axisListeners.end())
+    if (m_axisListeners.find(event) != m_axisListeners.end()) {
+      auto [x, y] = std::get<std::pair<float, float>>(event.data);
       m_axisListeners[event](x, y);
+    }
   };
 };

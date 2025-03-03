@@ -24,6 +24,8 @@ std::shared_ptr<InputController> GameScene::inputController() {
 
 void GameScene::init() {
   std::cout << "Init fired in GameScene" << std::endl;
+  m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::P},
+                                      [this](float) { togglePaused(); });
   // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::W},
   //                                     [](float) { /* TODO: */ });
   // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::A},
@@ -31,8 +33,6 @@ void GameScene::init() {
   // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::S},
   //                                     [](float) { /* TODO: */ });
   // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::D},
-  //                                     [](float) { /* TODO: */ });
-  // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::P},
   //                                     [](float) { /* TODO: */ });
 };
 

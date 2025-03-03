@@ -37,17 +37,6 @@ void CameraController::registerControls() {
       });
 };
 
-// void CameraController::processAction(T action) {
-// this is where you process actions
-
-//   switch (action) {
-//   case 1:
-//     break;
-//   default:
-//     break;
-//   }
-// };
-
 void CameraController::handleEvent(const InputEvent &input, float deltaTime) {
   m_inputController->handleEvent(input, deltaTime);
 };
