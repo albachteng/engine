@@ -40,6 +40,7 @@ public:
   void doAction(const ActionName &action, const ActionType &type,
                 float deltaTime = 0.0f, float xOffset = 0.0f,
                 float yOffset = 0.0f) {
+    std::cout << "Action: " << action << " Type: " << type << std::endl;
     handleAction(action, type, deltaTime, xOffset, yOffset);
   }
 

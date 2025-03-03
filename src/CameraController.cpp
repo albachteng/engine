@@ -1,4 +1,5 @@
 #include "../include/CameraController.h"
+#include <iostream>
 #include <memory>
 
 CameraController::CameraController(std::shared_ptr<Camera> camera,
@@ -11,6 +12,7 @@ std::shared_ptr<IInputController> CameraController::inputController() {
 };
 
 void CameraController::registerControls() {
+  std::cout << "registering camera controls" << std::endl;
   // this is where you connect the input controller to the camera behavior
   m_inputController->registerListener(
       {InputType::Keyboard, sf::Keyboard::W}, [this](float deltaTime) {
@@ -29,8 +31,10 @@ void CameraController::registerControls() {
         m_camera->move(CameraMovement::RIGHT, deltaTime);
       });
   m_inputController->registerAxisListener(
-      {InputType::MouseMove, std::pair<float, float>{}},
-      [this](float x, float y) { m_camera->rotate(x, y); });
+      {InputType::MouseMove, {}}, /* any pair */ [this](float x, float y) {
+        std::cout << "firing axis listener: " << x << ", " << y << std::endl;
+        m_camera->rotate(x, y);
+      });
 };
 
 // void CameraController::processAction(T action) {

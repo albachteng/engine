@@ -34,7 +34,6 @@ public:
                     float deltaTime = 0.0f, float xOffset = 0.0f,
                     float yOffset = 0.0f) override;
 
-protected:
   void processInput(const InputEvent &event, float xOffset = 0.0f,
                     float yOffset = 0.0f, float deltaTime = 0.0f) override;
 };

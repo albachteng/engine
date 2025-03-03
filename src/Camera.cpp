@@ -48,6 +48,7 @@ void Camera::move(CameraMovement movement, float deltaTime) {
 
 // TODO: move this into scene action processing
 void Camera::rotate(float xOffset, float yOffset) {
+  std::cout << "rotating: " << xOffset << ", " << yOffset << std::endl;
   float sensitivity = 0.05f;
   yaw += xOffset * sensitivity;
   pitch += yOffset * sensitivity;

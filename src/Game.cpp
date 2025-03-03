@@ -5,6 +5,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <cstdlib>
 #include <iostream>
 #include <memory>
 #include <ostream>
@@ -13,7 +14,7 @@ void Game::init(const std::string &config) {};
 
 Game::Game(const std::string &config) {
   init(config);
-  m_window.create(sf::VideoMode(1280, 720), "title");
+  m_window.create(sf::VideoMode(1280, 720), "sfml");
   m_window.setFramerateLimit(60);
   std::shared_ptr<InputController> inputController =
       std::make_shared<InputController>();
@@ -118,14 +119,43 @@ void Game::sMovement() {
   }
 };
 
+std::optional<InputEvent> Game::convertToInputEvent(const sf::Event &event) {
+  switch (event.type) {
+  case sf::Event::KeyPressed: {
+    return InputEvent{InputType::Keyboard, event.key.code};
+    break;
+  }
+  case sf::Event::MouseMoved: {
+    std::cout << "mouse moved" << ": " << event.mouseMove.x << ", "
+              << event.mouseMove.y << std::endl;
+
+    static float lastX = m_window.getSize().x / 2;
+    static float lastY = m_window.getSize().y / 2;
+    if (abs(event.mouseMove.x - lastX) < 2 &&
+        abs(event.mouseMove.y - lastY) < 2)
+      return std::nullopt; // Skip minor movements
+    float xOffset = event.mouseMove.x - lastX;
+    float yOffset = lastY - event.mouseMove.y; // inverted Y
+    lastX = event.mouseMove.x;
+    lastY = event.mouseMove.y;
+    return InputEvent{InputType::MouseMove,
+                      std::pair<float, float>{(float)xOffset, (float)yOffset}};
+    break;
+  }
+  default:
+    return std::nullopt;
+    break;
+  }
+}
+
 void Game::sInput(sf::Event event, float deltaTime) {
   auto scene = currentScene();
-  auto actionOpt = scene->getAction(event.key.code);
+  auto actionOpt = convertToInputEvent(event);
   switch (event.type) {
   case sf::Event::KeyPressed: {
     if (actionOpt.has_value()) {
       auto action = actionOpt.value();
-      currentScene()->doAction(action, ActionType::PRESSED, deltaTime);
+      currentScene()->processInput(action, 0.0f, 0.0f, deltaTime);
     }
     break;
   }
@@ -137,14 +167,13 @@ void Game::sInput(sf::Event event, float deltaTime) {
   //   break;
   // }
   case sf::Event::MouseMoved: {
-    static float lastX = m_window.getSize().x / 2;
-    static float lastY = m_window.getSize().y / 2;
-    float xOffset = event.mouseMove.x - lastX;
-    float yOffset = lastY - event.mouseMove.y; // inverted Y
-    lastX = event.mouseMove.x;
-    lastY = event.mouseMove.y;
-    currentScene()->doAction(SceneActions::MOUSE_MOVE, ActionType::PRESSED,
-                             deltaTime, xOffset, yOffset);
+    if (actionOpt.has_value()) {
+      auto action = actionOpt.value();
+      auto [x, y] = std::get<std::pair<float, float>>(action.data);
+      std::cout << "x, y: " << x << ", " << y << std::endl;
+      std::cout << "delta: " << deltaTime << std::endl;
+      currentScene()->processInput(action, x, y, deltaTime);
+    }
     break;
   }
   default:

@@ -1,9 +1,11 @@
 #pragma once
 #include "../include/EntityManager.h"
 #include "../include/GameScene.h"
+#include "InputEvent.hpp"
 #include "Renderer.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <optional>
 
 struct Config {};
 
@@ -33,4 +35,5 @@ public:
   void sCollision();
   void sInput(sf::Event event, float deltaTime);
   void sGravity();
+  std::optional<InputEvent> convertToInputEvent(const sf::Event &event);
 };

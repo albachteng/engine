@@ -24,21 +24,16 @@ std::shared_ptr<InputController> GameScene::inputController() {
 
 void GameScene::init() {
   std::cout << "Init fired in GameScene" << std::endl;
-  std::cout << sf::Keyboard::Key::W << "W" << std::endl;
-  std::cout << sf::Keyboard::Key::A << "A" << std::endl;
-  std::cout << sf::Keyboard::Key::S << "S" << std::endl;
-  std::cout << sf::Keyboard::Key::D << "D" << std::endl;
-  std::cout << sf::Keyboard::Key::P << "P" << std::endl;
-  m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::W},
-                                      [](float) { /* TODO: */ });
-  m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::A},
-                                      [](float) { /* TODO: */ });
-  m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::S},
-                                      [](float) { /* TODO: */ });
-  m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::D},
-                                      [](float) { /* TODO: */ });
-  m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::P},
-                                      [](float) { /* TODO: */ });
+  // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::W},
+  //                                     [](float) { /* TODO: */ });
+  // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::A},
+  //                                     [](float) { /* TODO: */ });
+  // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::S},
+  //                                     [](float) { /* TODO: */ });
+  // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::D},
+  //                                     [](float) { /* TODO: */ });
+  // m_inputController->registerListener({InputType::Keyboard, sf::Keyboard::P},
+  //                                     [](float) { /* TODO: */ });
 };
 
 void GameScene::processInput(const InputEvent &event, float xOffset,

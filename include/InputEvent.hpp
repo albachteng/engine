@@ -20,6 +20,10 @@ struct InputEvent {
       data;
 
   bool operator==(const InputEvent &other) const {
+    // we only need to know the MouseMove's type, not an exact match on data
+    if (type == InputType::MouseMove || other.type == InputType::MouseMove) {
+      return type == other.type;
+    }
     return type == other.type && data == other.data;
   };
 };
