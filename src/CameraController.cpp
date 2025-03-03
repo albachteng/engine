@@ -48,7 +48,6 @@ void CameraController::registerControls() {
 //   }
 // };
 
-void CameraController::handleEvent(const InputEvent &input, float x, float y,
-                                   float deltaTime) {
-  m_inputController->handleEvent(input, x, y, deltaTime);
+void CameraController::handleEvent(const InputEvent &input, float deltaTime) {
+  m_inputController->handleEvent(input, deltaTime);
 };

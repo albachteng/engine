@@ -36,9 +36,8 @@ void GameScene::init() {
   //                                     [](float) { /* TODO: */ });
 };
 
-void GameScene::processInput(const InputEvent &event, float xOffset,
-                             float yOffset, float deltaTime) {
-  m_inputController->handleEvent(event, xOffset, yOffset, deltaTime);
+void GameScene::processInput(const InputEvent &event, float deltaTime) {
+  m_inputController->handleEvent(event, deltaTime);
 };
 
 void GameScene::togglePaused() { m_paused = !m_paused; };
