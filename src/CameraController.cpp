@@ -13,7 +13,6 @@ std::shared_ptr<IInputController> CameraController::inputController() {
 
 void CameraController::registerControls() {
   std::cout << "registering camera controls" << std::endl;
-  // this is where you connect the input controller to the camera behavior
   m_inputController->registerListener(
       {InputType::Keyboard, sf::Keyboard::W}, [this](float deltaTime) {
         m_camera->move(CameraMovement::FORWARD, deltaTime);

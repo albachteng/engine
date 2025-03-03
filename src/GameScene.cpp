@@ -11,7 +11,6 @@ GameScene::GameScene(const std::shared_ptr<InputController> inputController,
           inputController)) {
 
   m_cameraController->registerControls();
-  // m_inputController.bindInput();
 };
 
 std::shared_ptr<CameraController> GameScene::cameraController() {
@@ -43,6 +42,3 @@ void GameScene::processInput(const InputEvent &event, float deltaTime) {
 void GameScene::togglePaused() { m_paused = !m_paused; };
 
 bool GameScene::isPaused() { return m_paused; };
-
-void GameScene::handleAction(const SceneActions &action, const ActionType &type,
-                             float deltaTime, float xOffset, float yOffset) {};
