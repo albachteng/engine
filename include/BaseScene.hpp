@@ -11,9 +11,9 @@ protected:
   // Use std::any to allow different enums in derived classes
   std::map<int, ActionName> m_actionMap;
   // Entity m_player;
-  virtual void handleAction(const ActionName &action, const ActionType &type,
-                            float deltaTime = 0.0f, float xOffset = 0.0f,
-                            float yOffset = 0.0f) = 0;
+  // virtual void handleAction(const ActionName &action, const ActionType &type,
+  //                           float deltaTime = 0.0f, float xOffset = 0.0f,
+  //                           float yOffset = 0.0f) = 0;
 
 public:
   virtual ~BaseScene() = default;
