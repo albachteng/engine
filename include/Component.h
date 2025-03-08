@@ -97,3 +97,21 @@ public:
   CTriangle();
   // Optionally, add indices, colors, etc.
 };
+
+class CAABB : public Component {
+public:
+  glm::vec3 min;
+  glm::vec3 max;
+
+  CAABB();
+  CAABB(const glm::vec3 &center, const glm::vec3 &halfsize);
+};
+
+class CMovement3D : public Component {
+public:
+  glm::vec3 vel;
+  glm::vec3 acc;
+
+  CMovement3D();
+  CMovement3D(const glm::vec3 &velocity, const glm::vec3 &acceleration);
+};

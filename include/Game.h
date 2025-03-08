@@ -1,6 +1,7 @@
 #pragma once
 #include "../include/EntityManager.h"
 #include "../include/GameScene.h"
+#include "Component.h"
 #include "InputEvent.hpp"
 #include "Renderer.h"
 #include <SFML/Graphics.hpp>
@@ -30,10 +31,11 @@ private:
 public:
   Game(const std::string &config);
   void run();
-  void sMovement();
+  void sMovement(float deltaTime = 0);
   void sRender();
   void sCollision();
   void sInput(sf::Event event, float deltaTime);
   void sGravity();
   std::optional<InputEvent> convertToInputEvent(const sf::Event &event);
+  bool AABBIntersect(const CAABB &a, const CAABB &b);
 };

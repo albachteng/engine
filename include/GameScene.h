@@ -8,9 +8,8 @@
 #include <memory>
 
 enum class SceneActions { FORWARD, BACK, LEFT, RIGHT, PAN, PAUSE };
-enum class ActionType { PRESSED, RELEASED };
 
-class GameScene : public BaseScene<SceneActions, ActionType> {
+class GameScene : public BaseScene<SceneActions> {
 private:
   std::shared_ptr<Entity> m_player;
   bool m_paused = false;

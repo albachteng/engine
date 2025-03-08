@@ -3,7 +3,7 @@
 #include <tuple>
 
 typedef std::tuple<CTransform, CTransform3D, CShape, CCollision, CInput, CScore,
-                   CLifespan, CGravity, CTriangle>
+                   CLifespan, CGravity, CTriangle, CMovement3D, CAABB>
     ComponentTuple;
 
 class Entity {

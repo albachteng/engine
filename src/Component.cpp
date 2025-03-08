@@ -37,3 +37,15 @@ CBoundingBox::CBoundingBox(const Vec2f &size)
 CGravity::CGravity() = default;
 
 CTriangle::CTriangle() = default;
+
+CAABB::CAABB() = default;
+CAABB::CAABB(const glm::vec3 &center, const glm::vec3 &halfsize) {
+  min = center - halfsize;
+  max = center + halfsize;
+}
+
+CMovement3D::CMovement3D() = default;
+
+CMovement3D::CMovement3D(const glm::vec3 &velocity,
+                         const glm::vec3 &acceleration)
+    : vel(velocity), acc(acceleration){};
