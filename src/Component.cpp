@@ -49,3 +49,6 @@ CMovement3D::CMovement3D() = default;
 CMovement3D::CMovement3D(const glm::vec3 &velocity,
                          const glm::vec3 &acceleration)
     : vel(velocity), acc(acceleration){};
+
+CSelection::CSelection() = default;
+CSelection::CSelection(Vec2i pos) : grid_position(pos){};

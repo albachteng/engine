@@ -5,6 +5,7 @@
 #include <glm/ext/vector_float3.hpp>
 
 typedef sf::Vector2f Vec2f;
+typedef sf::Vector2i Vec2i;
 
 class Component {
 public:
@@ -114,4 +115,12 @@ public:
 
   CMovement3D();
   CMovement3D(const glm::vec3 &velocity, const glm::vec3 &acceleration);
+};
+
+class CSelection : public Component {
+public:
+  Vec2i grid_position;
+
+  CSelection();
+  CSelection(Vec2i pos);
 };

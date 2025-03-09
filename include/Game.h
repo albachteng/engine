@@ -1,6 +1,6 @@
 #pragma once
 #include "../include/EntityManager.h"
-#include "../include/GameScene.h"
+#include "../include/MapScene.h"
 #include "Component.h"
 #include "InputEvent.hpp"
 #include "Renderer.h"
@@ -20,13 +20,14 @@ private:
   sf::Clock m_deltaClock;
   int m_currentFrame = 0;
   bool m_running = true;
-  std::shared_ptr<GameScene> m_currentScene;
+  std::shared_ptr<MapScene> m_currentScene;
   Renderer *m_renderer;
 
   void init(const std::string &path);
   std::shared_ptr<Entity> spawnPlayer();
-  std::shared_ptr<GameScene> currentScene();
+  std::shared_ptr<MapScene> currentScene();
   void spawnTriangle();
+  void spawnMapNodes();
 
 public:
   Game(const std::string &config);
@@ -36,6 +37,5 @@ public:
   void sCollision();
   void sInput(sf::Event event, float deltaTime);
   void sGravity();
-  std::optional<InputEvent> convertToInputEvent(const sf::Event &event);
   bool AABBIntersect(const CAABB &a, const CAABB &b);
 };

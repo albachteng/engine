@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Window/Event.hpp>
 #include <functional>
-#include <string>
+#include <iostream>
 #include <unordered_map>
 
 template <typename Action> class ActionController {
@@ -24,6 +24,7 @@ public:
 
   void handleEvent(const Action &action, float deltaTime = 0.0f,
                    float xOffset = 0.0f, float yOffset = 0.0f) {
+    std::cout << "handleEvent" << std::endl;
     if (m_listeners.find(action) != m_listeners.end())
       m_listeners[action](deltaTime);
     if (m_axisListeners.find(action) != m_axisListeners.end()) {

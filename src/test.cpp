@@ -5,10 +5,10 @@
 
 int main() {
   Game g = Game{"path"};
-  if (!gladLoadGL()) {
-    std::cerr << "failed to initialize GLAD" << std::endl;
-    return -1;
-  }
+  // if (!gladLoadGL()) {
+  //   std::cerr << "failed to initialize GLAD" << std::endl;
+  //   return -1;
+  // }
   g.run();
   return 0;
 }
