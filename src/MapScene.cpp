@@ -1,16 +1,26 @@
 #include "../include/MapScene.h"
+#include <cstdlib>
 #include <memory>
 
 void MapScene::onUnload() {};
-void MapScene::update(float deltaTime) {};
-void MapScene::render() {};
 
-MapScene::MapScene(const std::shared_ptr<Entity> &player) : m_player(player){};
+void MapScene::update(float deltaTime) { m_entityManager.update(); };
 
-MapScene::MapScene(
-    const std::shared_ptr<ActionController<MapActions>> inputController,
-    const std::shared_ptr<Entity> &player)
-    : m_player(player), m_actionController(inputController){};
+void MapScene::render() { m_renderer->render(m_entityManager.getEntities()); };
+
+MapScene::MapScene(sf::RenderWindow &window) {
+  m_player = spawnPlayer();
+  m_window_size = (Vec2f)window.getSize(); // TODO: handle resize
+  m_renderer = std::make_unique<SFMLRenderer>(window);
+  m_actionController = std::make_shared<ActionController<MapActions>>();
+  spawnMapNodes();
+};
+
+std::shared_ptr<Entity> MapScene::spawnPlayer() {
+  auto e = m_entityManager.addEntity("player");
+  e->add<CInput>();
+  return e;
+};
 
 void MapScene::onLoad() {
   std::cout << "Init fired in MapScene" << std::endl;
@@ -85,3 +95,79 @@ void MapScene::processInput(const InputEvent &input, float deltaTime) {
 void MapScene::togglePaused() { m_paused = !m_paused; };
 
 bool MapScene::isPaused() { return m_paused; };
+
+void MapScene::spawnMapNodes() {
+  std::cout << "entering spawnMapNodes" << std::endl;
+  int cols = 10;
+  int rows = 10;
+  float node_height = m_window_size.y / cols;
+  float node_width = m_window_size.x / rows;
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < rows; j++) {
+
+      std::cout << "spawn map nodes loop: " << i << ", " << j << std::endl;
+      auto e = m_entityManager.addEntity("map node");
+      bool isSelected = i == 0 && j == 0;
+      e->add<CShape>(node_height * .4f, 4,
+                     isSelected ? sf::Color::Black : sf::Color::White,
+                     isSelected ? sf::Color::White : sf::Color::Cyan, 3.0f);
+      float x = i * node_width + node_width * 0.5f;
+      float y = j * node_height + node_height * 0.5f;
+      e->add<CTransform>(Vec2f{x, y}, Vec2f{0.0f, 0.0f}, 45.0f);
+      e->add<CSelection>(Vec2i{i, j});
+    }
+  }
+};
+
+void MapScene::sMovement(float deltaTime) {
+  float height = m_window_size.y;
+  float width = m_window_size.x;
+  // MapNode selection updates
+  for (auto &e : m_entityManager.getEntities("map node")) {
+    auto cursor = getCursor();
+    std::cout << "movement: " << cursor.x << cursor.y << std::endl;
+    auto selection = e->get<CSelection>();
+    auto &shape = e->get<CShape>();
+
+    if (cursor == selection.grid_position) {
+      shape.circle.setFillColor(sf::Color::Black);
+      shape.circle.setOutlineColor(sf::Color::White);
+    } else {
+      shape.circle.setFillColor(sf::Color::White);
+      shape.circle.setOutlineColor(sf::Color::Cyan);
+    }
+  };
+};
+
+void MapScene::sInput(sf::Event event, float deltaTime) {
+  switch (event.type) {
+  case sf::Event::KeyPressed: {
+    processInput(InputEvent{InputType::Keyboard, event.key.code}, deltaTime);
+    break;
+  }
+  // case sf::Event::KeyReleased: {
+  //     currentScene()->processInput(InputEvent{InputType::KeyReleased, },
+  //     ActionType::RELEASED, deltaTime);
+  //   }
+  //   break;
+  // }
+  case sf::Event::MouseMoved: {
+    static float lastX = m_window_size.x / 2;
+    static float lastY = m_window_size.y / 2;
+    if (abs(event.mouseMove.x - lastX) < 2 &&
+        abs(event.mouseMove.y - lastY) < 2)
+      return; // Skip minor movements
+    float xOffset = event.mouseMove.x - lastX;
+    float yOffset = lastY - event.mouseMove.y; // inverted Y
+    lastX = event.mouseMove.x;
+    lastY = event.mouseMove.y;
+    std::cout << "delta: " << deltaTime << std::endl;
+    processInput(InputEvent{InputType::MouseMove,
+                            std::pair<float, float>{xOffset, yOffset}},
+                 deltaTime);
+    break;
+  }
+  default:
+    break;
+  }
+};

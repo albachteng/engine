@@ -15,79 +15,41 @@ Game::Game(const std::string &config) {
   init(config);
   m_window.create(sf::VideoMode(1280, 720), "sfml");
   m_window.setFramerateLimit(60);
-  auto inputController = std::make_shared<ActionController<MapActions>>();
-  std::cout << "created inputController" << std::endl;
-  m_currentScene = std::make_shared<MapScene>(inputController, spawnPlayer());
+  m_currentScene = std::make_shared<MapScene>(m_window);
   std::cout << "about to initialize scene" << std::endl;
   m_currentScene->onLoad();
-  m_renderer = new SFMLRenderer(m_window);
 }; // read in config file
 
 std::shared_ptr<MapScene> Game::currentScene() { return m_currentScene; };
 
 void Game::run() {
   std::cout << "running" << std::endl;
-  spawnMapNodes();
-  std::cout << "spawned map nodes" << std::endl;
-  // spawnTriangle();
   while (m_window.isOpen() && m_running) {
-    m_entityManager.update();
-    sf::Event event;
     float deltaTime = m_deltaClock.restart().asSeconds();
+    m_currentScene->update(deltaTime);
+    sf::Event event;
     while (m_window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
         m_window.close();
       }
-      sInput(event, deltaTime);
+      m_currentScene->sInput(event, deltaTime);
     }
 
     m_window.clear(sf::Color::Black);
 
     if (!currentScene()->isPaused()) {
-      sMovement(/*deltaTime*/);
+      m_currentScene->sMovement(deltaTime);
       // sGravity();
       // other pausable systems
     }
 
-    sRender();
+    m_currentScene->render();
     m_window.display();
     m_currentFrame++;
   }
 };
 
-std::shared_ptr<Entity> Game::spawnPlayer() {
-  auto e = m_entityManager.addEntity("player");
-  // e->add<CShape>(50.0, 5, sf::Color::Red, sf::Color::White, 3.0);
-  // e->add<CTransform>(Vec2f{200.0, 200.0}, Vec2f{3.0, 3.0}, 45.0);
-  e->add<CInput>();
-  // e->add<CGravity>();
-  return e;
-};
-
-void Game::spawnMapNodes() {
-  std::cout << "entering spawnMapNodes" << std::endl;
-  int cols = 10;
-  int rows = 10;
-  Vec2f window_size = (Vec2f)m_window.getSize();
-  float node_height = window_size.y / cols;
-  float node_width = window_size.x / rows;
-  for (int i = 0; i < cols; i++) {
-    for (int j = 0; j < rows; j++) {
-
-      std::cout << "spawn map nodes loop: " << i << ", " << j << std::endl;
-      auto e = m_entityManager.addEntity("map node");
-      bool isSelected = i == 0 && j == 0;
-      e->add<CShape>(node_height * .4f, 4,
-                     isSelected ? sf::Color::Black : sf::Color::White,
-                     isSelected ? sf::Color::White : sf::Color::Cyan, 3.0f);
-      float x = i * node_width + node_width * 0.5f;
-      float y = j * node_height + node_height * 0.5f;
-      e->add<CTransform>(Vec2f{x, y}, Vec2f{0.0f, 0.0f}, 45.0f);
-      e->add<CSelection>(Vec2i{i, j});
-    }
-  }
-};
-
+// TODO: move to scene
 void Game::spawnTriangle() {
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
@@ -108,24 +70,26 @@ void Game::spawnTriangle() {
   }
 };
 
-void Game::sRender() { m_renderer->render(m_entityManager.getEntities()); };
-
+// TODO: move to scene
 void Game::sGravity() {
   for (auto e : m_entityManager.getEntities()) {
     e->get<CTransform>().vel += e->get<CGravity>().gravity;
   }
 };
 
+// TODO: move to scene
 bool Game::AABBIntersect(const CAABB &a, const CAABB &b) {
   return (a.max.x > b.min.x && a.min.x < b.max.x) &&
          (a.max.y > b.min.y && a.min.y < b.max.y) &&
          (a.max.z > b.min.z && a.min.z < b.max.z);
 };
 
+// TODO: implement
 void Game::loadScene() {
 
 };
 
+// TODO: chop up and move to scenes
 void Game::sMovement(float deltaTime) {
   Vec2f size = (Vec2f)m_window.getSize();
   float height = size.y;
@@ -205,41 +169,5 @@ void Game::sMovement(float deltaTime) {
     //     }
     //   }
     // }
-  }
-};
-
-void Game::sInput(sf::Event event, float deltaTime) {
-  auto scene = currentScene();
-  switch (event.type) {
-  case sf::Event::KeyPressed: {
-    currentScene()->processInput(
-        InputEvent{InputType::Keyboard, event.key.code}, deltaTime);
-    break;
-  }
-  // case sf::Event::KeyReleased: {
-  //     currentScene()->processInput(InputEvent{InputType::KeyReleased, },
-  //     ActionType::RELEASED, deltaTime);
-  //   }
-  //   break;
-  // }
-  case sf::Event::MouseMoved: {
-    static float lastX = m_window.getSize().x / 2;
-    static float lastY = m_window.getSize().y / 2;
-    if (abs(event.mouseMove.x - lastX) < 2 &&
-        abs(event.mouseMove.y - lastY) < 2)
-      return; // Skip minor movements
-    float xOffset = event.mouseMove.x - lastX;
-    float yOffset = lastY - event.mouseMove.y; // inverted Y
-    lastX = event.mouseMove.x;
-    lastY = event.mouseMove.y;
-    std::cout << "delta: " << deltaTime << std::endl;
-    currentScene()->processInput(
-        InputEvent{InputType::MouseMove,
-                   std::pair<float, float>{xOffset, yOffset}},
-        deltaTime);
-    break;
-  }
-  default:
-    break;
   }
 };

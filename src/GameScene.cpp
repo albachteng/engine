@@ -4,6 +4,10 @@
 #include <memory>
 #include <unordered_map>
 
+void GameScene::onUnload() {};
+void GameScene::update(float deltaTime) {};
+void GameScene::render() {};
+
 GameScene::GameScene(
     const std::shared_ptr<ActionController<SceneActions>> inputController,
     const std::shared_ptr<Entity> &player)

@@ -1,8 +1,10 @@
 
 #include "BaseScene.hpp"
+#include "Component.h"
 #include "Entity.hpp"
 #include "EntityManager.h"
 #include "InputController.hpp"
+#include "SFMLRenderer.h"
 #include <memory>
 #include <unordered_map>
 
@@ -11,6 +13,9 @@ enum class MapActions { UP, DOWN, LEFT, RIGHT, CURSOR_MOVE, SELECT };
 class MapScene : BaseScene {
 private:
   EntityManager m_entityManager;
+  std::unique_ptr<SFMLRenderer> m_renderer;
+  Vec2f m_window_size;
+
   std::unordered_map<InputEvent, MapActions> m_inputMap;
   std::shared_ptr<Entity> m_player;
   std::shared_ptr<ActionController<MapActions>> m_actionController;
@@ -20,10 +25,14 @@ private:
   void moveCursor(int dx, int dy);
   Vec2i m_selectedNode = {0, 0};
 
+  std::shared_ptr<Entity> spawnPlayer();
+  void spawnMapNodes();
+
 public:
-  MapScene(const std::shared_ptr<Entity> &player = nullptr);
-  MapScene(const std::shared_ptr<ActionController<MapActions>> actionController,
-           const std::shared_ptr<Entity> &player = nullptr);
+  MapScene(sf::RenderWindow &window);
+
+  void sMovement(float deltaTime = 0.0f);
+  void sInput(sf::Event event, float deltaTime);
 
   void onLoad() override;
   void onUnload() override;

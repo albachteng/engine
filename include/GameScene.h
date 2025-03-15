@@ -17,17 +17,22 @@ private:
   std::shared_ptr<ActionController<SceneActions>> m_actionController;
 
 public:
+  void onUnload() override;
+  void update(float deltaTime) override;
+  void render() override;
+  void onLoad() override;
+  void processInput(const InputEvent &event, float deltaTime = 0.0f) override;
+
   std::unordered_map<InputEvent, SceneActions> m_inputMap;
   // not all scenes will require a player pointer
   GameScene(const std::shared_ptr<Entity> &player = nullptr);
   GameScene(
       const std::shared_ptr<ActionController<SceneActions>> actionController,
       const std::shared_ptr<Entity> &player = nullptr);
-  void onLoad() override;
-  void togglePaused();
-  bool isPaused();
+
   std::shared_ptr<Camera> camera();
   std::shared_ptr<ActionController<SceneActions>> actionController();
 
-  void processInput(const InputEvent &event, float deltaTime = 0.0f) override;
+  void togglePaused();
+  bool isPaused();
 };
