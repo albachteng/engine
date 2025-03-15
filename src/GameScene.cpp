@@ -16,7 +16,7 @@ std::shared_ptr<ActionController<SceneActions>> GameScene::actionController() {
   return m_actionController;
 };
 
-void GameScene::init() {
+void GameScene::onLoad() {
   std::cout << "Init fired in GameScene" << std::endl;
   std::cout << "registering input map" << std::endl;
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::W}] =

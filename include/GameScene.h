@@ -9,7 +9,7 @@
 
 enum class SceneActions { FORWARD, BACK, LEFT, RIGHT, PAN, PAUSE };
 
-class GameScene : public BaseScene<SceneActions> {
+class GameScene : public BaseScene {
 private:
   std::shared_ptr<Entity> m_player;
   bool m_paused = false;
@@ -23,7 +23,7 @@ public:
   GameScene(
       const std::shared_ptr<ActionController<SceneActions>> actionController,
       const std::shared_ptr<Entity> &player = nullptr);
-  void init() override;
+  void onLoad() override;
   void togglePaused();
   bool isPaused();
   std::shared_ptr<Camera> camera();

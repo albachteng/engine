@@ -19,7 +19,7 @@ Game::Game(const std::string &config) {
   std::cout << "created inputController" << std::endl;
   m_currentScene = std::make_shared<MapScene>(inputController, spawnPlayer());
   std::cout << "about to initialize scene" << std::endl;
-  m_currentScene->init();
+  m_currentScene->onLoad();
   m_renderer = new SFMLRenderer(m_window);
 }; // read in config file
 
@@ -120,6 +120,10 @@ bool Game::AABBIntersect(const CAABB &a, const CAABB &b) {
   return (a.max.x > b.min.x && a.min.x < b.max.x) &&
          (a.max.y > b.min.y && a.min.y < b.max.y) &&
          (a.max.z > b.min.z && a.min.z < b.max.z);
+};
+
+void Game::loadScene() {
+
 };
 
 void Game::sMovement(float deltaTime) {

@@ -38,4 +38,5 @@ public:
   void sInput(sf::Event event, float deltaTime);
   void sGravity();
   bool AABBIntersect(const CAABB &a, const CAABB &b);
+  void loadScene();
 };

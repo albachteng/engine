@@ -1,13 +1,17 @@
 
 #include "BaseScene.hpp"
 #include "Entity.hpp"
+#include "EntityManager.h"
 #include "InputController.hpp"
 #include <memory>
+#include <unordered_map>
 
 enum class MapActions { UP, DOWN, LEFT, RIGHT, CURSOR_MOVE, SELECT };
 
-class MapScene : BaseScene<MapActions> {
+class MapScene : BaseScene {
 private:
+  EntityManager m_entityManager;
+  std::unordered_map<InputEvent, MapActions> m_inputMap;
   std::shared_ptr<Entity> m_player;
   std::shared_ptr<ActionController<MapActions>> m_actionController;
   bool m_paused = false;
@@ -17,15 +21,19 @@ private:
   Vec2i m_selectedNode = {0, 0};
 
 public:
-  std::unordered_map<InputEvent, MapActions> m_inputMap;
   MapScene(const std::shared_ptr<Entity> &player = nullptr);
   MapScene(const std::shared_ptr<ActionController<MapActions>> actionController,
            const std::shared_ptr<Entity> &player = nullptr);
-  void init() override;
+
+  void onLoad() override;
+  void onUnload() override;
+  void update(float deltaTime) override;
+  void processInput(const InputEvent &event, float deltaTime = 0.0f) override;
+  void render() override;
+
   void togglePaused();
   bool isPaused();
   std::shared_ptr<ActionController<MapActions>> actionController();
 
-  void processInput(const InputEvent &event, float deltaTime = 0.0f) override;
   Vec2i getCursor();
 };

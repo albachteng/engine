@@ -1,6 +1,10 @@
 #include "../include/MapScene.h"
 #include <memory>
 
+void MapScene::onUnload() {};
+void MapScene::update(float deltaTime) {};
+void MapScene::render() {};
+
 MapScene::MapScene(const std::shared_ptr<Entity> &player) : m_player(player){};
 
 MapScene::MapScene(
@@ -8,7 +12,7 @@ MapScene::MapScene(
     const std::shared_ptr<Entity> &player)
     : m_player(player), m_actionController(inputController){};
 
-void MapScene::init() {
+void MapScene::onLoad() {
   std::cout << "Init fired in MapScene" << std::endl;
   std::cout << "registering input map" << std::endl;
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::W}] = MapActions::UP;
