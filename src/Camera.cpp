@@ -21,7 +21,7 @@ glm::mat4 Camera::getProjectionMatrix(float aspectRatio) const {
 
 // TODO: move this into scene action processing
 void Camera::move(CameraMovement movement, float deltaTime) {
-  std::cout << "in process keyboard" << std::endl;
+  // std::cout << "in process keyboard" << std::endl;
   float speed = 2.5f * deltaTime;
   std::cout << "speed: " << speed << std::endl;
   switch (movement) {
@@ -48,7 +48,7 @@ void Camera::move(CameraMovement movement, float deltaTime) {
 
 // TODO: move this into scene action processing
 void Camera::rotate(float xOffset, float yOffset) {
-  std::cout << "rotating: " << xOffset << ", " << yOffset << std::endl;
+  // std::cout << "rotating: " << xOffset << ", " << yOffset << std::endl;
   float sensitivity = 0.05f;
   yaw += xOffset * sensitivity;
   pitch += yOffset * sensitivity;

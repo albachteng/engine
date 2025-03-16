@@ -12,6 +12,11 @@ private:
 public:
   ActionController<Action>() = default;
 
+  void unregisterAll() {
+    m_listeners.clear();
+    m_axisListeners.clear();
+  };
+
   void registerListener(const Action &action,
                         std::function<void(float)> listener) {
     m_listeners[action] = listener;
@@ -24,7 +29,7 @@ public:
 
   void handleEvent(const Action &action, float deltaTime = 0.0f,
                    float xOffset = 0.0f, float yOffset = 0.0f) {
-    std::cout << "handleEvent" << std::endl;
+    // std::cout << "handleEvent" << std::endl;
     if (m_listeners.find(action) != m_listeners.end())
       m_listeners[action](deltaTime);
     if (m_axisListeners.find(action) != m_axisListeners.end()) {

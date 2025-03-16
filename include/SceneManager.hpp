@@ -2,6 +2,7 @@
 
 #include "BaseScene.hpp"
 #include <functional>
+#include <iostream>
 #include <memory>
 #include <unordered_map>
 
@@ -18,6 +19,7 @@ public:
   }
 
   void loadScene(const std::string &name) {
+    std::cout << "loading scene" << std::endl;
     if (m_sceneFactories.find(name) != m_sceneFactories.end()) {
       if (m_currentScene) {
         m_currentScene->onUnload();

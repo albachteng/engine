@@ -134,3 +134,12 @@ unsigned int OpenGLRenderer::compileShader(const char *source, GLenum type) {
   }
   return shader;
 };
+
+void OpenGLRenderer::onUnload() {
+  glBindVertexArray(0);
+  glUseProgram(0);
+  // glBindFramebuffer(GL_FRAMEBUFFER, 0); // ?
+  // glDeleteTextures(1, &textureID);
+  glDeleteBuffers(1, &VBO);
+  // glDeleteFramebuffers(1, &FBO);
+};

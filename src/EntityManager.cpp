@@ -45,6 +45,13 @@ EntityVec &EntityManager::getEntities(const std::string &tag) {
   return m_entityMap[tag];
 };
 
+void EntityManager::clear() {
+  m_entities.clear();
+  m_entityMap.clear();
+  m_toAdd.clear();
+  m_totalEntities = 0;
+};
+
 /* usage example:
  * void spawnEnemy() {
  * auto e = m_entities.addEntity("enemy")

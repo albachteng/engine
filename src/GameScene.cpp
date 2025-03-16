@@ -4,8 +4,18 @@
 #include <memory>
 #include <unordered_map>
 
-void GameScene::onUnload() {};
+void GameScene::onUnload() {
+  std::cout << "unloading GameScene" << std::endl;
+  m_entityManager.clear();
+  m_renderer->onUnload();
+  m_renderer.reset();
+  m_actionController->unregisterAll();
+  m_actionController.reset();
+  m_camera.reset();
+};
+
 void GameScene::update(float deltaTime) { m_entityManager.update(); };
+
 void GameScene::sRender() {
   m_renderer->render(m_entityManager.getEntities());
 };
@@ -47,6 +57,8 @@ void GameScene::onLoad() {
       SceneActions::BACK;
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::Right}] =
       SceneActions::RIGHT;
+  m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::Enter}] =
+      SceneActions::SCENE;
 
   std::cout << "registering listeners" << std::endl;
   m_actionController->registerListener(SceneActions::PAUSE,
@@ -67,11 +79,17 @@ void GameScene::onLoad() {
       SceneActions::RIGHT, [this](float deltaTime) {
         m_camera->move(CameraMovement::RIGHT, deltaTime);
       });
-  m_actionController->registerAxisListener(
-      SceneActions::PAN, [this](float x, float y) {
-        std::cout << "firing axis listener: " << x << ", " << y << std::endl;
-        m_camera->rotate(x, y);
-      });
+  m_actionController->registerListener(SceneActions::SCENE,
+                                       [this](float deltaTime) {
+                                         /* TODO: swap scenes */
+                                       });
+  m_actionController->registerAxisListener(SceneActions::PAN,
+                                           [this](float x, float y) {
+                                             // std::cout << "firing axis
+                                             // listener: " << x << ", " << y <<
+                                             // std::endl;
+                                             m_camera->rotate(x, y);
+                                           });
 };
 
 void GameScene::spawnTriangle() {
@@ -116,7 +134,7 @@ void GameScene::sInput(sf::Event &event, float deltaTime) {
     float yOffset = lastY - event.mouseMove.y; // inverted Y
     lastX = event.mouseMove.x;
     lastY = event.mouseMove.y;
-    std::cout << "delta: " << deltaTime << std::endl;
+    // std::cout << "delta: " << deltaTime << std::endl;
     processInput(InputEvent{InputType::MouseMove,
                             std::pair<float, float>{xOffset, yOffset}},
                  deltaTime);
@@ -188,7 +206,7 @@ void GameScene::sMovement(float deltaTime) {
 
     // 3D AABB collision resolution
     if (e->has<CAABB>() && e->has<CMovement3D>()) {
-      std::cout << "id: " << e->id() << std::endl;
+      // std::cout << "id: " << e->id() << std::endl;
       auto a_move = e->get<CMovement3D>();
       auto a_pos = e->get<CTransform3D>();
       // collision with "walls"
@@ -204,7 +222,7 @@ void GameScene::sMovement(float deltaTime) {
       for (auto &b : m_entityManager.getEntities("triangle")) {
         // some velocity
         if (AABBIntersect(e->get<CAABB>(), b->get<CAABB>())) {
-          std::cout << "hit! " << e->id() << ", " << b->id() << std::endl;
+          // std::cout << "hit! " << e->id() << ", " << b->id() << std::endl;
           a_move.vel *= -0.9f;
           auto b_move = b->get<CMovement3D>();
           b_move.vel *= -0.9f;

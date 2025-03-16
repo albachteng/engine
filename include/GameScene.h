@@ -9,7 +9,7 @@
 #include <glm/ext/vector_float3.hpp>
 #include <memory>
 
-enum class SceneActions { FORWARD, BACK, LEFT, RIGHT, PAN, PAUSE };
+enum class SceneActions { FORWARD, BACK, LEFT, RIGHT, PAN, PAUSE, SCENE };
 
 class GameScene : public BaseScene {
 private:

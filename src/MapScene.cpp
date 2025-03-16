@@ -63,6 +63,7 @@ void MapScene::onLoad() {
                                              // std::endl;
                                              /* watch mouse movement */
                                            });
+  std::cout << "finished onLoad()" << std::endl;
 };
 
 void MapScene::moveCursor(int dx, int dy) {

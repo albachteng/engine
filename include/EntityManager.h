@@ -24,4 +24,5 @@ public:
   std::shared_ptr<Entity> addEntity(const std::string &tag);
   EntityVec &getEntities();                       // all entities
   EntityVec &getEntities(const std::string &tag); // from map
+  void clear();
 };

@@ -17,6 +17,7 @@ public:
   void render() override;
   void render(const EntityVec &entities) override;
   std::shared_ptr<Camera> camera();
+  void onUnload();
 
 private:
   sf::RenderWindow &m_window;
