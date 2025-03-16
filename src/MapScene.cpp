@@ -6,7 +6,7 @@ void MapScene::onUnload() {};
 
 void MapScene::update(float deltaTime) { m_entityManager.update(); };
 
-void MapScene::render() { m_renderer->render(m_entityManager.getEntities()); };
+void MapScene::sRender() { m_renderer->render(m_entityManager.getEntities()); };
 
 MapScene::MapScene(sf::RenderWindow &window) {
   m_player = spawnPlayer();
@@ -139,7 +139,7 @@ void MapScene::sMovement(float deltaTime) {
   };
 };
 
-void MapScene::sInput(sf::Event event, float deltaTime) {
+void MapScene::sInput(sf::Event &event, float deltaTime) {
   switch (event.type) {
   case sf::Event::KeyPressed: {
     processInput(InputEvent{InputType::Keyboard, event.key.code}, deltaTime);

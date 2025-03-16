@@ -10,7 +10,7 @@
 
 enum class MapActions { UP, DOWN, LEFT, RIGHT, CURSOR_MOVE, SELECT };
 
-class MapScene : BaseScene {
+class MapScene : public BaseScene {
 private:
   EntityManager m_entityManager;
   std::unique_ptr<SFMLRenderer> m_renderer;
@@ -29,16 +29,15 @@ private:
   void spawnMapNodes();
 
 public:
-  MapScene(sf::RenderWindow &window);
+  explicit MapScene(sf::RenderWindow &window);
 
-  void sMovement(float deltaTime = 0.0f);
-  void sInput(sf::Event event, float deltaTime);
-
+  void sMovement(float deltaTime = 0.0f) override;
+  void sInput(sf::Event &event, float deltaTime) override;
   void onLoad() override;
   void onUnload() override;
   void update(float deltaTime) override;
   void processInput(const InputEvent &event, float deltaTime = 0.0f) override;
-  void render() override;
+  void sRender() override;
 
   void togglePaused();
   bool isPaused();
