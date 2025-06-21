@@ -22,5 +22,7 @@ public:
 private:
   sf::RenderWindow &m_window;
   unsigned int VAO, VBO, shaderProgram;
+  bool m_initialized;
   unsigned int compileShader(const char *source, GLenum type);
+  void setupBuffers();
 };

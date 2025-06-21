@@ -18,7 +18,7 @@ std::shared_ptr<Camera> OpenGLRenderer::camera() { return m_camera; };
 
 OpenGLRenderer::OpenGLRenderer(std::shared_ptr<Camera> camera,
                                sf::RenderWindow &window)
-    : m_camera(camera), m_window(window) {
+    : m_camera(camera), m_window(window), VAO(0), VBO(0), shaderProgram(0), m_initialized(false) {
   m_window.setActive(true); // active opengl context
   if (!gladLoadGL()) {
     std::cerr << "Failed to initialize OpenGL!" << std::endl;
@@ -28,9 +28,11 @@ OpenGLRenderer::OpenGLRenderer(std::shared_ptr<Camera> camera,
 };
 
 OpenGLRenderer::~OpenGLRenderer() {
-  glDeleteVertexArrays(1, &VAO);
-  glDeleteBuffers(1, &VBO);
-  glDeleteProgram(shaderProgram);
+  if (m_initialized) {
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shaderProgram);
+  }
 };
 
 void OpenGLRenderer::init() {
@@ -58,35 +60,33 @@ void OpenGLRenderer::init() {
 
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
-  // setupTriangle();
+  
+  setupBuffers();
   glEnable(GL_DEPTH_TEST);
+  m_initialized = true;
 };
 
 void OpenGLRenderer::render() {};
 
-// render a single triangle
+// render triangles efficiently - no per-frame buffer creation
 void OpenGLRenderer::render(const EntityVec &entities) {
+  if (!m_initialized) return;
+  
   glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // dark grey-green
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glUseProgram(shaderProgram);
+  
+  glBindVertexArray(VAO);
+  
   for (const auto &e : entities) {
     if (e->has<CTriangle>() && e->has<CTransform3D>()) {
       auto &triangle = e->get<CTriangle>();
       auto &transform = e->get<CTransform3D>();
 
-      // generating buffers on the fly, improve in the future
-      glGenVertexArrays(1, &VAO);
-      glGenBuffers(1, &VBO);
-      glBindVertexArray(VAO);
+      // Update buffer data efficiently - no recreation
       glBindBuffer(GL_ARRAY_BUFFER, VBO);
       glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(float),
-                   triangle.vertices.data(), GL_STATIC_DRAW);
-      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-                            (void *)0);
-      glEnableVertexAttribArray(0);
-      glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-                            (void *)(3 * sizeof(float)));
-      glEnableVertexAttribArray(1);
+                   triangle.vertices.data(), GL_DYNAMIC_DRAW);
 
       // matrix transforms for model, view and projection space
       glm::mat4 model = glm::mat4(1.0f);
@@ -101,7 +101,7 @@ void OpenGLRenderer::render(const EntityVec &entities) {
       glm::mat4 view = m_camera->getViewMatrix();
       glm::mat4 projection = m_camera->getProjectionMatrix(1280.0f / 720.0f);
 
-      // update uniform locations
+      // update uniform locations (could be cached for better performance)
       GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
       GLint viewLoc = glGetUniformLocation(shaderProgram, "view");
       GLint projLoc = glGetUniformLocation(shaderProgram, "projection");
@@ -111,12 +111,10 @@ void OpenGLRenderer::render(const EntityVec &entities) {
 
       // draw call
       glDrawArrays(GL_TRIANGLES, 0, 3);
-
-      glBindBuffer(GL_ARRAY_BUFFER, 0);
-      glBindVertexArray(0);
-      glDeleteVertexArrays(1, &VAO);
     }
   }
+  
+  glBindVertexArray(0);
 };
 
 // shader compilation helper
@@ -135,11 +133,28 @@ unsigned int OpenGLRenderer::compileShader(const char *source, GLenum type) {
   return shader;
 };
 
+void OpenGLRenderer::setupBuffers() {
+  // Create VAO and VBO once during initialization
+  glGenVertexArrays(1, &VAO);
+  glGenBuffers(1, &VBO);
+  
+  glBindVertexArray(VAO);
+  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  
+  // Set up vertex attributes (position and color)
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+                        (void *)0);
+  glEnableVertexAttribArray(0);
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+                        (void *)(3 * sizeof(float)));
+  glEnableVertexAttribArray(1);
+  
+  glBindVertexArray(0);
+}
+
 void OpenGLRenderer::onUnload() {
   glBindVertexArray(0);
   glUseProgram(0);
-  // glBindFramebuffer(GL_FRAMEBUFFER, 0); // ?
-  // glDeleteTextures(1, &textureID);
-  glDeleteBuffers(1, &VBO);
-  // glDeleteFramebuffers(1, &FBO);
+  // Clean up is now handled in destructor
+  m_initialized = false;
 };
