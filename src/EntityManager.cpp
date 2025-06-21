@@ -7,15 +7,14 @@
 #include <vector>
 
 typedef std::vector<std::shared_ptr<Entity>> EntityVec;
-typedef std::map<std::string, EntityVec> EntityMap;
-// TODO: abandon std::string in favor of enums
+typedef std::map<EntityTag, EntityVec> EntityMap;
 
 // template <typename T> bool has() const { return has_impl<T>(std::make_) }
 
-std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
+std::shared_ptr<Entity> EntityManager::addEntity(const EntityTag &tag) {
   // Helper struct to access private constructor with make_shared
   struct EntityBuilder : public Entity {
-    EntityBuilder(size_t id, const std::string &tag) : Entity(id, tag) {}
+    EntityBuilder(size_t id, const EntityTag &tag) : Entity(id, tag) {}
   };
   
   auto e = std::make_shared<EntityBuilder>(m_totalEntities++, tag);
@@ -48,13 +47,13 @@ void EntityManager::update() {
 
 EntityVec &EntityManager::getEntities() { return m_entities; }
 
-EntityVec &EntityManager::getEntities(const std::string &tag) {
+EntityVec &EntityManager::getEntities(const EntityTag &tag) {
   return m_entityMap[tag];
 }
 
 const EntityVec &EntityManager::getEntities() const { return m_entities; }
 
-const EntityVec &EntityManager::getEntities(const std::string &tag) const {
+const EntityVec &EntityManager::getEntities(const EntityTag &tag) const {
   auto it = m_entityMap.find(tag);
   if (it != m_entityMap.end()) {
     return it->second;
@@ -63,7 +62,7 @@ const EntityVec &EntityManager::getEntities(const std::string &tag) const {
   return empty;
 }
 
-bool EntityManager::hasTag(const std::string &tag) const {
+bool EntityManager::hasTag(const EntityTag &tag) const {
   return m_entityMap.find(tag) != m_entityMap.end();
 }
 
@@ -76,7 +75,7 @@ void EntityManager::clear() {
 
 /* usage example:
  * void spawnEnemy() {
- * auto e = m_entities.addEntity("enemy")
+ * auto e = m_entities.addEntity(EntityTag::ENEMY)
  * e->add<CTransform>(args);
  * e->add<CShape>(args);
  * }

@@ -17,7 +17,7 @@ MapScene::MapScene(sf::RenderWindow &window) {
 };
 
 std::shared_ptr<Entity> MapScene::spawnPlayer() {
-  auto e = m_entityManager.addEntity("player");
+  auto e = m_entityManager.addEntity(EntityTag::PLAYER);
   e->add<CInput>();
   return e;
 };
@@ -107,7 +107,7 @@ void MapScene::spawnMapNodes() {
     for (int j = 0; j < rows; j++) {
 
       std::cout << "spawn map nodes loop: " << i << ", " << j << std::endl;
-      auto e = m_entityManager.addEntity("map node");
+      auto e = m_entityManager.addEntity(EntityTag::MAP_NODE);
       bool isSelected = i == 0 && j == 0;
       e->add<CShape>(node_height * .4f, 4,
                      isSelected ? sf::Color::Black : sf::Color::White,
@@ -124,7 +124,7 @@ void MapScene::sMovement(float deltaTime) {
   float height = m_window_size.y;
   float width = m_window_size.x;
   // MapNode selection updates
-  for (auto &e : m_entityManager.getEntities("map node")) {
+  for (auto &e : m_entityManager.getEntities(EntityTag::MAP_NODE)) {
     auto cursor = getCursor();
     std::cout << "movement: " << cursor.x << cursor.y << std::endl;
     auto selection = e->get<CSelection>();

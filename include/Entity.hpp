@@ -2,6 +2,14 @@
 #include "Component.h"
 #include <tuple>
 
+enum class EntityTag {
+  DEFAULT,
+  TRIANGLE,
+  PLAYER,
+  MAP_NODE,
+  ENEMY
+};
+
 typedef std::tuple<CTransform, CTransform3D, CShape, CCollision, CInput, CScore,
                    CLifespan, CGravity, CTriangle, CMovement3D, CAABB,
                    CSelection>
@@ -9,10 +17,10 @@ typedef std::tuple<CTransform, CTransform3D, CShape, CCollision, CInput, CScore,
 
 class Entity {
 private:
-  Entity(const size_t &id, const std::string &tag) : m_tag(tag), m_id(id){};
+  Entity(const size_t &id, const EntityTag &tag) : m_tag(tag), m_id(id){};
   ComponentTuple m_components;
   bool m_active = true;
-  std::string m_tag = "default";
+  EntityTag m_tag = EntityTag::DEFAULT;
   size_t m_id = 0;
 
   friend class EntityManager;
@@ -21,7 +29,7 @@ public:
   size_t id() const;
   bool isActive() const;
   void destroy();
-  const std::string &tag() const;
+  const EntityTag &tag() const;
 
   template <typename T> T &get() { return std::get<T>(m_components); };
   template <typename T> bool has() { return get<T>().exists; }

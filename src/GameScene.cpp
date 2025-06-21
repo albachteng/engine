@@ -98,7 +98,7 @@ void GameScene::spawnTriangle() {
       for (int k = 0; k < 3; k++) {
         std::cout << "spawn Triangle loop" << std::endl;
         std::cout << "i, j, k: " << i << j << k << std::endl;
-        auto e = m_entityManager.addEntity("triangle");
+        auto e = m_entityManager.addEntity(EntityTag::TRIANGLE);
         e->add<CTransform3D>(
             glm::vec3{i * 2 * 1.0f, j * 3 * 1.0f, k * 4 * 1.0f},
             glm::vec3{0.0f}, glm::vec3{1.0f});
@@ -219,7 +219,7 @@ void GameScene::sMovement(float deltaTime) {
       if (a_pos.position.z > 100.0f || a_pos.position.z < -100.0f) {
         a_move.vel.z *= -0.9f;
       }
-      for (auto &b : m_entityManager.getEntities("triangle")) {
+      for (auto &b : m_entityManager.getEntities(EntityTag::TRIANGLE)) {
         // some velocity
         if (AABBIntersect(e->get<CAABB>(), b->get<CAABB>())) {
           // std::cout << "hit! " << e->id() << ", " << b->id() << std::endl;

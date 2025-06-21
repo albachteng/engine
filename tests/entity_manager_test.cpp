@@ -12,21 +12,21 @@ protected:
 };
 
 TEST_F(EntityManagerTest, AddEntity_CreatesEntityWithCorrectTag) {
-    auto entity = manager.addEntity("player");
+    auto entity = manager.addEntity(EntityTag::PLAYER);
     
-    EXPECT_EQ(entity->tag(), "player");
+    EXPECT_EQ(entity->tag(), EntityTag::PLAYER);
     EXPECT_TRUE(entity->isActive());
 }
 
 TEST_F(EntityManagerTest, AddEntity_AssignsUniqueIDs) {
-    auto entity1 = manager.addEntity("player");
-    auto entity2 = manager.addEntity("enemy");
+    auto entity1 = manager.addEntity(EntityTag::PLAYER);
+    auto entity2 = manager.addEntity(EntityTag::ENEMY);
     
     EXPECT_NE(entity1->id(), entity2->id());
 }
 
 TEST_F(EntityManagerTest, Update_MovesEntitiesToMainCollection) {
-    auto entity = manager.addEntity("test");
+    auto entity = manager.addEntity(EntityTag::DEFAULT);
     EXPECT_EQ(manager.getEntities().size(), 0); // Not moved yet
     
     manager.update();
@@ -36,20 +36,20 @@ TEST_F(EntityManagerTest, Update_MovesEntitiesToMainCollection) {
 }
 
 TEST_F(EntityManagerTest, Update_MovesEntitiesToTaggedCollection) {
-    auto player = manager.addEntity("player");
-    auto enemy = manager.addEntity("enemy");
+    auto player = manager.addEntity(EntityTag::PLAYER);
+    auto enemy = manager.addEntity(EntityTag::ENEMY);
     
     manager.update();
     
-    EXPECT_EQ(manager.getEntities("player").size(), 1);
-    EXPECT_EQ(manager.getEntities("enemy").size(), 1);
-    EXPECT_EQ(manager.getEntities("player")[0], player);
-    EXPECT_EQ(manager.getEntities("enemy")[0], enemy);
+    EXPECT_EQ(manager.getEntities(EntityTag::PLAYER).size(), 1);
+    EXPECT_EQ(manager.getEntities(EntityTag::ENEMY).size(), 1);
+    EXPECT_EQ(manager.getEntities(EntityTag::PLAYER)[0], player);
+    EXPECT_EQ(manager.getEntities(EntityTag::ENEMY)[0], enemy);
 }
 
 TEST_F(EntityManagerTest, Update_RemovesInactiveFromMainCollection) {
-    auto entity1 = manager.addEntity("test");
-    auto entity2 = manager.addEntity("test");
+    auto entity1 = manager.addEntity(EntityTag::DEFAULT);
+    auto entity2 = manager.addEntity(EntityTag::DEFAULT);
     manager.update();
     
     entity1->destroy();
@@ -60,68 +60,68 @@ TEST_F(EntityManagerTest, Update_RemovesInactiveFromMainCollection) {
 }
 
 TEST_F(EntityManagerTest, Update_RemovesInactiveFromTaggedCollections) {
-    auto player1 = manager.addEntity("player");
-    auto player2 = manager.addEntity("player");
-    auto enemy = manager.addEntity("enemy");
+    auto player1 = manager.addEntity(EntityTag::PLAYER);
+    auto player2 = manager.addEntity(EntityTag::PLAYER);
+    auto enemy = manager.addEntity(EntityTag::ENEMY);
     manager.update();
     
     player1->destroy();
     manager.update();
     
-    EXPECT_EQ(manager.getEntities("player").size(), 1);
-    EXPECT_EQ(manager.getEntities("enemy").size(), 1);
-    EXPECT_EQ(manager.getEntities("player")[0], player2);
-    EXPECT_EQ(manager.getEntities("enemy")[0], enemy);
+    EXPECT_EQ(manager.getEntities(EntityTag::PLAYER).size(), 1);
+    EXPECT_EQ(manager.getEntities(EntityTag::ENEMY).size(), 1);
+    EXPECT_EQ(manager.getEntities(EntityTag::PLAYER)[0], player2);
+    EXPECT_EQ(manager.getEntities(EntityTag::ENEMY)[0], enemy);
 }
 
 TEST_F(EntityManagerTest, Clear_RemovesAllEntities) {
-    manager.addEntity("player");
-    manager.addEntity("enemy");
+    manager.addEntity(EntityTag::PLAYER);
+    manager.addEntity(EntityTag::ENEMY);
     manager.update();
     
     manager.clear();
     
     EXPECT_EQ(manager.getEntities().size(), 0);
-    EXPECT_EQ(manager.getEntities("player").size(), 0);
-    EXPECT_EQ(manager.getEntities("enemy").size(), 0);
+    EXPECT_EQ(manager.getEntities(EntityTag::PLAYER).size(), 0);
+    EXPECT_EQ(manager.getEntities(EntityTag::ENEMY).size(), 0);
 }
 
 TEST_F(EntityManagerTest, Clear_ResetsTotalEntityCount) {
-    auto entity1 = manager.addEntity("test");
+    auto entity1 = manager.addEntity(EntityTag::DEFAULT);
     manager.clear();
-    auto entity2 = manager.addEntity("test");
+    auto entity2 = manager.addEntity(EntityTag::DEFAULT);
     
     // After clear, new entities should start from ID 0 again
     EXPECT_EQ(entity2->id(), 0);
 }
 
 TEST_F(EntityManagerTest, GetEntitiesByTag_ReturnsEmpty_ForNonexistentTag) {
-    manager.addEntity("player");
+    manager.addEntity(EntityTag::PLAYER);
     manager.update();
     
-    EXPECT_EQ(manager.getEntities("nonexistent").size(), 0);
+    EXPECT_EQ(manager.getEntities(EntityTag::ENEMY).size(), 0);
 }
 
 TEST_F(EntityManagerTest, HasTag_ReturnsFalse_ForNonexistentTag) {
-    manager.addEntity("player");
+    manager.addEntity(EntityTag::PLAYER);
     manager.update();
     
-    EXPECT_FALSE(manager.hasTag("nonexistent"));
-    EXPECT_FALSE(manager.hasTag("enemy"));
+    EXPECT_FALSE(manager.hasTag(EntityTag::DEFAULT));
+    EXPECT_FALSE(manager.hasTag(EntityTag::ENEMY));
 }
 
 TEST_F(EntityManagerTest, HasTag_ReturnsTrue_ForExistingTag) {
-    manager.addEntity("player");
-    manager.addEntity("enemy");
+    manager.addEntity(EntityTag::PLAYER);
+    manager.addEntity(EntityTag::ENEMY);
     manager.update();
     
-    EXPECT_TRUE(manager.hasTag("player"));
-    EXPECT_TRUE(manager.hasTag("enemy"));
+    EXPECT_TRUE(manager.hasTag(EntityTag::PLAYER));
+    EXPECT_TRUE(manager.hasTag(EntityTag::ENEMY));
 }
 
 TEST_F(EntityManagerTest, ConstGetEntities_AllEntities) {
-    auto entity1 = manager.addEntity("player");
-    auto entity2 = manager.addEntity("enemy");
+    auto entity1 = manager.addEntity(EntityTag::PLAYER);
+    auto entity2 = manager.addEntity(EntityTag::ENEMY);
     manager.update();
     
     const EntityManager& constManager = manager;
@@ -133,13 +133,13 @@ TEST_F(EntityManagerTest, ConstGetEntities_AllEntities) {
 }
 
 TEST_F(EntityManagerTest, ConstGetEntities_ByTag) {
-    auto player1 = manager.addEntity("player");
-    auto player2 = manager.addEntity("player");
-    manager.addEntity("enemy");
+    auto player1 = manager.addEntity(EntityTag::PLAYER);
+    auto player2 = manager.addEntity(EntityTag::PLAYER);
+    manager.addEntity(EntityTag::ENEMY);
     manager.update();
     
     const EntityManager& constManager = manager;
-    const auto& players = constManager.getEntities("player");
+    const auto& players = constManager.getEntities(EntityTag::PLAYER);
     
     EXPECT_EQ(players.size(), 2);
     EXPECT_EQ(players[0], player1);
@@ -147,24 +147,24 @@ TEST_F(EntityManagerTest, ConstGetEntities_ByTag) {
 }
 
 TEST_F(EntityManagerTest, ConstGetEntities_ReturnsEmpty_ForNonexistentTag) {
-    manager.addEntity("player");
+    manager.addEntity(EntityTag::PLAYER);
     manager.update();
     
     const EntityManager& constManager = manager;
-    const auto& nonexistent = constManager.getEntities("nonexistent");
+    const auto& nonexistent = constManager.getEntities(EntityTag::ENEMY);
     
     EXPECT_EQ(nonexistent.size(), 0);
 }
 
 TEST_F(EntityManagerTest, ComplexLifecycle_MultipleUpdates) {
     // Add entities
-    auto p1 = manager.addEntity("player");
-    auto e1 = manager.addEntity("enemy");
+    auto p1 = manager.addEntity(EntityTag::PLAYER);
+    auto e1 = manager.addEntity(EntityTag::ENEMY);
     manager.update();
     
     // Add more entities
-    auto p2 = manager.addEntity("player");
-    auto e2 = manager.addEntity("enemy");
+    auto p2 = manager.addEntity(EntityTag::PLAYER);
+    auto e2 = manager.addEntity(EntityTag::ENEMY);
     manager.update();
     
     // Destroy some entities
@@ -174,8 +174,8 @@ TEST_F(EntityManagerTest, ComplexLifecycle_MultipleUpdates) {
     
     // Verify final state
     EXPECT_EQ(manager.getEntities().size(), 2);
-    EXPECT_EQ(manager.getEntities("player").size(), 1);
-    EXPECT_EQ(manager.getEntities("enemy").size(), 1);
-    EXPECT_EQ(manager.getEntities("player")[0], p2);
-    EXPECT_EQ(manager.getEntities("enemy")[0], e1);
+    EXPECT_EQ(manager.getEntities(EntityTag::PLAYER).size(), 1);
+    EXPECT_EQ(manager.getEntities(EntityTag::ENEMY).size(), 1);
+    EXPECT_EQ(manager.getEntities(EntityTag::PLAYER)[0], p2);
+    EXPECT_EQ(manager.getEntities(EntityTag::ENEMY)[0], e1);
 }

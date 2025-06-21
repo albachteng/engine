@@ -6,8 +6,7 @@
 #include <vector>
 
 typedef std::vector<std::shared_ptr<Entity>> EntityVec;
-typedef std::map<std::string, EntityVec> EntityMap;
-// TODO: abandon std::string in favor of enums
+typedef std::map<EntityTag, EntityVec> EntityMap;
 
 // template <typename T> bool has() const { return has_impl<T>(std::make_) }
 
@@ -21,11 +20,11 @@ private:
 public:
   EntityManager() = default;
   void update(); // handles adding and removing
-  std::shared_ptr<Entity> addEntity(const std::string &tag);
+  std::shared_ptr<Entity> addEntity(const EntityTag &tag);
   EntityVec &getEntities();                       // all entities
-  EntityVec &getEntities(const std::string &tag); // from map
+  EntityVec &getEntities(const EntityTag &tag); // from map
   const EntityVec &getEntities() const;                       // all entities (const)
-  const EntityVec &getEntities(const std::string &tag) const; // from map (const)
-  bool hasTag(const std::string &tag) const;                  // check if tag exists
+  const EntityVec &getEntities(const EntityTag &tag) const; // from map (const)
+  bool hasTag(const EntityTag &tag) const;                  // check if tag exists
   void clear();
 };

@@ -6,7 +6,7 @@ class EntityTest : public ::testing::Test {
 protected:
     void SetUp() override {
         manager.clear();
-        entity = manager.addEntity("test");
+        entity = manager.addEntity(EntityTag::DEFAULT);
         manager.update(); // Move entity from toAdd to main collection
     }
 
@@ -16,7 +16,7 @@ protected:
 
 TEST_F(EntityTest, BasicProperties) {
     EXPECT_EQ(entity->id(), 0); // First entity should have ID 0
-    EXPECT_EQ(entity->tag(), "test");
+    EXPECT_EQ(entity->tag(), EntityTag::DEFAULT);
     EXPECT_TRUE(entity->isActive());
 }
 
