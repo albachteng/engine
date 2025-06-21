@@ -25,6 +25,8 @@ public:
   EntityVec &getEntities(const EntityTag &tag); // from map
   const EntityVec &getEntities() const;                       // all entities (const)
   const EntityVec &getEntities(const EntityTag &tag) const; // from map (const)
+  std::shared_ptr<Entity> getEntityById(size_t id);          // get entity by ID
+  std::shared_ptr<Entity> getEntityById(size_t id) const;    // get entity by ID (const)
   bool hasTag(const EntityTag &tag) const;                  // check if tag exists
   void clear();
 };

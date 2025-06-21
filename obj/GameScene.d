@@ -4,4 +4,5 @@ obj/GameScene.o: src/GameScene.cpp src/../include/GameScene.h \
  src/../include/Entity.hpp src/../include/InputController.hpp \
  src/../include/OpenGLRenderer.hpp src/../include/./Renderer.h \
  src/../include/./EntityManager.h include/glad/glad.h \
- include/KHR/khrplatform.h
+ include/KHR/khrplatform.h src/../include/CollisionSystem.hpp \
+ src/../include/SpatialPartition.hpp

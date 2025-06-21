@@ -7,6 +7,7 @@
 void GameScene::onUnload() {
   std::cout << "unloading GameScene" << std::endl;
   m_entityManager.clear();
+  m_collisionSystem->clear();
   m_renderer->onUnload();
   m_renderer.reset();
   m_actionController->unregisterAll();
@@ -25,6 +26,15 @@ GameScene::GameScene(sf::RenderWindow &window) {
   m_window_size = (Vec2f)window.getSize(); // TODO: handle resize
   m_renderer = std::make_unique<OpenGLRenderer>(m_camera, window);
   m_actionController = std::make_shared<ActionController<SceneActions>>();
+  
+  // Initialize collision system with uniform grid (world bounds: -100 to 100, cell size: 10)
+  m_collisionSystem = std::make_unique<CollisionSystem>(
+    PartitionType::UNIFORM_GRID,
+    glm::vec3(-100.0f, -100.0f, -100.0f),
+    glm::vec3(100.0f, 100.0f, 100.0f),
+    10.0f
+  );
+  
   spawnTriangle();
 };
 
@@ -171,6 +181,9 @@ void GameScene::sMovement(float deltaTime) {
   float height = m_window_size.y;
   float width = m_window_size.x;
 
+  // Update collision system with current entity positions
+  m_collisionSystem->updateEntities(m_entityManager);
+
   for (auto &e : m_entityManager.getEntities()) {
     // 2D rotation
     // if (e->has<CTransform>())
@@ -219,9 +232,11 @@ void GameScene::sMovement(float deltaTime) {
       if (a_pos.position.z > 100.0f || a_pos.position.z < -100.0f) {
         a_move.vel.z *= -0.9f;
       }
-      for (auto &b : m_entityManager.getEntities(EntityTag::TRIANGLE)) {
-        // some velocity
-        if (AABBIntersect(e->get<CAABB>(), b->get<CAABB>())) {
+      // Use optimized collision detection instead of O(N²) loop
+      auto collisions = m_collisionSystem->findCollisionsFor(e, m_entityManager);
+      for (auto &b : collisions) {
+        // Only process collisions with triangles (matching original logic)
+        if (b->tag() == EntityTag::TRIANGLE && b->has<CMovement3D>()) {
           // std::cout << "hit! " << e->id() << ", " << b->id() << std::endl;
           a_move.vel *= -0.9f;
           auto b_move = b->get<CMovement3D>();

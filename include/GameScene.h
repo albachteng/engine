@@ -5,6 +5,7 @@
 #include "Entity.hpp"
 #include "InputController.hpp"
 #include "OpenGLRenderer.hpp"
+#include "CollisionSystem.hpp"
 #include <cstddef>
 #include <glm/ext/vector_float3.hpp>
 #include <memory>
@@ -18,6 +19,7 @@ private:
   std::shared_ptr<Camera> m_camera;
   std::shared_ptr<ActionController<SceneActions>> m_actionController;
   std::unique_ptr<OpenGLRenderer> m_renderer;
+  std::unique_ptr<CollisionSystem> m_collisionSystem;
   void spawnTriangle();
   Vec2f m_window_size;
   EntityManager m_entityManager;

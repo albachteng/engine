@@ -62,6 +62,32 @@ const EntityVec &EntityManager::getEntities(const EntityTag &tag) const {
   return empty;
 }
 
+std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) {
+  auto it = std::find_if(m_entities.begin(), m_entities.end(),
+                        [id](const std::shared_ptr<Entity>& e) {
+                            return e->id() == id;
+                        });
+  
+  if (it != m_entities.end()) {
+    return *it;
+  }
+  
+  return nullptr;
+}
+
+std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) const {
+  auto it = std::find_if(m_entities.begin(), m_entities.end(),
+                        [id](const std::shared_ptr<Entity>& e) {
+                            return e->id() == id;
+                        });
+  
+  if (it != m_entities.end()) {
+    return *it;
+  }
+  
+  return nullptr;
+}
+
 bool EntityManager::hasTag(const EntityTag &tag) const {
   return m_entityMap.find(tag) != m_entityMap.end();
 }
