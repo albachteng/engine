@@ -25,7 +25,9 @@ Game::Game(const std::string &config) {
         return std::static_pointer_cast<BaseScene>(
             std::make_shared<GameScene>(m_window));
       }));
-  m_sceneManager.loadScene("GameScene");
+  // Use new thread-safe API for initial scene loading
+  m_sceneManager.requestSceneTransition("GameScene");
+  m_sceneManager.processTransitions(); // Process immediately for startup
   std::cout << "about to initialize scene" << std::endl;
 }; // read in config file
 
@@ -33,7 +35,19 @@ void Game::run() {
   std::cout << "running" << std::endl;
   while (m_window.isOpen() && m_running) {
     float deltaTime = m_deltaClock.restart().asSeconds();
-    m_sceneManager.getCurrentScene()->update(deltaTime);
+    
+    // Process any pending scene transitions at safe point
+    m_sceneManager.processTransitions();
+    
+    // Get current scene safely
+    auto currentScene = m_sceneManager.getCurrentScene();
+    if (!currentScene) {
+      // No active scene - skip frame but keep running
+      std::cerr << "Warning: No active scene, skipping frame" << std::endl;
+      continue;
+    }
+    
+    currentScene->update(deltaTime);
     sf::Event event;
     while (m_window.pollEvent(event)) {
       if (event.type == sf::Event::Closed) {
@@ -42,23 +56,30 @@ void Game::run() {
       if (event.type == sf::Event::KeyPressed) {
         std::cout << "key pressed: " << event.key.code << std::endl;
         if (event.key.code == sf::Keyboard::Key::Enter) {
-          m_sceneManager.loadScene("MapScene");
+          // Use thread-safe scene transition request
+          m_sceneManager.requestSceneTransition("MapScene");
           m_window.clear(sf::Color::Black);
-          std::cout << "finished loadScene" << std::endl;
+          std::cout << "requested scene transition to MapScene" << std::endl;
         }
       }
-      m_sceneManager.getCurrentScene()->sInput(event, deltaTime);
+      // Safe scene access for input handling
+      if (currentScene) {
+        currentScene->sInput(event, deltaTime);
+      }
     }
 
     m_window.clear(sf::Color::Black);
 
-    if (!m_sceneManager.getCurrentScene()->isPaused()) {
-      m_sceneManager.getCurrentScene()->sMovement(deltaTime);
+    // Safe scene access for movement and rendering
+    if (currentScene && !currentScene->isPaused()) {
+      currentScene->sMovement(deltaTime);
       // sGravity();
       // other pausable systems
     }
 
-    m_sceneManager.getCurrentScene()->sRender();
+    if (currentScene) {
+      currentScene->sRender();
+    }
     m_window.display();
     m_currentFrame++;
   }
