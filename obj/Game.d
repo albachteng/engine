@@ -14,4 +14,5 @@ obj/Game.o: src/Game.cpp src/../include/Game.h \
  include/KHR/khrplatform.h src/../include/../include/CollisionSystem.hpp \
  src/../include/../include/SpatialPartition.hpp \
  src/../include/../include/MapScene.h \
- src/../include/../include/SFMLRenderer.h src/../include/SceneManager.hpp
+ src/../include/../include/SFMLRenderer.h src/../include/SceneManager.hpp \
+ src/../include/Logger.hpp

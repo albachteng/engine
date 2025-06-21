@@ -1,5 +1,5 @@
 #include "../include/CollisionSystem.hpp"
-#include <iostream>
+#include "../include/Logger.hpp"
 
 CollisionSystem::CollisionSystem(PartitionType type,
                                 const glm::vec3& worldMin,
@@ -10,12 +10,12 @@ CollisionSystem::CollisionSystem(PartitionType type,
     m_spatialPartition = createSpatialPartition(type, worldMin, worldMax, cellSize);
     
     if (!m_spatialPartition) {
-        std::cerr << "Failed to create spatial partition strategy" << std::endl;
+        LOG_ERROR("CollisionSystem: Failed to create spatial partition strategy");
         return;
     }
     
-    std::cout << "CollisionSystem initialized with " << m_spatialPartition->getStrategyName() 
-              << " strategy" << std::endl;
+    LOG_INFO_STREAM("CollisionSystem: Initialized with " << m_spatialPartition->getStrategyName() 
+              << " strategy");
 }
 
 void CollisionSystem::updateEntities(EntityManager& entityManager) {

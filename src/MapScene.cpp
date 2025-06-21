@@ -1,5 +1,6 @@
 #include "../include/MapScene.h"
 #include "../include/Constants.hpp"
+#include "../include/Logger.hpp"
 #include <cstdlib>
 #include <memory>
 
@@ -24,8 +25,8 @@ std::shared_ptr<Entity> MapScene::spawnPlayer() {
 };
 
 void MapScene::onLoad() {
-  std::cout << "Init fired in MapScene" << std::endl;
-  std::cout << "registering input map" << std::endl;
+  LOG_INFO("MapScene: Initializing scene");
+  LOG_DEBUG("MapScene: Registering input mappings");
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::W}] = MapActions::UP;
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::A}] =
       MapActions::LEFT;
@@ -45,7 +46,7 @@ void MapScene::onLoad() {
       MapActions::RIGHT;
 
   // register listeners
-  std::cout << "registering listeners" << std::endl;
+  LOG_DEBUG("MapScene: Registering input listeners");
   m_actionController->registerListener(MapActions::UP, [this](float deltaTime) {
     /* map movement */
   });
@@ -59,30 +60,27 @@ void MapScene::onLoad() {
       MapActions::UP, [this](float deltaTime) { moveCursor(0, -1); });
   m_actionController->registerAxisListener(MapActions::CURSOR_MOVE,
                                            [this](float x, float y) {
-                                             // std::cout << "firing axis
-                                             // listener: " << x << ", " << y <<
-                                             // std::endl;
                                              /* watch mouse movement */
                                            });
-  std::cout << "finished onLoad()" << std::endl;
+  LOG_INFO("MapScene: Scene loading completed");
 };
 
 void MapScene::moveCursor(int dx, int dy) {
-  std::cout << "previous selected node: " << m_selectedNode.x << ", "
-            << m_selectedNode.y << std::endl;
+  LOG_DEBUG_STREAM("MapScene: Previous selected node: " << m_selectedNode.x << ", "
+            << m_selectedNode.y);
   int newX = m_selectedNode.x + dx;
   int newY = m_selectedNode.y + dy;
 
   if (newX >= 0 && newX < m_cols && newY >= 0 && newY < m_rows) {
     m_selectedNode = {newX, newY};
-    std::cout << "new selected node: " << newX << ", " << newY << std::endl;
+    LOG_DEBUG_STREAM("MapScene: New selected node: " << newX << ", " << newY);
   };
 };
 
 Vec2i MapScene::getCursor() { return m_selectedNode; };
 
 void MapScene::processInput(const InputEvent &input, float deltaTime) {
-  std::cout << "processInput" << std::endl;
+  LOG_DEBUG("MapScene: Processing input");
   auto action = m_inputMap.find(input);
   if (action != m_inputMap.end()) {
     std::pair<float, float> pair = {0.0f, 0.0f};
@@ -99,7 +97,7 @@ void MapScene::togglePaused() { m_paused = !m_paused; };
 bool MapScene::isPaused() { return m_paused; };
 
 void MapScene::spawnMapNodes() {
-  std::cout << "entering spawnMapNodes" << std::endl;
+  LOG_DEBUG("MapScene: Spawning map nodes");
   int cols = EngineConstants::UI::MAP_GRID_COLS;
   int rows = EngineConstants::UI::MAP_GRID_ROWS;
   float node_height = m_window_size.y / cols;
@@ -107,7 +105,7 @@ void MapScene::spawnMapNodes() {
   for (int i = 0; i < cols; i++) {
     for (int j = 0; j < rows; j++) {
 
-      std::cout << "spawn map nodes loop: " << i << ", " << j << std::endl;
+      LOG_DEBUG_STREAM("MapScene: Creating node at position: " << i << ", " << j);
       auto e = m_entityManager.addEntity(EntityTag::MAP_NODE);
       bool isSelected = i == 0 && j == 0;
       e->add<CShape>(node_height * EngineConstants::UI::MAP_NODE_SIZE_FACTOR, 
@@ -129,7 +127,7 @@ void MapScene::sMovement(float deltaTime) {
   // MapNode selection updates
   for (auto &e : m_entityManager.getEntities(EntityTag::MAP_NODE)) {
     auto cursor = getCursor();
-    std::cout << "movement: " << cursor.x << cursor.y << std::endl;
+    LOG_DEBUG_STREAM("MapScene: Cursor movement: " << cursor.x << ", " << cursor.y);
     auto selection = e->get<CSelection>();
     auto &shape = e->get<CShape>();
 
@@ -165,7 +163,7 @@ void MapScene::sInput(sf::Event &event, float deltaTime) {
     float yOffset = lastY - event.mouseMove.y; // inverted Y
     lastX = event.mouseMove.x;
     lastY = event.mouseMove.y;
-    std::cout << "delta: " << deltaTime << std::endl;
+    LOG_DEBUG_STREAM("MapScene: Frame delta time: " << deltaTime);
     processInput(InputEvent{InputType::MouseMove,
                             std::pair<float, float>{xOffset, yOffset}},
                  deltaTime);

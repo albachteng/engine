@@ -69,7 +69,7 @@ const EntityVec &EntityManager::getEntities(const EntityTag &tag) const {
   return empty;
 }
 
-std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) {
+std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) const {
   auto it = std::find_if(m_entities.begin(), m_entities.end(),
                         [id](const std::shared_ptr<Entity>& e) {
                             return e->id() == id;
@@ -82,17 +82,9 @@ std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) {
   return nullptr;
 }
 
-std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) const {
-  auto it = std::find_if(m_entities.begin(), m_entities.end(),
-                        [id](const std::shared_ptr<Entity>& e) {
-                            return e->id() == id;
-                        });
-  
-  if (it != m_entities.end()) {
-    return *it;
-  }
-  
-  return nullptr;
+std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) {
+  // Implement non-const version in terms of const version to avoid duplication
+  return const_cast<const EntityManager*>(this)->getEntityById(id);
 }
 
 bool EntityManager::hasTag(const EntityTag &tag) const {

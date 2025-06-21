@@ -1,12 +1,12 @@
 #include "../include/Game.h"
 #include "../include/Constants.hpp"
+#include "../include/Logger.hpp"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <cstdlib>
 #include <functional>
 #include <glm/ext/vector_float3.hpp>
-#include <iostream>
 #include <memory>
 #include <ostream>
 
@@ -30,11 +30,11 @@ Game::Game(const std::string &config) {
   // Use new thread-safe API for initial scene loading
   m_sceneManager.requestSceneTransition("GameScene");
   m_sceneManager.processTransitions(); // Process immediately for startup
-  std::cout << "about to initialize scene" << std::endl;
+  LOG_INFO("Game: Scene initialization complete");
 }; // read in config file
 
 void Game::run() {
-  std::cout << "running" << std::endl;
+  LOG_INFO("Game: Starting main game loop");
   while (m_window.isOpen() && m_running) {
     float deltaTime = m_deltaClock.restart().asSeconds();
     
@@ -45,7 +45,7 @@ void Game::run() {
     auto currentScene = m_sceneManager.getCurrentScene();
     if (!currentScene) {
       // No active scene - skip frame but keep running
-      std::cerr << "Warning: No active scene, skipping frame" << std::endl;
+      LOG_WARN("Game: No active scene, skipping frame");
       continue;
     }
     
@@ -56,12 +56,12 @@ void Game::run() {
         m_window.close();
       }
       if (event.type == sf::Event::KeyPressed) {
-        std::cout << "key pressed: " << event.key.code << std::endl;
+        LOG_DEBUG_STREAM("Game: Key pressed: " << event.key.code);
         if (event.key.code == sf::Keyboard::Key::Enter) {
           // Use thread-safe scene transition request
           m_sceneManager.requestSceneTransition("MapScene");
           m_window.clear(sf::Color::Black);
-          std::cout << "requested scene transition to MapScene" << std::endl;
+          LOG_INFO("Game: Requested scene transition to MapScene");
         }
       }
       // Safe scene access for input handling

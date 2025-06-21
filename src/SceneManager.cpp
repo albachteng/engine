@@ -1,5 +1,5 @@
 #include "../include/SceneManager.hpp"
-#include <iostream>
+#include "../include/Logger.hpp"
 #include <stdexcept>
 #include <chrono>
 
@@ -11,11 +11,11 @@ SceneManager::~SceneManager() {
         m_currentSceneContext.state = SceneState::UNLOADING;
         try {
             m_currentSceneContext.scene->onUnload();
-            std::cout << "SceneManager: Successfully unloaded scene '" 
-                      << m_currentSceneContext.name << "' during shutdown" << std::endl;
+            LOG_INFO_STREAM("SceneManager: Successfully unloaded scene '" 
+                      << m_currentSceneContext.name << "' during shutdown");
         } catch (const std::exception& e) {
-            std::cerr << "SceneManager: Error unloading scene during shutdown: " 
-                      << e.what() << std::endl;
+            LOG_ERROR_STREAM("SceneManager: Error unloading scene during shutdown: " 
+                      << e.what());
         }
     }
     
@@ -38,32 +38,32 @@ void SceneManager::registerScene(const std::string& name,
     }
     
     m_sceneFactories[name] = factory;
-    std::cout << "SceneManager: Registered scene factory '" << name << "'" << std::endl;
+    LOG_INFO_STREAM("SceneManager: Registered scene factory '" << name << "'");
 }
 
 void SceneManager::requestSceneTransition(const std::string& name, bool force) {
     std::lock_guard<std::mutex> lock(m_mutex);
     
     if (name.empty()) {
-        std::cerr << "SceneManager: Cannot transition to empty scene name" << std::endl;
+        LOG_ERROR("SceneManager: Cannot transition to empty scene name");
         return;
     }
     
     if (m_sceneFactories.find(name) == m_sceneFactories.end()) {
-        std::cerr << "SceneManager: Scene '" << name << "' not registered" << std::endl;
+        LOG_ERROR_STREAM("SceneManager: Scene '" << name << "' not registered");
         return;
     }
     
     // Skip duplicate transitions unless forced
     if (!force && m_currentSceneContext.name == name && 
         m_currentSceneContext.state == SceneState::ACTIVE) {
-        std::cout << "SceneManager: Scene '" << name << "' already active, skipping transition" << std::endl;
+        LOG_INFO_STREAM("SceneManager: Scene '" << name << "' already active, skipping transition");
         return;
     }
     
     // Add to pending transitions
     m_pendingTransitions.emplace(name, force);
-    std::cout << "SceneManager: Queued transition to scene '" << name << "'" << std::endl;
+    LOG_INFO_STREAM("SceneManager: Queued transition to scene '" << name << "'");
 }
 
 void SceneManager::processTransitions() {
@@ -87,7 +87,7 @@ void SceneManager::processTransitions() {
     m_isTransitioning = true;
     lock.unlock(); // Release lock during actual scene operations
     
-    std::cout << "SceneManager: Processing transition to '" << transition.targetSceneName << "'" << std::endl;
+    LOG_INFO_STREAM("SceneManager: Processing transition to '" << transition.targetSceneName << "'");
     
     bool success = loadSceneInternal(transition.targetSceneName, transition.force);
     
@@ -97,9 +97,9 @@ void SceneManager::processTransitions() {
     
     if (!success) {
         m_failedTransitions++;
-        std::cerr << "SceneManager: Failed to transition to '" << transition.targetSceneName << "'" << std::endl;
+        LOG_ERROR_STREAM("SceneManager: Failed to transition to '" << transition.targetSceneName << "'");
     } else {
-        std::cout << "SceneManager: Successfully transitioned to '" << transition.targetSceneName << "'" << std::endl;
+        LOG_INFO_STREAM("SceneManager: Successfully transitioned to '" << transition.targetSceneName << "'");
     }
 }
 
@@ -112,10 +112,10 @@ bool SceneManager::loadSceneInternal(const std::string& name, bool force) {
     try {
         // Step 1: Unload current scene if exists
         if (m_currentSceneContext.scene && m_currentSceneContext.state == SceneState::ACTIVE) {
-            std::cout << "SceneManager: Unloading current scene '" << m_currentSceneContext.name << "'" << std::endl;
+            LOG_INFO_STREAM("SceneManager: Unloading current scene '" << m_currentSceneContext.name << "'");
             
             if (!unloadSceneInternal(m_currentSceneContext)) {
-                std::cerr << "SceneManager: Failed to unload current scene, aborting transition" << std::endl;
+                LOG_ERROR("SceneManager: Failed to unload current scene, aborting transition");
                 return false;
             }
         }
@@ -124,7 +124,7 @@ bool SceneManager::loadSceneInternal(const std::string& name, bool force) {
         SceneContext newContext(name);
         newContext.state = SceneState::LOADING;
         
-        std::cout << "SceneManager: Loading scene '" << name << "'" << std::endl;
+        LOG_INFO_STREAM("SceneManager: Loading scene '" << name << "'");
         
         // Step 3: Create scene instance
         auto factory = m_sceneFactories[name];
@@ -149,13 +149,13 @@ bool SceneManager::loadSceneInternal(const std::string& name, bool force) {
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration<double, std::milli>(end - start).count();
         
-        std::cout << "SceneManager: Scene '" << name << "' loaded successfully in " 
-                  << duration << "ms" << std::endl;
+        LOG_INFO_STREAM("SceneManager: Scene '" << name << "' loaded successfully in " 
+                  << duration << "ms");
         
         return true;
         
     } catch (const std::exception& e) {
-        std::cerr << "SceneManager: Exception during scene loading: " << e.what() << std::endl;
+        LOG_ERROR_STREAM("SceneManager: Exception during scene loading: " << e.what());
         
         // Attempt rollback to previous scene
         rollbackToPreviousScene();
@@ -174,22 +174,22 @@ bool SceneManager::unloadSceneInternal(SceneContext& context) {
         context.scene.reset();
         context.state = SceneState::INACTIVE;
         
-        std::cout << "SceneManager: Scene '" << context.name << "' unloaded successfully" << std::endl;
+        LOG_INFO_STREAM("SceneManager: Scene '" << context.name << "' unloaded successfully");
         return true;
         
     } catch (const std::exception& e) {
         context.state = SceneState::FAILED;
         context.errorMessage = e.what();
-        std::cerr << "SceneManager: Error unloading scene '" << context.name << "': " << e.what() << std::endl;
+        LOG_ERROR_STREAM("SceneManager: Error unloading scene '" << context.name << "': " << e.what());
         return false;
     }
 }
 
 void SceneManager::rollbackToPreviousScene() {
-    std::cout << "SceneManager: Attempting rollback to previous scene" << std::endl;
+    LOG_INFO("SceneManager: Attempting rollback to previous scene");
     
     if (!m_previousSceneContext.scene || m_previousSceneContext.state != SceneState::ACTIVE) {
-        std::cout << "SceneManager: No valid previous scene for rollback" << std::endl;
+        LOG_WARN("SceneManager: No valid previous scene for rollback");
         
         // Create empty scene context as fallback
         std::lock_guard<std::mutex> lock(m_mutex);
@@ -206,11 +206,11 @@ void SceneManager::rollbackToPreviousScene() {
             m_currentSceneContext = m_previousSceneContext;
         }
         
-        std::cout << "SceneManager: Successfully rolled back to scene '" 
-                  << m_previousSceneContext.name << "'" << std::endl;
+        LOG_INFO_STREAM("SceneManager: Successfully rolled back to scene '" 
+                  << m_previousSceneContext.name << "'");
         
     } catch (const std::exception& e) {
-        std::cerr << "SceneManager: Rollback failed: " << e.what() << std::endl;
+        LOG_ERROR_STREAM("SceneManager: Rollback failed: " << e.what());
         
         // Complete failure - clear current scene
         std::lock_guard<std::mutex> lock(m_mutex);
@@ -282,14 +282,14 @@ void SceneManager::clearPendingTransitions() {
     }
     
     if (cleared > 0) {
-        std::cout << "SceneManager: Cleared " << cleared << " pending transitions" << std::endl;
+        LOG_INFO_STREAM("SceneManager: Cleared " << cleared << " pending transitions");
     }
 }
 
 // Backward compatibility - deprecated
 void SceneManager::loadScene(const std::string& name) {
-    std::cerr << "SceneManager: WARNING - loadScene() is deprecated and unsafe. "
-              << "Use requestSceneTransition() instead." << std::endl;
+    LOG_WARN("SceneManager: WARNING - loadScene() is deprecated and unsafe. "
+              "Use requestSceneTransition() instead.");
     
     // For backward compatibility, queue the transition
     requestSceneTransition(name, false);

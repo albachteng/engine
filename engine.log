@@ -1,0 +1,41 @@
+
+=== Engine Logger Started: 2025-06-21 15:55:02.172 ===
+[2025-06-21 15:55:02.172] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-21 15:55:02.426] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-21 15:55:02.426] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-21 15:55:02.426] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-21 15:55:02.426] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-21 15:55:02.426] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-21 15:55:02.434] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-21 15:55:02.434] [INFO ] [GameScene.cpp:51] GameScene: Initializing scene
+[2025-06-21 15:55:02.434] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 7.88096ms
+[2025-06-21 15:55:02.434] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-21 15:55:02.434] [INFO ] [Game.cpp:33] Game: Scene initialization complete
+[2025-06-21 15:55:02.434] [INFO ] [Game.cpp:37] Game: Starting main game loop
+
+=== Engine Logger Started: 2025-06-21 15:55:32.151 ===
+[2025-06-21 15:55:32.151] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-21 15:55:32.359] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-21 15:55:32.359] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-21 15:55:32.359] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-21 15:55:32.359] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-21 15:55:32.359] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-21 15:55:32.366] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-21 15:55:32.366] [INFO ] [GameScene.cpp:51] GameScene: Initializing scene
+[2025-06-21 15:55:32.366] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 6.57317ms
+[2025-06-21 15:55:32.366] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-21 15:55:32.366] [INFO ] [Game.cpp:33] Game: Scene initialization complete
+[2025-06-21 15:55:32.366] [INFO ] [Game.cpp:37] Game: Starting main game loop
+[2025-06-21 15:55:44.390] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'MapScene'
+[2025-06-21 15:55:44.390] [INFO ] [Game.cpp:64] Game: Requested scene transition to MapScene
+[2025-06-21 15:55:44.407] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'MapScene'
+[2025-06-21 15:55:44.407] [INFO ] [SceneManager.cpp:115] SceneManager: Unloading current scene 'GameScene'
+[2025-06-21 15:55:44.407] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-21 15:55:44.407] [INFO ] [SceneManager.cpp:177] SceneManager: Scene 'GameScene' unloaded successfully
+[2025-06-21 15:55:44.407] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'MapScene'
+[2025-06-21 15:55:44.408] [INFO ] [MapScene.cpp:28] MapScene: Initializing scene
+[2025-06-21 15:55:44.408] [INFO ] [MapScene.cpp:65] MapScene: Scene loading completed
+[2025-06-21 15:55:44.408] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'MapScene' loaded successfully in 0.7592ms
+[2025-06-21 15:55:44.408] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'MapScene'
+[2025-06-21 15:55:47.821] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-21 15:55:47.821] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'MapScene' during shutdown

@@ -1,12 +1,12 @@
 #include "../include/GameScene.h"
 #include "../include/Constants.hpp"
+#include "../include/Logger.hpp"
 #include <SFML/Window/Keyboard.hpp>
-#include <iostream>
 #include <memory>
 #include <unordered_map>
 
 void GameScene::onUnload() {
-  std::cout << "unloading GameScene" << std::endl;
+  LOG_INFO("GameScene: Unloading scene and cleaning up resources");
   m_entityManager.clear();
   m_collisionSystem->clear();
   m_renderer->onUnload();
@@ -48,8 +48,8 @@ std::shared_ptr<ActionController<SceneActions>> GameScene::actionController() {
 };
 
 void GameScene::onLoad() {
-  std::cout << "Init fired in GameScene" << std::endl;
-  std::cout << "registering input map" << std::endl;
+  LOG_INFO("GameScene: Initializing scene");
+  LOG_DEBUG("GameScene: Registering input mappings");
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::W}] =
       SceneActions::FORWARD;
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::A}] =
@@ -73,7 +73,7 @@ void GameScene::onLoad() {
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::Enter}] =
       SceneActions::SCENE;
 
-  std::cout << "registering listeners" << std::endl;
+  LOG_DEBUG("GameScene: Registering input listeners");
   m_actionController->registerListener(SceneActions::PAUSE,
                                        [this](float) { togglePaused(); });
   m_actionController->registerListener(
@@ -98,9 +98,6 @@ void GameScene::onLoad() {
                                        });
   m_actionController->registerAxisListener(SceneActions::PAN,
                                            [this](float x, float y) {
-                                             // std::cout << "firing axis
-                                             // listener: " << x << ", " << y <<
-                                             // std::endl;
                                              m_camera->rotate(x, y);
                                            });
 };
@@ -109,8 +106,7 @@ void GameScene::spawnTriangle() {
   for (int i = 0; i < EngineConstants::World::ENTITY_GRID_SIZE; i++) {
     for (int j = 0; j < EngineConstants::World::ENTITY_GRID_SIZE; j++) {
       for (int k = 0; k < EngineConstants::World::ENTITY_GRID_SIZE; k++) {
-        std::cout << "spawn Triangle loop" << std::endl;
-        std::cout << "i, j, k: " << i << j << k << std::endl;
+        LOG_DEBUG_STREAM("GameScene: Spawning triangle at position " << i << ", " << j << ", " << k);
         auto e = m_entityManager.addEntity(EntityTag::TRIANGLE);
         e->add<CTransform3D>(
             glm::vec3{i * EngineConstants::World::ENTITY_SPACING_X, 
@@ -151,7 +147,6 @@ void GameScene::sInput(sf::Event &event, float deltaTime) {
     float yOffset = lastY - event.mouseMove.y; // inverted Y
     lastX = event.mouseMove.x;
     lastY = event.mouseMove.y;
-    // std::cout << "delta: " << deltaTime << std::endl;
     processInput(InputEvent{InputType::MouseMove,
                             std::pair<float, float>{xOffset, yOffset}},
                  deltaTime);
@@ -228,7 +223,6 @@ void GameScene::sMovement(float deltaTime) {
 
     // 3D AABB collision resolution
     if (e->has<CAABB>() && e->has<CMovement3D>()) {
-      // std::cout << "id: " << e->id() << std::endl;
       auto a_move = e->get<CMovement3D>();
       auto a_pos = e->get<CTransform3D>();
       // collision with world boundaries
@@ -246,7 +240,6 @@ void GameScene::sMovement(float deltaTime) {
       for (auto &b : collisions) {
         // Only process collisions with triangles (matching original logic)
         if (b->tag() == EntityTag::TRIANGLE && b->has<CMovement3D>()) {
-          // std::cout << "hit! " << e->id() << ", " << b->id() << std::endl;
           a_move.vel *= -0.9f;
           auto b_move = b->get<CMovement3D>();
           b_move.vel *= -0.9f;

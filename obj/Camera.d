@@ -6,4 +6,4 @@ obj/Camera.o: src/Camera.cpp src/../include/Camera.h \
  src/../include/OpenGLRenderer.hpp src/../include/./Renderer.h \
  src/../include/./EntityManager.h include/glad/glad.h \
  include/KHR/khrplatform.h src/../include/CollisionSystem.hpp \
- src/../include/SpatialPartition.hpp
+ src/../include/SpatialPartition.hpp src/../include/Logger.hpp
