@@ -31,9 +31,9 @@ OpenGLRenderer::OpenGLRenderer(std::shared_ptr<Camera> camera,
 
 OpenGLRenderer::~OpenGLRenderer() {
   if (m_initialized) {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
+    GL_CALL(glDeleteVertexArrays(1, &VAO));
+    GL_CALL(glDeleteBuffers(1, &VBO));
+    GL_CALL(glDeleteProgram(shaderProgram));
   }
 };
 
@@ -47,24 +47,25 @@ void OpenGLRenderer::init() {
 
   // create shader program
   shaderProgram = glCreateProgram();
-  glAttachShader(shaderProgram, vertexShader);
-  glAttachShader(shaderProgram, fragmentShader);
-  glLinkProgram(shaderProgram);
+  GL_CHECK_ERROR();
+  GL_CALL(glAttachShader(shaderProgram, vertexShader));
+  GL_CALL(glAttachShader(shaderProgram, fragmentShader));
+  GL_CALL(glLinkProgram(shaderProgram));
 
   // check for linking errors
   int success;
-  glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+  GL_CALL(glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success));
   if (!success) {
     char infoLog[512];
-    glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog);
+    GL_CALL(glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog));
     std::cerr << "Shader program linking failed: \n" << infoLog << std::endl;
   }
 
-  glDeleteShader(vertexShader);
-  glDeleteShader(fragmentShader);
+  GL_CALL(glDeleteShader(vertexShader));
+  GL_CALL(glDeleteShader(fragmentShader));
   
   setupBuffers();
-  glEnable(GL_DEPTH_TEST);
+  GL_CALL(glEnable(GL_DEPTH_TEST));
   m_initialized = true;
 };
 
@@ -74,11 +75,11 @@ void OpenGLRenderer::render() {};
 void OpenGLRenderer::render(const EntityVec &entities) {
   if (!m_initialized) return;
   
-  glClearColor(0.2f, 0.3f, 0.3f, 1.0f); // dark grey-green
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glUseProgram(shaderProgram);
+  GL_CALL(glClearColor(0.2f, 0.3f, 0.3f, 1.0f)); // dark grey-green
+  GL_CALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+  GL_CALL(glUseProgram(shaderProgram));
   
-  glBindVertexArray(VAO);
+  GL_CALL(glBindVertexArray(VAO));
   
   for (const auto &e : entities) {
     if (e->has<CTriangle>() && e->has<CTransform3D>()) {
@@ -86,9 +87,9 @@ void OpenGLRenderer::render(const EntityVec &entities) {
       auto &transform = e->get<CTransform3D>();
 
       // Update buffer data efficiently - no recreation
-      glBindBuffer(GL_ARRAY_BUFFER, VBO);
-      glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(float),
-                   triangle.vertices.data(), GL_DYNAMIC_DRAW);
+      GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, VBO));
+      GL_CALL(glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(float),
+                   triangle.vertices.data(), GL_DYNAMIC_DRAW));
 
       // matrix transforms for model, view and projection space
       glm::mat4 model = glm::mat4(1.0f);
@@ -105,31 +106,35 @@ void OpenGLRenderer::render(const EntityVec &entities) {
 
       // update uniform locations (could be cached for better performance)
       GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
+      GL_CHECK_ERROR();
       GLint viewLoc = glGetUniformLocation(shaderProgram, "view");
+      GL_CHECK_ERROR();
       GLint projLoc = glGetUniformLocation(shaderProgram, "projection");
-      glad_glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-      glad_glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-      glad_glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+      GL_CHECK_ERROR();
+      GL_CALL(glad_glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model)));
+      GL_CALL(glad_glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view)));
+      GL_CALL(glad_glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection)));
 
       // draw call
-      glDrawArrays(GL_TRIANGLES, 0, 3);
+      GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 3));
     }
   }
   
-  glBindVertexArray(0);
+  GL_CALL(glBindVertexArray(0));
 };
 
 // shader compilation helper
 unsigned int OpenGLRenderer::compileShader(const char *source, GLenum type) {
   unsigned int shader = glCreateShader(type);
-  glShaderSource(shader, 1, &source, nullptr);
-  glCompileShader(shader);
+  GL_CHECK_ERROR();
+  GL_CALL(glShaderSource(shader, 1, &source, nullptr));
+  GL_CALL(glCompileShader(shader));
 
   int success;
-  glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+  GL_CALL(glGetShaderiv(shader, GL_COMPILE_STATUS, &success));
   if (!success) {
     char infoLog[512];
-    glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+    GL_CALL(glGetShaderInfoLog(shader, 512, nullptr, infoLog));
     std::cerr << "Shader compilation failed: \n" << infoLog << std::endl;
   }
   return shader;
@@ -137,26 +142,26 @@ unsigned int OpenGLRenderer::compileShader(const char *source, GLenum type) {
 
 void OpenGLRenderer::setupBuffers() {
   // Create VAO and VBO once during initialization
-  glGenVertexArrays(1, &VAO);
-  glGenBuffers(1, &VBO);
+  GL_CALL(glGenVertexArrays(1, &VAO));
+  GL_CALL(glGenBuffers(1, &VBO));
   
-  glBindVertexArray(VAO);
-  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  GL_CALL(glBindVertexArray(VAO));
+  GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, VBO));
   
   // Set up vertex attributes (position and color)
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-                        (void *)0);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-                        (void *)(3 * sizeof(float)));
-  glEnableVertexAttribArray(1);
+  GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+                        (void *)0));
+  GL_CALL(glEnableVertexAttribArray(0));
+  GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+                        (void *)(3 * sizeof(float))));
+  GL_CALL(glEnableVertexAttribArray(1));
   
-  glBindVertexArray(0);
+  GL_CALL(glBindVertexArray(0));
 }
 
 void OpenGLRenderer::onUnload() {
-  glBindVertexArray(0);
-  glUseProgram(0);
+  GL_CALL(glBindVertexArray(0));
+  GL_CALL(glUseProgram(0));
   // Clean up is now handled in destructor
   m_initialized = false;
 };
