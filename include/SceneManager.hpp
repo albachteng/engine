@@ -70,18 +70,30 @@ private:
     size_t m_failedTransitions = 0;
     
     /**
-     * Internal scene loading with exception safety
-     * Called from processTransitions() in thread-safe context
+     * @brief Internal scene loading with exception safety
+     * @param name Name of scene to load
+     * @param force Force reload even if scene is already active
+     * @return True if scene loaded successfully
+     * 
+     * Called from processTransitions() in thread-safe context.
+     * Handles factory invocation, scene initialization, and error recovery.
      */
     bool loadSceneInternal(const std::string& name, bool force);
     
     /**
-     * Internal scene unloading with error handling
+     * @brief Internal scene unloading with error handling
+     * @param context Scene context to unload
+     * @return True if unloaded successfully
+     * 
+     * Calls scene's onUnload() method and handles any exceptions.
      */
     bool unloadSceneInternal(SceneContext& context);
     
     /**
-     * Rollback to previous scene if new scene fails
+     * @brief Rollback to previous scene if new scene fails
+     * 
+     * Restores previous scene state when a scene transition fails.
+     * Provides graceful degradation instead of leaving system in broken state.
      */
     void rollbackToPreviousScene();
 

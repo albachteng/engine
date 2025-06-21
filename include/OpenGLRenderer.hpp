@@ -47,6 +47,14 @@ inline const char* getGLErrorString(GLenum error) {
 
 class OpenGLRenderer : public Renderer {
 public:
+  /**
+   * @brief Initialize OpenGL renderer with camera and render target
+   * @param camera Shared pointer to camera for view/projection matrices
+   * @param window SFML render window for OpenGL context
+   * 
+   * Sets up OpenGL state, compiles shaders, and creates vertex buffers.
+   * Throws runtime_error if OpenGL initialization fails.
+   */
   OpenGLRenderer(std::shared_ptr<Camera> camera, sf::RenderWindow &window);
   ~OpenGLRenderer();
   std::shared_ptr<Camera> m_camera;
@@ -55,12 +63,35 @@ public:
   void render() override;
   void render(const EntityVec &entities) override;
   std::shared_ptr<Camera> camera();
+  
+  /**
+   * @brief Clean up OpenGL resources and reset state
+   * 
+   * Properly deletes VAOs, VBOs, and shader programs to prevent memory leaks.
+   * Safe to call multiple times.
+   */
   void onUnload();
 
 private:
   sf::RenderWindow &m_window;
   unsigned int VAO, VBO, shaderProgram;
   bool m_initialized;
+  
+  /**
+   * @brief Compile GLSL shader source code
+   * @param source Null-terminated shader source code
+   * @param type GL_VERTEX_SHADER or GL_FRAGMENT_SHADER
+   * @return OpenGL shader ID, or 0 if compilation failed
+   * 
+   * Handles compilation errors and logs detailed error messages.
+   */
   unsigned int compileShader(const char *source, GLenum type);
+  
+  /**
+   * @brief Set up vertex array objects and buffer objects for rendering
+   * 
+   * Creates VAO/VBO for vertex data and configures vertex attributes.
+   * Must be called after OpenGL context is active.
+   */
   void setupBuffers();
 };

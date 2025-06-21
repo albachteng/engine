@@ -1,4 +1,5 @@
 #include "../include/GameScene.h"
+#include "../include/Constants.hpp"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <memory>
@@ -22,17 +23,19 @@ void GameScene::sRender() {
 };
 
 GameScene::GameScene(sf::RenderWindow &window) {
-  m_camera = std::make_shared<Camera>(glm::vec3{0.0f, 0.0f, 3.0f});
+  m_camera = std::make_shared<Camera>(glm::vec3{EngineConstants::Camera::START_X, 
+                                                EngineConstants::Camera::START_Y, 
+                                                EngineConstants::Camera::START_Z});
   m_window_size = (Vec2f)window.getSize(); // TODO: handle resize
   m_renderer = std::make_unique<OpenGLRenderer>(m_camera, window);
   m_actionController = std::make_shared<ActionController<SceneActions>>();
   
-  // Initialize collision system with uniform grid (world bounds: -100 to 100, cell size: 10)
+  // Initialize collision system with uniform grid
   m_collisionSystem = std::make_unique<CollisionSystem>(
     PartitionType::UNIFORM_GRID,
-    glm::vec3(-100.0f, -100.0f, -100.0f),
-    glm::vec3(100.0f, 100.0f, 100.0f),
-    10.0f
+    glm::vec3(EngineConstants::World::MIN_BOUND, EngineConstants::World::MIN_BOUND, EngineConstants::World::MIN_BOUND),
+    glm::vec3(EngineConstants::World::MAX_BOUND, EngineConstants::World::MAX_BOUND, EngineConstants::World::MAX_BOUND),
+    EngineConstants::SpatialPartition::DEFAULT_CELL_SIZE
   );
   
   spawnTriangle();
@@ -103,17 +106,21 @@ void GameScene::onLoad() {
 };
 
 void GameScene::spawnTriangle() {
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      for (int k = 0; k < 3; k++) {
+  for (int i = 0; i < EngineConstants::World::ENTITY_GRID_SIZE; i++) {
+    for (int j = 0; j < EngineConstants::World::ENTITY_GRID_SIZE; j++) {
+      for (int k = 0; k < EngineConstants::World::ENTITY_GRID_SIZE; k++) {
         std::cout << "spawn Triangle loop" << std::endl;
         std::cout << "i, j, k: " << i << j << k << std::endl;
         auto e = m_entityManager.addEntity(EntityTag::TRIANGLE);
         e->add<CTransform3D>(
-            glm::vec3{i * 2 * 1.0f, j * 3 * 1.0f, k * 4 * 1.0f},
+            glm::vec3{i * EngineConstants::World::ENTITY_SPACING_X, 
+                      j * EngineConstants::World::ENTITY_SPACING_Y, 
+                      k * EngineConstants::World::ENTITY_SPACING_Z},
             glm::vec3{0.0f}, glm::vec3{1.0f});
         e->add<CTriangle>();
-        e->add<CAABB>(glm::vec3{i * 2 * 1.0f, j * 3 * 1.0f, k * 4 * 1.0f},
+        e->add<CAABB>(glm::vec3{i * EngineConstants::World::ENTITY_SPACING_X, 
+                                j * EngineConstants::World::ENTITY_SPACING_Y, 
+                                k * EngineConstants::World::ENTITY_SPACING_Z},
                       glm::vec3{i * 1.0f, j * 1.5f, k * 2.0f});
         e->add<CMovement3D>(glm::vec3{i * 1.0f, j * 1.0f, k * 1.0f},
                             glm::vec3{0.5f * j, 0.5f * i, 0.5f * k});
@@ -137,8 +144,8 @@ void GameScene::sInput(sf::Event &event, float deltaTime) {
   case sf::Event::MouseMoved: {
     static float lastX = m_window_size.x / 2;
     static float lastY = m_window_size.y / 2;
-    if (abs(event.mouseMove.x - lastX) < 2 &&
-        abs(event.mouseMove.y - lastY) < 2)
+    if (abs(event.mouseMove.x - lastX) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD &&
+        abs(event.mouseMove.y - lastY) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD)
       return; // Skip minor movements
     float xOffset = event.mouseMove.x - lastX;
     float yOffset = lastY - event.mouseMove.y; // inverted Y
@@ -191,7 +198,9 @@ void GameScene::sMovement(float deltaTime) {
 
     // 3D rotation and movement
     if (e->has<CTransform3D>() && e->has<CMovement3D>()) {
-      e->get<CTransform3D>().rotation += glm::vec3{1.0f, 1.0f, 1.0f};
+      e->get<CTransform3D>().rotation += glm::vec3{EngineConstants::World::ENTITY_ROTATION_RATE, 
+                                                   EngineConstants::World::ENTITY_ROTATION_RATE, 
+                                                   EngineConstants::World::ENTITY_ROTATION_RATE};
       e->get<CTransform3D>().position += e->get<CMovement3D>().vel * deltaTime;
       e->get<CMovement3D>().vel += e->get<CMovement3D>().acc * deltaTime;
     }
@@ -222,15 +231,15 @@ void GameScene::sMovement(float deltaTime) {
       // std::cout << "id: " << e->id() << std::endl;
       auto a_move = e->get<CMovement3D>();
       auto a_pos = e->get<CTransform3D>();
-      // collision with "walls"
-      if (a_pos.position.x > 100.0f || a_pos.position.x < -100.0f) {
-        a_move.vel.x *= -0.9f;
+      // collision with world boundaries
+      if (a_pos.position.x > EngineConstants::World::MAX_BOUND || a_pos.position.x < EngineConstants::World::MIN_BOUND) {
+        a_move.vel.x *= EngineConstants::World::COLLISION_DAMPING_FACTOR;
       }
-      if (a_pos.position.y > 100.0f || a_pos.position.y < -100.0f) {
-        a_move.vel.y *= -0.9f;
+      if (a_pos.position.y > EngineConstants::World::MAX_BOUND || a_pos.position.y < EngineConstants::World::MIN_BOUND) {
+        a_move.vel.y *= EngineConstants::World::COLLISION_DAMPING_FACTOR;
       }
-      if (a_pos.position.z > 100.0f || a_pos.position.z < -100.0f) {
-        a_move.vel.z *= -0.9f;
+      if (a_pos.position.z > EngineConstants::World::MAX_BOUND || a_pos.position.z < EngineConstants::World::MIN_BOUND) {
+        a_move.vel.z *= EngineConstants::World::COLLISION_DAMPING_FACTOR;
       }
       // Use optimized collision detection instead of O(N²) loop
       auto collisions = m_collisionSystem->findCollisionsFor(e, m_entityManager);

@@ -1,4 +1,5 @@
 #include "../include/MapScene.h"
+#include "../include/Constants.hpp"
 #include <cstdlib>
 #include <memory>
 
@@ -99,8 +100,8 @@ bool MapScene::isPaused() { return m_paused; };
 
 void MapScene::spawnMapNodes() {
   std::cout << "entering spawnMapNodes" << std::endl;
-  int cols = 10;
-  int rows = 10;
+  int cols = EngineConstants::UI::MAP_GRID_COLS;
+  int rows = EngineConstants::UI::MAP_GRID_ROWS;
   float node_height = m_window_size.y / cols;
   float node_width = m_window_size.x / rows;
   for (int i = 0; i < cols; i++) {
@@ -109,12 +110,14 @@ void MapScene::spawnMapNodes() {
       std::cout << "spawn map nodes loop: " << i << ", " << j << std::endl;
       auto e = m_entityManager.addEntity(EntityTag::MAP_NODE);
       bool isSelected = i == 0 && j == 0;
-      e->add<CShape>(node_height * .4f, 4,
+      e->add<CShape>(node_height * EngineConstants::UI::MAP_NODE_SIZE_FACTOR, 
+                     EngineConstants::UI::MAP_NODE_SHAPE_POINTS,
                      isSelected ? sf::Color::Black : sf::Color::White,
-                     isSelected ? sf::Color::White : sf::Color::Cyan, 3.0f);
-      float x = i * node_width + node_width * 0.5f;
-      float y = j * node_height + node_height * 0.5f;
-      e->add<CTransform>(Vec2f{x, y}, Vec2f{0.0f, 0.0f}, 45.0f);
+                     isSelected ? sf::Color::White : sf::Color::Cyan, 
+                     EngineConstants::UI::MAP_NODE_OUTLINE_THICKNESS);
+      float x = i * node_width + node_width * EngineConstants::UI::GRID_CENTER_OFFSET;
+      float y = j * node_height + node_height * EngineConstants::UI::GRID_CENTER_OFFSET;
+      e->add<CTransform>(Vec2f{x, y}, Vec2f{0.0f, 0.0f}, EngineConstants::UI::MAP_NODE_ROTATION_ANGLE);
       e->add<CSelection>(Vec2i{i, j});
     }
   }
@@ -155,8 +158,8 @@ void MapScene::sInput(sf::Event &event, float deltaTime) {
   case sf::Event::MouseMoved: {
     static float lastX = m_window_size.x / 2;
     static float lastY = m_window_size.y / 2;
-    if (abs(event.mouseMove.x - lastX) < 2 &&
-        abs(event.mouseMove.y - lastY) < 2)
+    if (abs(event.mouseMove.x - lastX) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD &&
+        abs(event.mouseMove.y - lastY) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD)
       return; // Skip minor movements
     float xOffset = event.mouseMove.x - lastX;
     float yOffset = lastY - event.mouseMove.y; // inverted Y

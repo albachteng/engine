@@ -1,4 +1,5 @@
 #pragma once
+#include "Constants.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -81,7 +82,7 @@ public:
 
 class CGravity : public Component {
 public:
-  Vec2f gravity = {0.0, 9.8f};
+  Vec2f gravity = {EngineConstants::Physics::GRAVITY_X, EngineConstants::Physics::GRAVITY_Y};
   CGravity();
 };
 

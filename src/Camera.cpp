@@ -1,5 +1,6 @@
 #include "../include/Camera.h"
 #include "../include/GameScene.h"
+#include "../include/Constants.hpp"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/vector_float3.hpp>
 #include <glm/geometric.hpp>
@@ -7,7 +8,10 @@
 
 Camera::Camera(glm::vec3 startPosition)
     : position(startPosition), front(glm::vec3(0.0f, 0.0f, -1.0f)),
-      up(glm::vec3(0.0f, 1.0f, 0.0f)), yaw(-90.0f), pitch(0.0f), fov(45.0f){};
+      up(glm::vec3(0.0f, 1.0f, 0.0f)), 
+      yaw(EngineConstants::Camera::DEFAULT_YAW), 
+      pitch(EngineConstants::Camera::DEFAULT_PITCH), 
+      fov(EngineConstants::Camera::DEFAULT_FOV){};
 
 // where the camera is looking
 glm::mat4 Camera::getViewMatrix() const {
@@ -16,13 +20,15 @@ glm::mat4 Camera::getViewMatrix() const {
 
 // perspective matrix
 glm::mat4 Camera::getProjectionMatrix(float aspectRatio) const {
-  return glm::perspective(glm::radians(fov), aspectRatio, 0.1f, 100.0f);
+  return glm::perspective(glm::radians(fov), aspectRatio, 
+                         EngineConstants::Camera::NEAR_CLIP_PLANE, 
+                         EngineConstants::Camera::FAR_CLIP_PLANE);
 };
 
 // TODO: move this into scene action processing
 void Camera::move(CameraMovement movement, float deltaTime) {
   // std::cout << "in process keyboard" << std::endl;
-  float speed = 2.5f * deltaTime;
+  float speed = EngineConstants::Camera::MOVEMENT_SPEED * deltaTime;
   std::cout << "speed: " << speed << std::endl;
   switch (movement) {
   case CameraMovement::FORWARD: {
@@ -49,15 +55,15 @@ void Camera::move(CameraMovement movement, float deltaTime) {
 // TODO: move this into scene action processing
 void Camera::rotate(float xOffset, float yOffset) {
   // std::cout << "rotating: " << xOffset << ", " << yOffset << std::endl;
-  float sensitivity = 0.05f;
+  float sensitivity = EngineConstants::Camera::MOUSE_SENSITIVITY;
   yaw += xOffset * sensitivity;
   pitch += yOffset * sensitivity;
 
   // limit pitch angle to avoid flipping
-  if (pitch > 89.0f)
-    pitch = 89.0f;
-  if (pitch < -89.0f)
-    pitch = -89.0f;
+  if (pitch > EngineConstants::Camera::MAX_PITCH_ANGLE)
+    pitch = EngineConstants::Camera::MAX_PITCH_ANGLE;
+  if (pitch < EngineConstants::Camera::MIN_PITCH_ANGLE)
+    pitch = EngineConstants::Camera::MIN_PITCH_ANGLE;
 
   // update camera direction
   glm::vec3 direction;

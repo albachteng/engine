@@ -2,6 +2,7 @@ obj/Game.o: src/Game.cpp src/../include/Game.h \
  src/../include/../include/EntityManager.h \
  src/../include/../include/Entity.hpp \
  src/../include/../include/Component.h \
+ src/../include/../include/Constants.hpp \
  src/../include/../include/ComponentManager.hpp \
  src/../include/../include/GameScene.h \
  src/../include/../include/BaseScene.hpp \

@@ -1,4 +1,5 @@
 #include "../include/Game.h"
+#include "../include/Constants.hpp"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -13,8 +14,9 @@ void Game::init(const std::string &config) {};
 
 Game::Game(const std::string &config) {
   init(config);
-  m_window.create(sf::VideoMode(1280, 720), "sfml");
-  m_window.setFramerateLimit(60);
+  m_window.create(sf::VideoMode(EngineConstants::Display::WINDOW_WIDTH, 
+                                EngineConstants::Display::WINDOW_HEIGHT), "sfml");
+  m_window.setFramerateLimit(EngineConstants::Display::TARGET_FRAMERATE);
   m_sceneManager.registerScene(
       "MapScene", std::function<std::shared_ptr<BaseScene>()>([this]() {
         return std::static_pointer_cast<BaseScene>(

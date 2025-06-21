@@ -35,6 +35,13 @@ private:
     static size_t s_nextID;
     
 public:
+    /**
+     * @brief Get unique type ID for component type T (thread-safe)
+     * @return Unique ID for component type T, same ID returned for same type
+     * 
+     * Uses static local variable to ensure each component type gets exactly one ID.
+     * First call for a type increments the global counter.
+     */
     template<typename T>
     static size_t getID() {
         static size_t id = s_nextID++;
@@ -311,7 +318,13 @@ public:
     }
     
     /**
-     * Add component to entity
+     * @brief Add component to entity with perfect forwarding
+     * @param entityID The entity to add the component to
+     * @param args Constructor arguments forwarded to component constructor
+     * @return Reference to the newly created component
+     * 
+     * Uses perfect forwarding to efficiently construct components in-place.
+     * Automatically registers component type if not already registered.
      */
     template<typename T, typename... Args>
     T& addComponent(size_t entityID, Args&&... args) {
@@ -362,7 +375,11 @@ public:
     }
     
     /**
-     * Remove all components for entity (called when entity is destroyed)
+     * @brief Remove all components for entity (called when entity is destroyed)
+     * @param entityID The entity to remove all components from
+     * 
+     * Iterates through all component arrays and removes entity's components.
+     * Safe to call even if entity has no components of certain types.
      */
     void removeAllComponents(size_t entityID) {
         for (auto& componentArray : m_componentArrays) {
@@ -384,7 +401,7 @@ public:
     }
     
     /**
-     * Get statistics for debugging/profiling
+     * @brief Statistics structure for performance monitoring and debugging
      */
     struct Statistics {
         size_t totalComponentTypes = 0;
@@ -392,6 +409,12 @@ public:
         std::vector<std::pair<std::string, size_t>> componentCounts;
     };
     
+    /**
+     * @brief Get detailed statistics about component usage
+     * @return Statistics structure with component counts and type information
+     * 
+     * Useful for profiling memory usage and debugging component system performance.
+     */
     Statistics getStatistics() const {
         Statistics stats;
         

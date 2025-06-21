@@ -1,4 +1,5 @@
 #include "../include/SpatialPartition.hpp"
+#include "../include/Constants.hpp"
 #include <algorithm>
 #include <chrono>
 #include <iostream>
@@ -249,7 +250,7 @@ public:
         
         // Check each non-empty cell
         for (const auto& cell : m_grid) {
-            if (cell.entities.size() < 2) continue;
+            if (cell.entities.size() < EngineConstants::SpatialPartition::MIN_ENTITIES_FOR_COLLISION) continue;
             
             // Check all pairs within this cell
             for (size_t i = 0; i < cell.entities.size(); ++i) {
@@ -396,7 +397,7 @@ public:
  */
 class QuadtreeStrategy : public SpatialPartitionStrategy {
 public:
-    QuadtreeStrategy(const glm::vec3& worldMin, const glm::vec3& worldMax, size_t maxEntitiesPerNode = 8) {
+    QuadtreeStrategy(const glm::vec3& worldMin, const glm::vec3& worldMax, size_t maxEntitiesPerNode = EngineConstants::SpatialPartition::QUADTREE_MAX_ENTITIES_PER_NODE) {
         // TODO: Implement quadtree construction
         std::cout << "TODO: QuadtreeStrategy not yet implemented" << std::endl;
     }
@@ -461,7 +462,7 @@ public:
  */
 class SpatialHashStrategy : public SpatialPartitionStrategy {
 public:
-    SpatialHashStrategy(float cellSize = 10.0f) {
+    SpatialHashStrategy(float cellSize = EngineConstants::SpatialPartition::SPATIAL_HASH_DEFAULT_CELL_SIZE) {
         // TODO: Implement spatial hash construction
         std::cout << "TODO: SpatialHashStrategy not yet implemented" << std::endl;
     }

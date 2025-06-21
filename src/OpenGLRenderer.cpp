@@ -1,5 +1,6 @@
 #include "../include/OpenGLRenderer.hpp"
 #include "../include/FileLoader.h"
+#include "../include/Constants.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <glm/ext/matrix_float4x4.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -56,8 +57,8 @@ void OpenGLRenderer::init() {
   int success;
   GL_CALL(glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success));
   if (!success) {
-    char infoLog[512];
-    GL_CALL(glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog));
+    char infoLog[EngineConstants::Graphics::SHADER_LOG_BUFFER_SIZE];
+    GL_CALL(glGetProgramInfoLog(shaderProgram, EngineConstants::Graphics::SHADER_LOG_BUFFER_SIZE, nullptr, infoLog));
     std::cerr << "Shader program linking failed: \n" << infoLog << std::endl;
   }
 
@@ -75,7 +76,10 @@ void OpenGLRenderer::render() {};
 void OpenGLRenderer::render(const EntityVec &entities) {
   if (!m_initialized) return;
   
-  GL_CALL(glClearColor(0.2f, 0.3f, 0.3f, 1.0f)); // dark grey-green
+  GL_CALL(glClearColor(EngineConstants::Graphics::CLEAR_COLOR_R, 
+                       EngineConstants::Graphics::CLEAR_COLOR_G, 
+                       EngineConstants::Graphics::CLEAR_COLOR_B, 
+                       EngineConstants::Graphics::CLEAR_COLOR_A));
   GL_CALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
   GL_CALL(glUseProgram(shaderProgram));
   
@@ -88,7 +92,7 @@ void OpenGLRenderer::render(const EntityVec &entities) {
 
       // Update buffer data efficiently - no recreation
       GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-      GL_CALL(glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(float),
+      GL_CALL(glBufferData(GL_ARRAY_BUFFER, EngineConstants::Graphics::TRIANGLE_VERTEX_DATA_SIZE * sizeof(float),
                    triangle.vertices.data(), GL_DYNAMIC_DRAW));
 
       // matrix transforms for model, view and projection space
@@ -102,7 +106,7 @@ void OpenGLRenderer::render(const EntityVec &entities) {
                           glm::vec3(0.0f, 0.0f, 1.0f));
       model = glm::scale(model, transform.scale);
       glm::mat4 view = m_camera->getViewMatrix();
-      glm::mat4 projection = m_camera->getProjectionMatrix(1280.0f / 720.0f);
+      glm::mat4 projection = m_camera->getProjectionMatrix(EngineConstants::Display::ASPECT_RATIO);
 
       // update uniform locations (could be cached for better performance)
       GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
@@ -133,8 +137,8 @@ unsigned int OpenGLRenderer::compileShader(const char *source, GLenum type) {
   int success;
   GL_CALL(glGetShaderiv(shader, GL_COMPILE_STATUS, &success));
   if (!success) {
-    char infoLog[512];
-    GL_CALL(glGetShaderInfoLog(shader, 512, nullptr, infoLog));
+    char infoLog[EngineConstants::Graphics::SHADER_LOG_BUFFER_SIZE];
+    GL_CALL(glGetShaderInfoLog(shader, EngineConstants::Graphics::SHADER_LOG_BUFFER_SIZE, nullptr, infoLog));
     std::cerr << "Shader compilation failed: \n" << infoLog << std::endl;
   }
   return shader;
@@ -149,11 +153,11 @@ void OpenGLRenderer::setupBuffers() {
   GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, VBO));
   
   // Set up vertex attributes (position and color)
-  GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
+  GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, EngineConstants::Graphics::VERTEX_STRIDE_SIZE * sizeof(float),
                         (void *)0));
   GL_CALL(glEnableVertexAttribArray(0));
-  GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float),
-                        (void *)(3 * sizeof(float))));
+  GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, EngineConstants::Graphics::VERTEX_STRIDE_SIZE * sizeof(float),
+                        (void *)(EngineConstants::Graphics::COLOR_ATTRIBUTE_OFFSET * sizeof(float))));
   GL_CALL(glEnableVertexAttribArray(1));
   
   GL_CALL(glBindVertexArray(0));

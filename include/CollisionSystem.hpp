@@ -21,11 +21,14 @@ private:
     
 public:
     /**
-     * Initialize collision system with spatial partitioning strategy
-     * @param type Spatial partitioning algorithm to use
-     * @param worldMin Minimum world bounds
-     * @param worldMax Maximum world bounds  
-     * @param cellSize Grid cell size (for uniform grid)
+     * @brief Initialize collision system with spatial partitioning strategy
+     * @param type Spatial partitioning algorithm to use (UNIFORM_GRID, QUADTREE, etc.)
+     * @param worldMin Minimum world bounds for spatial structure
+     * @param worldMax Maximum world bounds for spatial structure
+     * @param cellSize Grid cell size (for uniform grid) or leaf size (for trees)
+     * 
+     * Creates optimized spatial data structure for collision detection.
+     * World bounds should encompass all entities that may participate in collisions.
      */
     CollisionSystem(PartitionType type = PartitionType::UNIFORM_GRID,
                    const glm::vec3& worldMin = glm::vec3(-100.0f),
@@ -33,14 +36,22 @@ public:
                    float cellSize = 10.0f);
     
     /**
-     * Update collision system with all entities that have CAABB and CTransform3D
-     * This should be called once per frame before collision detection
+     * @brief Update collision system with all entities that have CAABB and CTransform3D
+     * @param entityManager Entity manager containing entities to check for collisions
+     * 
+     * Rebuilds spatial partitioning structure with current entity positions and bounds.
+     * Must be called once per frame before collision detection to ensure accuracy.
+     * Only processes entities that have both CAABB and CTransform3D components.
      */
     void updateEntities(EntityManager& entityManager);
     
     /**
-     * Find all collision pairs using spatial partitioning
-     * @return Vector of entity pairs that are colliding
+     * @brief Find all collision pairs using spatial partitioning
+     * @return Vector of entity pairs that are colliding (AABB intersection)
+     * 
+     * Uses spatial partitioning to efficiently find potential collision pairs,
+     * then performs precise AABB intersection tests. Complexity depends on
+     * spatial partitioning strategy: O(N) for uniform grid, O(N log N) for trees.
      */
     std::vector<CollisionPair> findCollisions();
     
@@ -53,10 +64,15 @@ public:
         const std::shared_ptr<Entity>& entity, EntityManager& entityManager);
     
     /**
-     * Find entities within a region
+     * @brief Find entities within a region using spatial queries
      * @param region World-space AABB to query
      * @param entityManager Entity manager to get entities from
-     * @return Vector of entities in the region
+     * @return Vector of entities whose AABBs intersect with the query region
+     * 
+     * Efficient spatial query for region-based operations like:
+     * - Explosion damage areas
+     * - Trigger volumes
+     * - Area-of-effect calculations
      */
     std::vector<std::shared_ptr<Entity>> queryRegion(
         const CAABB& region, EntityManager& entityManager);
