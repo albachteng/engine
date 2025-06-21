@@ -7,12 +7,14 @@
 #include <memory>
 #include <ostream>
 
-// sample vertex and fragment shaders:
-const char *vertexShaderSource =
-    FileLoader::loadFileAsCharPtr("./src/ColorShader.vert");
+// Load shader sources safely using RAII
+static const std::string vertexShaderSourceStr =
+    FileLoader::loadFileAsString("./src/ColorShader.vert");
+static const std::string fragmentShaderSourceStr =
+    FileLoader::loadFileAsString("./src/DepthFragment.frag");
 
-const char *fragmentShaderSource =
-    FileLoader::loadFileAsCharPtr("./src/DepthFragment.frag");
+static const char *vertexShaderSource = vertexShaderSourceStr.c_str();
+static const char *fragmentShaderSource = fragmentShaderSourceStr.c_str();
 
 std::shared_ptr<Camera> OpenGLRenderer::camera() { return m_camera; };
 

@@ -20,7 +20,11 @@ char *FileLoader::loadFileAsCharPtr(const std::string &path) {
   return buffer;
 };
 
-void FileLoader::freeCharPtr(char *ptr) { delete[] ptr; };
+void FileLoader::freeCharPtr(char *ptr) { 
+  if (ptr) {
+    delete[] ptr; 
+  }
+};
 
 std::string FileLoader::loadFileAsString(const std::string &path) {
   std::ifstream file(path);
