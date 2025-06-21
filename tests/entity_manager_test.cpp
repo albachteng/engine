@@ -102,6 +102,60 @@ TEST_F(EntityManagerTest, GetEntitiesByTag_ReturnsEmpty_ForNonexistentTag) {
     EXPECT_EQ(manager.getEntities("nonexistent").size(), 0);
 }
 
+TEST_F(EntityManagerTest, HasTag_ReturnsFalse_ForNonexistentTag) {
+    manager.addEntity("player");
+    manager.update();
+    
+    EXPECT_FALSE(manager.hasTag("nonexistent"));
+    EXPECT_FALSE(manager.hasTag("enemy"));
+}
+
+TEST_F(EntityManagerTest, HasTag_ReturnsTrue_ForExistingTag) {
+    manager.addEntity("player");
+    manager.addEntity("enemy");
+    manager.update();
+    
+    EXPECT_TRUE(manager.hasTag("player"));
+    EXPECT_TRUE(manager.hasTag("enemy"));
+}
+
+TEST_F(EntityManagerTest, ConstGetEntities_AllEntities) {
+    auto entity1 = manager.addEntity("player");
+    auto entity2 = manager.addEntity("enemy");
+    manager.update();
+    
+    const EntityManager& constManager = manager;
+    const auto& entities = constManager.getEntities();
+    
+    EXPECT_EQ(entities.size(), 2);
+    EXPECT_EQ(entities[0], entity1);
+    EXPECT_EQ(entities[1], entity2);
+}
+
+TEST_F(EntityManagerTest, ConstGetEntities_ByTag) {
+    auto player1 = manager.addEntity("player");
+    auto player2 = manager.addEntity("player");
+    manager.addEntity("enemy");
+    manager.update();
+    
+    const EntityManager& constManager = manager;
+    const auto& players = constManager.getEntities("player");
+    
+    EXPECT_EQ(players.size(), 2);
+    EXPECT_EQ(players[0], player1);
+    EXPECT_EQ(players[1], player2);
+}
+
+TEST_F(EntityManagerTest, ConstGetEntities_ReturnsEmpty_ForNonexistentTag) {
+    manager.addEntity("player");
+    manager.update();
+    
+    const EntityManager& constManager = manager;
+    const auto& nonexistent = constManager.getEntities("nonexistent");
+    
+    EXPECT_EQ(nonexistent.size(), 0);
+}
+
 TEST_F(EntityManagerTest, ComplexLifecycle_MultipleUpdates) {
     // Add entities
     auto p1 = manager.addEntity("player");

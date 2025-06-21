@@ -13,8 +13,12 @@ typedef std::map<std::string, EntityVec> EntityMap;
 // template <typename T> bool has() const { return has_impl<T>(std::make_) }
 
 std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
-  // create a new entity object
-  auto e = std::shared_ptr<Entity>(new Entity(m_totalEntities++, tag));
+  // Helper struct to access private constructor with make_shared
+  struct EntityBuilder : public Entity {
+    EntityBuilder(size_t id, const std::string &tag) : Entity(id, tag) {}
+  };
+  
+  auto e = std::make_shared<EntityBuilder>(m_totalEntities++, tag);
   m_toAdd.push_back(e); // delay for iterator invalidation
   return e;
 };
@@ -42,10 +46,26 @@ void EntityManager::update() {
   m_toAdd.clear();
 };
 
-EntityVec &EntityManager::getEntities() { return m_entities; };
+EntityVec &EntityManager::getEntities() { return m_entities; }
+
 EntityVec &EntityManager::getEntities(const std::string &tag) {
   return m_entityMap[tag];
-};
+}
+
+const EntityVec &EntityManager::getEntities() const { return m_entities; }
+
+const EntityVec &EntityManager::getEntities(const std::string &tag) const {
+  auto it = m_entityMap.find(tag);
+  if (it != m_entityMap.end()) {
+    return it->second;
+  }
+  static const EntityVec empty;
+  return empty;
+}
+
+bool EntityManager::hasTag(const std::string &tag) const {
+  return m_entityMap.find(tag) != m_entityMap.end();
+}
 
 void EntityManager::clear() {
   m_entities.clear();

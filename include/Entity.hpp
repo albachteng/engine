@@ -8,7 +8,6 @@ typedef std::tuple<CTransform, CTransform3D, CShape, CCollision, CInput, CScore,
     ComponentTuple;
 
 class Entity {
-
 private:
   Entity(const size_t &id, const std::string &tag) : m_tag(tag), m_id(id){};
   ComponentTuple m_components;
