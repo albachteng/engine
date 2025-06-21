@@ -9,10 +9,10 @@
 
 // sample vertex and fragment shaders:
 const char *vertexShaderSource =
-    FileLoader::loadFileAsCharPtr("./ColorShader.vert");
+    FileLoader::loadFileAsCharPtr("./src/ColorShader.vert");
 
 const char *fragmentShaderSource =
-    FileLoader::loadFileAsCharPtr("./DepthFragment.frag");
+    FileLoader::loadFileAsCharPtr("./src/DepthFragment.frag");
 
 std::shared_ptr<Camera> OpenGLRenderer::camera() { return m_camera; };
 
