@@ -2,6 +2,7 @@ obj/test.o: src/test.cpp src/../include/Game.h \
  src/../include/../include/EntityManager.h \
  src/../include/../include/Entity.hpp \
  src/../include/../include/Component.h \
+ src/../include/../include/ComponentManager.hpp \
  src/../include/../include/GameScene.h \
  src/../include/../include/BaseScene.hpp \
  src/../include/../include/InputEvent.hpp \

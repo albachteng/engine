@@ -18,7 +18,15 @@ private:
   size_t m_totalEntities = 0;
 
 public:
-  EntityManager() = default;
+  EntityManager() {
+    // Initialize component system
+    Entity::initializeComponentManager();
+  }
+  
+  ~EntityManager() {
+    // Clean up component system
+    Entity::shutdownComponentManager();
+  }
   void update(); // handles adding and removing
   std::shared_ptr<Entity> addEntity(const EntityTag &tag);
   EntityVec &getEntities();                       // all entities

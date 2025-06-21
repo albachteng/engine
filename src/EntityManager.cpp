@@ -28,10 +28,17 @@ void EntityManager::update() {
     m_entities.push_back(e);
     m_entityMap[e->tag()].push_back(e);
   }
-  // Remove inactive entities from main vector
+  // Remove inactive entities from main vector and clean up their components
   auto it = std::remove_if(
       m_entities.begin(), m_entities.end(),
-      [](const std::shared_ptr<Entity> &e) { return !e->isActive(); });
+      [](const std::shared_ptr<Entity> &e) { 
+        if (!e->isActive()) {
+          // Clean up entity's components before removing
+          e->removeAllComponents();
+          return true;
+        }
+        return false;
+      });
   m_entities.erase(it, m_entities.end());
 
   // Remove inactive entities from each tag group
@@ -97,6 +104,11 @@ void EntityManager::clear() {
   m_entityMap.clear();
   m_toAdd.clear();
   m_totalEntities = 0;
+  
+  // Clear component system
+  if (Entity::getComponentManager()) {
+    Entity::getComponentManager()->clear();
+  }
 };
 
 /* usage example:
