@@ -177,6 +177,15 @@ public:
     }
     
     /**
+     * Get multiple components at once (const version)
+     * Returns tuple of const component references
+     */
+    template<typename... Components>
+    std::tuple<const Components&...> getComponents() const {
+        return std::tie(get<Components>()...);
+    }
+    
+    /**
      * Remove all components from entity
      * Called automatically when entity is destroyed
      */

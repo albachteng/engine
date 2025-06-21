@@ -288,6 +288,29 @@ public:
     }
     
     /**
+     * Get component type ID for type T (const version)
+     */
+    template<typename T>
+    size_t getComponentTypeID() const {
+        size_t componentID = ComponentTypeIDGenerator::getID<T>();
+        
+        // In const context, we can't auto-register, so component must exist
+        assert(componentID < m_componentArrays.size() && m_componentArrays[componentID] && 
+               "Component type not registered - call non-const version first");
+        
+        return componentID;
+    }
+    
+    /**
+     * Get component array for type T (const version)
+     */
+    template<typename T>
+    const ComponentArray<T>* getComponentArray() const {
+        size_t componentID = getComponentTypeID<T>();
+        return static_cast<const ComponentArray<T>*>(m_componentArrays[componentID].get());
+    }
+    
+    /**
      * Add component to entity
      */
     template<typename T, typename... Args>
@@ -322,7 +345,7 @@ public:
     
     template<typename T>
     const T& getComponent(size_t entityID) const {
-        ComponentArray<T>* componentArray = getComponentArray<T>();
+        const ComponentArray<T>* componentArray = getComponentArray<T>();
         return componentArray->getComponent(entityID);
     }
     
