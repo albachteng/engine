@@ -1,6 +1,6 @@
 #include "../include/Camera.h"
-#include "../include/GameScene.h"
 #include "../include/Constants.hpp"
+#include "../include/GameScene.h"
 #include "../include/Logger.hpp"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/vector_float3.hpp>
@@ -8,9 +8,9 @@
 
 Camera::Camera(glm::vec3 startPosition)
     : position(startPosition), front(glm::vec3(0.0f, 0.0f, -1.0f)),
-      up(glm::vec3(0.0f, 1.0f, 0.0f)), 
-      yaw(EngineConstants::Camera::DEFAULT_YAW), 
-      pitch(EngineConstants::Camera::DEFAULT_PITCH), 
+      up(glm::vec3(0.0f, 1.0f, 0.0f)),
+      yaw(EngineConstants::Camera::DEFAULT_YAW),
+      pitch(EngineConstants::Camera::DEFAULT_PITCH),
       fov(EngineConstants::Camera::DEFAULT_FOV){};
 
 // where the camera is looking
@@ -20,15 +20,14 @@ glm::mat4 Camera::getViewMatrix() const {
 
 // perspective matrix
 glm::mat4 Camera::getProjectionMatrix(float aspectRatio) const {
-  return glm::perspective(glm::radians(fov), aspectRatio, 
-                         EngineConstants::Camera::NEAR_CLIP_PLANE, 
-                         EngineConstants::Camera::FAR_CLIP_PLANE);
+  return glm::perspective(glm::radians(fov), aspectRatio,
+                          EngineConstants::Camera::NEAR_CLIP_PLANE,
+                          EngineConstants::Camera::FAR_CLIP_PLANE);
 };
 
 // TODO: move this into scene action processing
 void Camera::move(CameraMovement movement, float deltaTime) {
   float speed = EngineConstants::Camera::MOVEMENT_SPEED * deltaTime;
-  LOG_DEBUG_STREAM("Camera: Movement speed: " << speed);
   switch (movement) {
   case CameraMovement::FORWARD: {
     position += speed * front;

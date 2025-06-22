@@ -124,16 +124,17 @@ constexpr bool ENABLE_MOUSE_CAPTURE =
 
 // Mouse sensitivity and smoothing controls
 constexpr float MOUSE_SENSITIVITY_SCALE =
-    0.15f;                                  // Overall sensitivity multiplier
-constexpr float MOUSE_SENSITIVITY_X = 1.0f; // Horizontal sensitivity modifier
+    0.05f;                                  // Overall sensitivity multiplier
+constexpr float MOUSE_SENSITIVITY_X = .50f; // Horizontal sensitivity modifier
 constexpr float MOUSE_SENSITIVITY_Y = .10f; // Vertical sensitivity modifier
 constexpr float MOUSE_MAX_DELTA =
-    100.0f; // Maximum pixel offset to prevent wild rotation
+    50.0f; // Maximum pixel offset to prevent wild rotation
 constexpr float MOUSE_ACCELERATION =
     1.0f; // Mouse acceleration factor (1.0 = linear)
 constexpr float MOUSE_SMOOTHING =
-    0.5f; // Smoothing factor (0.0 = no smoothing, 0.9 = heavy smoothing)
-constexpr bool ENABLE_MOUSE_SMOOTHING = true; // Enable mouse movement smoothing
+    0.7f; // Smoothing factor (0.0 = no smoothing, 0.9 = heavy smoothing)
+constexpr bool ENABLE_MOUSE_SMOOTHING =
+    false; // Enable mouse movement smoothing
 } // namespace Input
 
 namespace UI {

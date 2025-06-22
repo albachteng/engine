@@ -44,6 +44,11 @@ private:
   bool m_mouseCapture = false;
   sf::Vector2i m_windowCenter;
   
+  // Mouse movement tracking
+  bool m_firstMouseMovement = true;
+  int m_lastMouseX = 0;
+  int m_lastMouseY = 0;
+  
   // Mouse smoothing state
   float m_smoothedXOffset = 0.0f;
   float m_smoothedYOffset = 0.0f;
