@@ -236,9 +236,21 @@ void GameScene::sMovement(float deltaTime) {
 void GameScene::handleMouseMovement(int mouseX, int mouseY, float deltaTime) {
   if (!m_mouseCapture) return;
   
-  // Calculate relative movement from center
-  float rawXOffset = mouseX - m_windowCenter.x;
-  float rawYOffset = m_windowCenter.y - mouseY; // Inverted Y
+  // Skip the first mouse movement to establish baseline position
+  if (m_firstMouseMovement) {
+    m_lastMouseX = mouseX;
+    m_lastMouseY = mouseY;
+    m_firstMouseMovement = false;
+    return;
+  }
+  
+  // Calculate TRUE relative movement based on direction of mouse motion
+  float rawXOffset = mouseX - m_lastMouseX;      // Positive = moving right
+  float rawYOffset = m_lastMouseY - mouseY;      // Positive = moving up (inverted Y)
+  
+  // Update last position for next frame
+  m_lastMouseX = mouseX;
+  m_lastMouseY = mouseY;
   
   // Only process if movement exceeds threshold
   if (abs(rawXOffset) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD &&
@@ -283,17 +295,19 @@ void GameScene::handleMouseMovement(int mouseX, int mouseY, float deltaTime) {
   processInput(InputEvent{InputType::MouseMove,
                           std::pair<float, float>{finalXOffset, finalYOffset}},
                deltaTime);
-  
-  // Reset mouse to center of window for continuous movement
-  sf::Mouse::setPosition(m_windowCenter, m_window);
 }
 
 void GameScene::captureMouse() {
   if (EngineConstants::Input::ENABLE_MOUSE_CAPTURE) {
     m_mouseCapture = true;
     m_window.setMouseCursorVisible(false);
-    sf::Mouse::setPosition(m_windowCenter, m_window);
-    LOG_INFO("GameScene: Mouse captured for FPS-style controls");
+    
+    // Reset mouse tracking state
+    m_firstMouseMovement = true;
+    m_smoothedXOffset = 0.0f;
+    m_smoothedYOffset = 0.0f;
+    
+    LOG_INFO("GameScene: Mouse captured for FPS-style controls (relative movement)");
   }
 }
 

@@ -75,11 +75,11 @@ constexpr float START_Z = 3.0f;
 
 namespace World {
 // World boundary limits for collision system
-constexpr float MIN_BOUND = -20.0f;
-constexpr float MAX_BOUND = 20.0f;
+constexpr float MIN_BOUND = -10.0f;
+constexpr float MAX_BOUND = 10.0f;
 
 // Collision response
-constexpr float COLLISION_DAMPING_FACTOR = -0.9f;
+constexpr float COLLISION_DAMPING_FACTOR = -0.95f;
 
 // Entity spawning and layout
 constexpr int ENTITY_GRID_SIZE = 3; // 3×3×3 grid of entities
@@ -118,21 +118,21 @@ constexpr float HALF_EXTENTS_FACTOR = 0.5f;       // For computing half-extents
 namespace Input {
 // Mouse input thresholds
 constexpr int MOUSE_MOVEMENT_THRESHOLD =
-    25; // Minimum pixels to register movement
+    5; // Minimum pixels to register movement
 constexpr bool ENABLE_MOUSE_CAPTURE =
     true; // Capture mouse to window for FPS-style controls
 
 // Mouse sensitivity and smoothing controls
 constexpr float MOUSE_SENSITIVITY_SCALE =
-    0.05f;                                  // Overall sensitivity multiplier
+    0.15f;                                  // Overall sensitivity multiplier
 constexpr float MOUSE_SENSITIVITY_X = .50f; // Horizontal sensitivity modifier
-constexpr float MOUSE_SENSITIVITY_Y = .10f; // Vertical sensitivity modifier
+constexpr float MOUSE_SENSITIVITY_Y = .50f; // Vertical sensitivity modifier
 constexpr float MOUSE_MAX_DELTA =
-    50.0f; // Maximum pixel offset to prevent wild rotation
+    75.0f; // Maximum pixel offset to prevent wild rotation
 constexpr float MOUSE_ACCELERATION =
     1.0f; // Mouse acceleration factor (1.0 = linear)
 constexpr float MOUSE_SMOOTHING =
-    0.7f; // Smoothing factor (0.0 = no smoothing, 0.9 = heavy smoothing)
+    0.25f; // Smoothing factor (0.0 = no smoothing, 0.9 = heavy smoothing)
 constexpr bool ENABLE_MOUSE_SMOOTHING =
     false; // Enable mouse movement smoothing
 } // namespace Input
@@ -147,6 +147,14 @@ constexpr int MAP_NODE_SHAPE_POINTS = 4; // Makes CircleShape into a square
 constexpr float MAP_NODE_OUTLINE_THICKNESS = 3.0f;
 constexpr float GRID_CENTER_OFFSET = 0.5f; // Position nodes at cell centers
 constexpr float MAP_NODE_ROTATION_ANGLE = 45.0f; // Diamond rotation
+
+// Enhanced map navigation
+constexpr float MAP_NODE_DEFAULT_SIZE = 20.0f;     // Default node size/radius
+constexpr float MAP_DIRECTIONAL_TOLERANCE = 0.7f; // Cosine threshold for directional navigation
+constexpr float MAP_PULSE_SPEED = 3.0f;           // Speed of pulsing animation
+constexpr float MAP_PULSE_MIN_ALPHA = 100;        // Minimum alpha for pulse effect
+constexpr float MAP_PULSE_MAX_ALPHA = 255;        // Maximum alpha for pulse effect
+constexpr float MAP_SELECTION_OUTLINE = 4.0f;     // Outline thickness for selected nodes
 
 // 3D Debug Grid configuration
 constexpr float GRID_3D_SIZE =

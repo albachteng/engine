@@ -57,3 +57,13 @@ CGridLine::CGridLine() : start(0.0f), end(0.0f), color(0.0f), width(0.0f), isMaj
 CGridLine::CGridLine(const glm::vec3& startPos, const glm::vec3& endPos, 
                      const glm::vec3& lineColor, float lineWidth, bool major)
     : start(startPos), end(endPos), color(lineColor), width(lineWidth), isMajor(major) {};
+
+CMapNode::CMapNode() 
+    : nodeId(-1), position(0.0f, 0.0f), shape(NodeShape::CIRCLE), isSelected(false), 
+      isNavigable(true), baseColor(sf::Color::White), selectedColor(sf::Color::Yellow),
+      pulseColor(sf::Color::Red), pulseTimer(0.0f), size(20.0f) {}
+
+CMapNode::CMapNode(int id, const Vec2f& pos, NodeShape nodeShape, bool navigable, float nodeSize)
+    : nodeId(id), position(pos), shape(nodeShape), isSelected(false), isNavigable(navigable),
+      baseColor(sf::Color::White), selectedColor(sf::Color::Yellow), 
+      pulseColor(sf::Color::Red), pulseTimer(0.0f), size(nodeSize) {};

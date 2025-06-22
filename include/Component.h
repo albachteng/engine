@@ -139,3 +139,29 @@ public:
             const glm::vec3& lineColor = glm::vec3(0.5f, 0.5f, 0.5f), 
             float lineWidth = 0.02f, bool major = false);
 };
+
+enum class NodeShape {
+  CIRCLE,
+  SQUARE,
+  DIAMOND,
+  TRIANGLE,
+  HEXAGON
+};
+
+class CMapNode : public Component {
+public:
+  int nodeId;                    // Unique identifier for this node
+  Vec2f position;               // Actual position (not grid-based)
+  NodeShape shape;              // Shape of the node
+  bool isSelected;              // Current selection state
+  bool isNavigable;             // Whether this node can be navigated to
+  sf::Color baseColor;          // Default color when not selected
+  sf::Color selectedColor;      // Color when selected
+  sf::Color pulseColor;         // Color for pulsing animation
+  float pulseTimer;             // Animation timer for pulsing
+  float size;                   // Size/radius of the node
+  
+  CMapNode();
+  CMapNode(int id, const Vec2f& pos, NodeShape nodeShape = NodeShape::CIRCLE, 
+           bool navigable = true, float nodeSize = 20.0f);
+};
