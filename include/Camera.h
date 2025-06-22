@@ -23,5 +23,6 @@ public:
   void move(CameraMovement movement,
             float deltaTime); // TODO: replace this with Scene method
 
-  void rotate(float xOffset, float yOffset);
+  void rotate(float xOffset, float yOffset);           // Applies built-in sensitivity scaling
+  void rotateRaw(float xOffset, float yOffset);       // Uses pre-processed values without additional scaling
 };

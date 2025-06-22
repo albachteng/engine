@@ -4,6 +4,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <memory>
 #include <unordered_map>
+#include <cmath>
+#include <algorithm>
 
 void GameScene::onUnload() {
   LOG_INFO("GameScene: Unloading scene and cleaning up resources");
@@ -28,11 +30,12 @@ void GameScene::sRender() {
   m_renderer->render(m_entityManager.getEntities());
 };
 
-GameScene::GameScene(sf::RenderWindow &window) {
+GameScene::GameScene(sf::RenderWindow &window) : m_window(window) {
   m_camera = std::make_shared<Camera>(glm::vec3{
       EngineConstants::Camera::START_X, EngineConstants::Camera::START_Y,
       EngineConstants::Camera::START_Z});
   m_window_size = (Vec2f)window.getSize(); // TODO: handle resize
+  m_windowCenter = sf::Vector2i(m_window_size.x / 2, m_window_size.y / 2);
   m_renderer = std::make_unique<OpenGLRenderer>(m_camera, window);
   m_actionController = std::make_shared<ActionController<SceneActions>>();
 
@@ -100,6 +103,10 @@ void GameScene::onLoad() {
       SceneActions::RIGHT;
   m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::Enter}] =
       SceneActions::SCENE;
+  m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::Escape}] =
+      SceneActions::MOUSE_TOGGLE;
+  m_inputMap[InputEvent{InputType::Keyboard, sf::Keyboard::G}] =
+      SceneActions::GRID_TOGGLE;
 
   LOG_DEBUG("GameScene: Registering input listeners");
   m_actionController->registerListener(SceneActions::PAUSE,
@@ -124,8 +131,18 @@ void GameScene::onLoad() {
                                        [this](float deltaTime) {
                                          /* TODO: swap scenes */
                                        });
+  m_actionController->registerListener(SceneActions::MOUSE_TOGGLE,
+                                       [this](float) { 
+                                         if (m_mouseCapture) releaseMouse(); 
+                                         else captureMouse(); 
+                                       });
+  m_actionController->registerListener(SceneActions::GRID_TOGGLE,
+                                       [this](float) { toggleGrid(); });
   m_actionController->registerAxisListener(
-      SceneActions::PAN, [this](float x, float y) { m_camera->rotate(x, y); });
+      SceneActions::PAN, [this](float x, float y) { m_camera->rotateRaw(x, y); });
+  
+  // Enable mouse capture by default
+  captureMouse();
 };
 
 void GameScene::spawnTriangle() {
@@ -163,20 +180,7 @@ void GameScene::sInput(sf::Event &event, float deltaTime) {
   //   break;
   // }
   case sf::Event::MouseMoved: {
-    static float lastX = m_window_size.x / 2;
-    static float lastY = m_window_size.y / 2;
-    if (abs(event.mouseMove.x - lastX) <
-            EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD &&
-        abs(event.mouseMove.y - lastY) <
-            EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD)
-      return; // Skip minor movements
-    float xOffset = event.mouseMove.x - lastX;
-    float yOffset = lastY - event.mouseMove.y; // inverted Y
-    lastX = event.mouseMove.x;
-    lastY = event.mouseMove.y;
-    processInput(InputEvent{InputType::MouseMove,
-                            std::pair<float, float>{xOffset, yOffset}},
-                 deltaTime);
+    handleMouseMovement(event.mouseMove.x, event.mouseMove.y, deltaTime);
     break;
   }
   default:
@@ -228,3 +232,141 @@ void GameScene::sMovement(float deltaTime) {
   // 5. Update legacy collision system for compatibility (if needed by other systems)
   m_collisionSystem->updateEntities(m_entityManager);
 };
+
+void GameScene::handleMouseMovement(int mouseX, int mouseY, float deltaTime) {
+  if (!m_mouseCapture) return;
+  
+  // Calculate relative movement from center
+  float rawXOffset = mouseX - m_windowCenter.x;
+  float rawYOffset = m_windowCenter.y - mouseY; // Inverted Y
+  
+  // Only process if movement exceeds threshold
+  if (abs(rawXOffset) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD &&
+      abs(rawYOffset) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD) {
+    return;
+  }
+  
+  // Clamp delta to prevent wild rotation from large movements
+  float clampedXOffset = std::max(-EngineConstants::Input::MOUSE_MAX_DELTA, 
+                                  std::min(EngineConstants::Input::MOUSE_MAX_DELTA, rawXOffset));
+  float clampedYOffset = std::max(-EngineConstants::Input::MOUSE_MAX_DELTA, 
+                                  std::min(EngineConstants::Input::MOUSE_MAX_DELTA, rawYOffset));
+  
+  // Apply sensitivity scaling
+  float scaledXOffset = clampedXOffset * EngineConstants::Input::MOUSE_SENSITIVITY_SCALE * 
+                        EngineConstants::Input::MOUSE_SENSITIVITY_X;
+  float scaledYOffset = clampedYOffset * EngineConstants::Input::MOUSE_SENSITIVITY_SCALE * 
+                        EngineConstants::Input::MOUSE_SENSITIVITY_Y;
+  
+  // Apply acceleration (power curve for fine control)
+  if (EngineConstants::Input::MOUSE_ACCELERATION != 1.0f) {
+    float xSign = scaledXOffset >= 0 ? 1.0f : -1.0f;
+    float ySign = scaledYOffset >= 0 ? 1.0f : -1.0f;
+    scaledXOffset = xSign * pow(abs(scaledXOffset), EngineConstants::Input::MOUSE_ACCELERATION);
+    scaledYOffset = ySign * pow(abs(scaledYOffset), EngineConstants::Input::MOUSE_ACCELERATION);
+  }
+  
+  // Apply smoothing if enabled
+  float finalXOffset, finalYOffset;
+  if (EngineConstants::Input::ENABLE_MOUSE_SMOOTHING) {
+    float smoothing = EngineConstants::Input::MOUSE_SMOOTHING;
+    m_smoothedXOffset = m_smoothedXOffset * smoothing + scaledXOffset * (1.0f - smoothing);
+    m_smoothedYOffset = m_smoothedYOffset * smoothing + scaledYOffset * (1.0f - smoothing);
+    finalXOffset = m_smoothedXOffset;
+    finalYOffset = m_smoothedYOffset;
+  } else {
+    finalXOffset = scaledXOffset;
+    finalYOffset = scaledYOffset;
+  }
+  
+  // Process the mouse movement
+  processInput(InputEvent{InputType::MouseMove,
+                          std::pair<float, float>{finalXOffset, finalYOffset}},
+               deltaTime);
+  
+  // Reset mouse to center of window for continuous movement
+  sf::Mouse::setPosition(m_windowCenter, m_window);
+}
+
+void GameScene::captureMouse() {
+  if (EngineConstants::Input::ENABLE_MOUSE_CAPTURE) {
+    m_mouseCapture = true;
+    m_window.setMouseCursorVisible(false);
+    sf::Mouse::setPosition(m_windowCenter, m_window);
+    LOG_INFO("GameScene: Mouse captured for FPS-style controls");
+  }
+}
+
+void GameScene::releaseMouse() {
+  m_mouseCapture = false;
+  m_window.setMouseCursorVisible(true);
+  LOG_INFO("GameScene: Mouse released");
+}
+
+void GameScene::toggleGrid() {
+  m_gridVisible = !m_gridVisible;
+  if (m_gridVisible && !m_gridCreated) {
+    createGrid();
+  }
+  LOG_INFO_STREAM("GameScene: Grid visibility toggled to " << (m_gridVisible ? "ON" : "OFF"));
+}
+
+void GameScene::createGrid() {
+  if (m_gridCreated) return;
+  
+  LOG_INFO("GameScene: Creating 3D debug grid");
+  
+  float halfSize = EngineConstants::UI::GRID_3D_SIZE / 2.0f;
+  float spacing = EngineConstants::UI::GRID_3D_SPACING;
+  float majorSpacing = EngineConstants::UI::GRID_3D_MAJOR_SPACING;
+  
+  // Create grid lines in X-Z plane (Y = 0)
+  for (float x = -halfSize; x <= halfSize; x += spacing) {
+    bool isMajor = (fmod(abs(x), majorSpacing) < 0.001f);
+    glm::vec3 color = isMajor ? glm::vec3(0.8f, 0.8f, 0.8f) : glm::vec3(0.4f, 0.4f, 0.4f);
+    
+    // Vertical lines (parallel to Z axis)
+    auto lineEntity = m_entityManager.addEntity(EntityTag::TRIANGLE); // Reuse triangle tag for now
+    lineEntity->add<CTransform3D>(glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(1.0f));
+    lineEntity->add<CGridLine>(glm::vec3(x, 0, -halfSize), glm::vec3(x, 0, halfSize), color, 
+                               EngineConstants::UI::GRID_3D_LINE_WIDTH, isMajor);
+  }
+  
+  for (float z = -halfSize; z <= halfSize; z += spacing) {
+    bool isMajor = (fmod(abs(z), majorSpacing) < 0.001f);
+    glm::vec3 color = isMajor ? glm::vec3(0.8f, 0.8f, 0.8f) : glm::vec3(0.4f, 0.4f, 0.4f);
+    
+    // Horizontal lines (parallel to X axis)
+    auto lineEntity = m_entityManager.addEntity(EntityTag::TRIANGLE); // Reuse triangle tag for now
+    lineEntity->add<CTransform3D>(glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(1.0f));
+    lineEntity->add<CGridLine>(glm::vec3(-halfSize, 0, z), glm::vec3(halfSize, 0, z), color,
+                               EngineConstants::UI::GRID_3D_LINE_WIDTH, isMajor);
+  }
+  
+  // Add coordinate axes (X=red, Y=green, Z=blue)
+  auto xAxis = m_entityManager.addEntity(EntityTag::TRIANGLE);
+  xAxis->add<CTransform3D>(glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(1.0f));
+  xAxis->add<CGridLine>(glm::vec3(-halfSize, 0, 0), glm::vec3(halfSize, 0, 0), 
+                        glm::vec3(1.0f, 0.0f, 0.0f), 0.05f, true); // Red X-axis
+  
+  auto zAxis = m_entityManager.addEntity(EntityTag::TRIANGLE);
+  zAxis->add<CTransform3D>(glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(1.0f));
+  zAxis->add<CGridLine>(glm::vec3(0, 0, -halfSize), glm::vec3(0, 0, halfSize), 
+                        glm::vec3(0.0f, 0.0f, 1.0f), 0.05f, true); // Blue Z-axis
+  
+  auto yAxis = m_entityManager.addEntity(EntityTag::TRIANGLE);
+  yAxis->add<CTransform3D>(glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(1.0f));
+  yAxis->add<CGridLine>(glm::vec3(0, -halfSize/2, 0), glm::vec3(0, halfSize/2, 0), 
+                        glm::vec3(0.0f, 1.0f, 0.0f), 0.05f, true); // Green Y-axis
+  
+  m_gridCreated = true;
+  LOG_INFO_STREAM("GameScene: Created grid with " << (int)(2 * (halfSize * 2 / spacing + 1)) << " lines");
+}
+
+void GameScene::destroyGrid() {
+  if (!m_gridCreated) return;
+  
+  LOG_INFO("GameScene: Destroying grid (not implemented - grid entities persist)");
+  // TODO: Implement grid entity removal by tracking grid entities
+  m_gridCreated = false;
+}

@@ -52,3 +52,8 @@ CMovement3D::CMovement3D(const glm::vec3 &velocity,
 
 CSelection::CSelection() = default;
 CSelection::CSelection(Vec2i pos) : grid_position(pos){};
+
+CGridLine::CGridLine() : start(0.0f), end(0.0f), color(0.0f), width(0.0f), isMajor(false) {}
+CGridLine::CGridLine(const glm::vec3& startPos, const glm::vec3& endPos, 
+                     const glm::vec3& lineColor, float lineWidth, bool major)
+    : start(startPos), end(endPos), color(lineColor), width(lineWidth), isMajor(major) {};

@@ -70,3 +70,22 @@ void Camera::rotate(float xOffset, float yOffset) {
   direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
   front = glm::normalize(direction);
 }
+
+// Raw rotation without additional sensitivity scaling (for pre-processed input)
+void Camera::rotateRaw(float xOffset, float yOffset) {
+  yaw += xOffset;
+  pitch += yOffset;
+
+  // limit pitch angle to avoid flipping
+  if (pitch > EngineConstants::Camera::MAX_PITCH_ANGLE)
+    pitch = EngineConstants::Camera::MAX_PITCH_ANGLE;
+  if (pitch < EngineConstants::Camera::MIN_PITCH_ANGLE)
+    pitch = EngineConstants::Camera::MIN_PITCH_ANGLE;
+
+  // update camera direction
+  glm::vec3 direction;
+  direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+  direction.y = sin(glm::radians(pitch));
+  direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+  front = glm::normalize(direction);
+}

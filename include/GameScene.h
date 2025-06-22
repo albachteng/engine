@@ -14,7 +14,7 @@
 #include <glm/ext/vector_float3.hpp>
 #include <memory>
 
-enum class SceneActions { FORWARD, BACK, LEFT, RIGHT, PAN, PAUSE, SCENE };
+enum class SceneActions { FORWARD, BACK, LEFT, RIGHT, PAN, PAUSE, SCENE, MOUSE_TOGGLE, GRID_TOGGLE };
 
 class GameScene : public BaseScene {
 private:
@@ -24,6 +24,7 @@ private:
   std::shared_ptr<ActionController<SceneActions>> m_actionController;
   std::unique_ptr<OpenGLRenderer> m_renderer;
   std::unique_ptr<CollisionSystem> m_collisionSystem;
+  sf::RenderWindow& m_window;
   
   // New physics systems
   std::unique_ptr<CollisionDetectionSystem> m_collisionDetectionSystem;
@@ -35,6 +36,24 @@ private:
   Vec2f m_window_size;
   EntityManager m_entityManager;
   void sMovement(float deltaTime);
+  
+  // Mouse handling
+  void handleMouseMovement(int mouseX, int mouseY, float deltaTime);
+  void captureMouse();
+  void releaseMouse();
+  bool m_mouseCapture = false;
+  sf::Vector2i m_windowCenter;
+  
+  // Mouse smoothing state
+  float m_smoothedXOffset = 0.0f;
+  float m_smoothedYOffset = 0.0f;
+  
+  // Grid rendering
+  bool m_gridVisible = EngineConstants::UI::GRID_3D_DEFAULT_VISIBLE;
+  bool m_gridCreated = false;
+  void toggleGrid();
+  void createGrid();
+  void destroyGrid();
 
 public:
   bool AABBIntersect(const CAABB &a, const CAABB &b);

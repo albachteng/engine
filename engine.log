@@ -890,3 +890,197 @@
 [2025-06-22 12:14:15.138] [INFO ] [test.cpp:18] Engine: Application shutting down normally
 [2025-06-22 12:14:15.146] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
 [2025-06-22 12:14:15.146] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 12:29:19.579 ===
+[2025-06-22 12:29:19.579] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:29:19.807] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:29:19.807] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:29:19.807] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:29:19.807] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:29:19.807] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:29:19.813] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:29:19.813] [INFO ] [GameScene.cpp:81] GameScene: Initializing scene
+[2025-06-22 12:29:19.813] [INFO ] [GameScene.cpp:262] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:29:19.814] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 6.41887ms
+[2025-06-22 12:29:19.814] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:29:19.814] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:29:19.814] [INFO ] [Game.cpp:38] Game: Starting main game loop
+
+=== Engine Logger Started: 2025-06-22 12:29:34.536 ===
+[2025-06-22 12:29:34.536] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:29:34.766] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:29:34.766] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:29:34.766] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:29:34.766] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:29:34.766] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:29:34.772] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:29:34.772] [INFO ] [GameScene.cpp:81] GameScene: Initializing scene
+[2025-06-22 12:29:34.772] [INFO ] [GameScene.cpp:262] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:29:34.773] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 6.91356ms
+[2025-06-22 12:29:34.773] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:29:34.773] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:29:34.773] [INFO ] [Game.cpp:38] Game: Starting main game loop
+
+=== Engine Logger Started: 2025-06-22 12:30:46.334 ===
+[2025-06-22 12:30:46.334] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:30:46.562] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:30:46.562] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:30:46.562] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:30:46.562] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:30:46.562] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:30:46.568] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+
+=== Engine Logger Started: 2025-06-22 12:34:56.084 ===
+[2025-06-22 12:34:56.084] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:34:56.280] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:34:56.280] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:34:56.280] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:34:56.280] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:34:56.280] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:34:56.286] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:34:56.286] [INFO ] [GameScene.cpp:81] GameScene: Initializing scene
+[2025-06-22 12:34:56.286] [INFO ] [GameScene.cpp:262] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:34:56.286] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 5.84619ms
+[2025-06-22 12:34:56.286] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:34:56.286] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:34:56.286] [INFO ] [Game.cpp:38] Game: Starting main game loop
+
+=== Engine Logger Started: 2025-06-22 12:36:15.858 ===
+[2025-06-22 12:36:15.858] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:36:16.043] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:36:16.043] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:36:16.043] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:36:16.043] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:36:16.043] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:36:16.050] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:36:16.051] [INFO ] [GameScene.cpp:81] GameScene: Initializing scene
+[2025-06-22 12:36:16.051] [INFO ] [GameScene.cpp:262] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:36:16.051] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 7.6888ms
+[2025-06-22 12:36:16.051] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:36:16.051] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:36:16.051] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:36:19.261] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:36:21.302] [INFO ] [GameScene.cpp:283] GameScene: Creating 3D debug grid
+[2025-06-22 12:36:21.302] [INFO ] [GameScene.cpp:329] GameScene: Created grid with 22 lines
+[2025-06-22 12:36:21.302] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to ON
+[2025-06-22 12:36:32.243] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:36:36.308] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to ON
+[2025-06-22 12:36:38.968] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:36:40.925] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to ON
+[2025-06-22 12:36:42.197] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:36:46.045] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to ON
+[2025-06-22 12:37:04.236] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:37:07.466] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 12:37:07.471] [INFO ] [GameScene.cpp:10] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 12:37:07.471] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 12:39:45.229 ===
+[2025-06-22 12:39:45.229] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:39:45.464] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:39:45.464] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:39:45.464] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:39:45.464] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:39:45.464] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:39:45.470] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:39:45.470] [INFO ] [GameScene.cpp:81] GameScene: Initializing scene
+[2025-06-22 12:39:45.471] [INFO ] [GameScene.cpp:262] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:39:45.471] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 7.13945ms
+[2025-06-22 12:39:45.471] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:39:45.471] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:39:45.471] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:40:28.764] [INFO ] [GameScene.cpp:269] GameScene: Mouse released
+[2025-06-22 12:40:32.143] [INFO ] [GameScene.cpp:262] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:40:43.935] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:40:45.526] [INFO ] [GameScene.cpp:283] GameScene: Creating 3D debug grid
+[2025-06-22 12:40:45.526] [INFO ] [GameScene.cpp:329] GameScene: Created grid with 22 lines
+[2025-06-22 12:40:45.526] [INFO ] [GameScene.cpp:277] GameScene: Grid visibility toggled to ON
+
+=== Engine Logger Started: 2025-06-22 12:46:28.999 ===
+[2025-06-22 12:46:28.999] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:46:29.237] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:46:29.237] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:46:29.237] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:46:29.237] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:46:29.237] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:46:29.242] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+
+=== Engine Logger Started: 2025-06-22 12:47:43.845 ===
+[2025-06-22 12:47:43.845] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:47:44.066] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:47:44.066] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:47:44.066] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:47:44.067] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:47:44.067] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:47:44.074] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:47:44.074] [INFO ] [GameScene.cpp:82] GameScene: Initializing scene
+[2025-06-22 12:47:44.075] [INFO ] [GameScene.cpp:296] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:47:44.075] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 8.01994ms
+[2025-06-22 12:47:44.075] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:47:44.075] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:47:44.075] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:48:18.422] [INFO ] [GameScene.cpp:311] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:48:19.727] [INFO ] [GameScene.cpp:317] GameScene: Creating 3D debug grid
+[2025-06-22 12:48:19.727] [INFO ] [GameScene.cpp:363] GameScene: Created grid with 22 lines
+[2025-06-22 12:48:19.727] [INFO ] [GameScene.cpp:311] GameScene: Grid visibility toggled to ON
+[2025-06-22 12:49:00.371] [INFO ] [GameScene.cpp:303] GameScene: Mouse released
+[2025-06-22 12:49:01.877] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 12:49:01.884] [INFO ] [GameScene.cpp:11] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 12:49:01.884] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 12:51:10.271 ===
+[2025-06-22 12:51:10.271] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:51:10.501] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:51:10.501] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:51:10.501] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:51:10.501] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:51:10.501] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:51:10.507] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:51:10.507] [INFO ] [GameScene.cpp:82] GameScene: Initializing scene
+[2025-06-22 12:51:10.507] [INFO ] [GameScene.cpp:296] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:51:10.507] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 6.34046ms
+[2025-06-22 12:51:10.507] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:51:10.507] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:51:10.507] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:51:33.857] [INFO ] [GameScene.cpp:311] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:51:34.361] [INFO ] [GameScene.cpp:317] GameScene: Creating 3D debug grid
+[2025-06-22 12:51:34.361] [INFO ] [GameScene.cpp:363] GameScene: Created grid with 22 lines
+[2025-06-22 12:51:34.361] [INFO ] [GameScene.cpp:311] GameScene: Grid visibility toggled to ON
+[2025-06-22 12:51:53.613] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 12:51:53.616] [INFO ] [GameScene.cpp:11] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 12:51:53.616] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 12:52:39.705 ===
+[2025-06-22 12:52:39.705] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:52:39.919] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:52:39.919] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:52:39.919] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:52:39.919] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:52:39.919] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:52:39.925] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:52:39.925] [INFO ] [GameScene.cpp:82] GameScene: Initializing scene
+[2025-06-22 12:52:39.925] [INFO ] [GameScene.cpp:296] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:52:39.925] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 6.00717ms
+[2025-06-22 12:52:39.925] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:52:39.925] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:52:39.925] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:52:50.798] [INFO ] [GameScene.cpp:311] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:52:51.934] [INFO ] [GameScene.cpp:317] GameScene: Creating 3D debug grid
+[2025-06-22 12:52:51.934] [INFO ] [GameScene.cpp:363] GameScene: Created grid with 22 lines
+[2025-06-22 12:52:51.934] [INFO ] [GameScene.cpp:311] GameScene: Grid visibility toggled to ON
+[2025-06-22 12:52:54.860] [INFO ] [GameScene.cpp:311] GameScene: Grid visibility toggled to OFF
+[2025-06-22 12:52:56.365] [INFO ] [GameScene.cpp:311] GameScene: Grid visibility toggled to ON
+[2025-06-22 12:52:58.538] [INFO ] [GameScene.cpp:303] GameScene: Mouse released
+[2025-06-22 12:53:11.019] [INFO ] [GameScene.cpp:296] GameScene: Mouse captured for FPS-style controls
+[2025-06-22 12:54:13.587] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'MapScene'
+[2025-06-22 12:54:13.587] [INFO ] [Game.cpp:59] Game: Requested scene transition to MapScene
+[2025-06-22 12:54:13.604] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'MapScene'
+[2025-06-22 12:54:13.604] [INFO ] [SceneManager.cpp:115] SceneManager: Unloading current scene 'GameScene'
+[2025-06-22 12:54:13.604] [INFO ] [GameScene.cpp:11] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 12:54:13.604] [INFO ] [SceneManager.cpp:177] SceneManager: Scene 'GameScene' unloaded successfully
+[2025-06-22 12:54:13.604] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'MapScene'
+[2025-06-22 12:54:13.604] [INFO ] [MapScene.cpp:28] MapScene: Initializing scene
+[2025-06-22 12:54:13.604] [INFO ] [MapScene.cpp:65] MapScene: Scene loading completed
+[2025-06-22 12:54:13.604] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'MapScene' loaded successfully in 0.728219ms
+[2025-06-22 12:54:13.604] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'MapScene'
+[2025-06-22 12:54:16.807] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 12:54:16.815] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'MapScene' during shutdown

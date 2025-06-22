@@ -118,7 +118,22 @@ constexpr float HALF_EXTENTS_FACTOR = 0.5f;       // For computing half-extents
 namespace Input {
 // Mouse input thresholds
 constexpr int MOUSE_MOVEMENT_THRESHOLD =
-    2; // Minimum pixels to register movement
+    25; // Minimum pixels to register movement
+constexpr bool ENABLE_MOUSE_CAPTURE =
+    true; // Capture mouse to window for FPS-style controls
+
+// Mouse sensitivity and smoothing controls
+constexpr float MOUSE_SENSITIVITY_SCALE =
+    0.15f;                                  // Overall sensitivity multiplier
+constexpr float MOUSE_SENSITIVITY_X = 1.0f; // Horizontal sensitivity modifier
+constexpr float MOUSE_SENSITIVITY_Y = .10f; // Vertical sensitivity modifier
+constexpr float MOUSE_MAX_DELTA =
+    100.0f; // Maximum pixel offset to prevent wild rotation
+constexpr float MOUSE_ACCELERATION =
+    1.0f; // Mouse acceleration factor (1.0 = linear)
+constexpr float MOUSE_SMOOTHING =
+    0.5f; // Smoothing factor (0.0 = no smoothing, 0.9 = heavy smoothing)
+constexpr bool ENABLE_MOUSE_SMOOTHING = true; // Enable mouse movement smoothing
 } // namespace Input
 
 namespace UI {
@@ -131,6 +146,15 @@ constexpr int MAP_NODE_SHAPE_POINTS = 4; // Makes CircleShape into a square
 constexpr float MAP_NODE_OUTLINE_THICKNESS = 3.0f;
 constexpr float GRID_CENTER_OFFSET = 0.5f; // Position nodes at cell centers
 constexpr float MAP_NODE_ROTATION_ANGLE = 45.0f; // Diamond rotation
+
+// 3D Debug Grid configuration
+constexpr float GRID_3D_SIZE =
+    50.0f; // Total grid size (extends from -25 to +25)
+constexpr float GRID_3D_SPACING = 5.0f;     // Distance between grid lines
+constexpr float GRID_3D_LINE_WIDTH = 0.02f; // Thickness of grid lines
+constexpr float GRID_3D_MAJOR_SPACING =
+    10.0f; // Distance between major grid lines
+constexpr bool GRID_3D_DEFAULT_VISIBLE = true; // Default visibility state
 } // namespace UI
 
 // ============================================================================

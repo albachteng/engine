@@ -125,3 +125,17 @@ public:
   CSelection();
   CSelection(Vec2i pos);
 };
+
+class CGridLine : public Component {
+public:
+  glm::vec3 start;
+  glm::vec3 end;
+  glm::vec3 color;
+  float width;
+  bool isMajor; // true for major grid lines (e.g., every 10 units)
+  
+  CGridLine();
+  CGridLine(const glm::vec3& startPos, const glm::vec3& endPos, 
+            const glm::vec3& lineColor = glm::vec3(0.5f, 0.5f, 0.5f), 
+            float lineWidth = 0.02f, bool major = false);
+};

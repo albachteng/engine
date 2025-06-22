@@ -94,4 +94,12 @@ private:
    * Must be called after OpenGL context is active.
    */
   void setupBuffers();
+  
+  /**
+   * @brief Render grid lines for debug visualization
+   * @param entities Vector of entities to check for CGridLine components
+   * @param view View matrix from camera
+   * @param projection Projection matrix from camera
+   */
+  void renderGridLines(const EntityVec &entities, const glm::mat4& view, const glm::mat4& projection);
 };

@@ -88,6 +88,11 @@ void OpenGLRenderer::render(const EntityVec &entities) {
 
   GL_CALL(glBindVertexArray(VAO));
 
+  // Common view and projection matrices
+  glm::mat4 view = m_camera->getViewMatrix();
+  glm::mat4 projection = m_camera->getProjectionMatrix(EngineConstants::Display::ASPECT_RATIO);
+  
+  // Render triangles
   for (const auto &e : entities) {
     if (e->has<CTriangle>() && e->has<CTransform3D>()) {
       auto &triangle = e->get<CTriangle>();
@@ -110,9 +115,6 @@ void OpenGLRenderer::render(const EntityVec &entities) {
       model = glm::rotate(model, glm::radians(transform.rotation.z),
                           glm::vec3(0.0f, 0.0f, 1.0f));
       model = glm::scale(model, transform.scale);
-      glm::mat4 view = m_camera->getViewMatrix();
-      glm::mat4 projection =
-          m_camera->getProjectionMatrix(EngineConstants::Display::ASPECT_RATIO);
 
       // update uniform locations (could be cached for better performance)
       GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
@@ -132,6 +134,9 @@ void OpenGLRenderer::render(const EntityVec &entities) {
       GL_CALL(glDrawArrays(GL_TRIANGLES, 0, 3));
     }
   }
+  
+  // Render grid lines (if any) - for now always render, visibility is controlled by entity creation
+  renderGridLines(entities, view, projection);
 
   GL_CALL(glBindVertexArray(0));
 };
@@ -177,6 +182,52 @@ void OpenGLRenderer::setupBuffers() {
   GL_CALL(glEnableVertexAttribArray(1));
 
   GL_CALL(glBindVertexArray(0));
+}
+
+void OpenGLRenderer::renderGridLines(const EntityVec &entities, const glm::mat4& view, const glm::mat4& projection) {
+  // Simple line rendering using GL_LINES
+  // This creates a thick line by rendering it as a series of small triangles
+  
+  for (const auto &e : entities) {
+    if (e->has<CGridLine>() && e->has<CTransform3D>()) {
+      auto &gridLine = e->get<CGridLine>();
+      auto &transform = e->get<CTransform3D>();
+      
+      // Create line vertices (start and end points with color)
+      std::vector<float> lineVertices = {
+        // Position (3) + Color (3)
+        gridLine.start.x, gridLine.start.y, gridLine.start.z, gridLine.color.r, gridLine.color.g, gridLine.color.b,
+        gridLine.end.x,   gridLine.end.y,   gridLine.end.z,   gridLine.color.r, gridLine.color.g, gridLine.color.b
+      };
+      
+      // Update buffer with line data
+      GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, VBO));
+      GL_CALL(glBufferData(GL_ARRAY_BUFFER, lineVertices.size() * sizeof(float), 
+                           lineVertices.data(), GL_DYNAMIC_DRAW));
+      
+      // Set up model matrix (identity for grid lines since they're in world space)
+      glm::mat4 model = glm::mat4(1.0f);
+      model = glm::translate(model, transform.position);
+      
+      // Update uniforms
+      GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
+      GLint viewLoc = glGetUniformLocation(shaderProgram, "view");
+      GLint projLoc = glGetUniformLocation(shaderProgram, "projection");
+      
+      GL_CALL(glad_glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model)));
+      GL_CALL(glad_glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view)));
+      GL_CALL(glad_glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection)));
+      
+      // Set line width (note: this may not work on all OpenGL implementations)
+      GL_CALL(glLineWidth(gridLine.width * 100.0f)); // Scale up for visibility
+      
+      // Draw the line
+      GL_CALL(glDrawArrays(GL_LINES, 0, 2));
+    }
+  }
+  
+  // Reset line width
+  GL_CALL(glLineWidth(1.0f));
 }
 
 void OpenGLRenderer::onUnload() {
