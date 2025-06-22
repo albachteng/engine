@@ -13,6 +13,10 @@ obj/Game.o: src/Game.cpp src/../include/Game.h \
  src/../include/../include/./Renderer.h include/glad/glad.h \
  include/KHR/khrplatform.h src/../include/../include/CollisionSystem.hpp \
  src/../include/../include/SpatialPartition.hpp \
+ src/../include/../include/CollisionDetectionSystem.hpp \
+ src/../include/../include/CollisionResolutionSystem.hpp \
+ src/../include/../include/BoundarySystem.hpp \
+ src/../include/../include/MovementSystem.hpp \
  src/../include/../include/MapScene.h \
  src/../include/../include/SFMLRenderer.h src/../include/SceneManager.hpp \
  src/../include/Logger.hpp

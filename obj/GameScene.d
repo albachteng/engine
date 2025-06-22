@@ -6,4 +6,8 @@ obj/GameScene.o: src/GameScene.cpp src/../include/GameScene.h \
  src/../include/OpenGLRenderer.hpp src/../include/./Renderer.h \
  src/../include/./EntityManager.h include/glad/glad.h \
  include/KHR/khrplatform.h src/../include/CollisionSystem.hpp \
- src/../include/SpatialPartition.hpp src/../include/Logger.hpp
+ src/../include/SpatialPartition.hpp \
+ src/../include/CollisionDetectionSystem.hpp \
+ src/../include/CollisionResolutionSystem.hpp \
+ src/../include/BoundarySystem.hpp src/../include/MovementSystem.hpp \
+ src/../include/Logger.hpp

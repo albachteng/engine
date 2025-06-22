@@ -14,14 +14,14 @@ struct Config {};
 
 class Game {
 private:
-  sf::RenderWindow m_window;
-  sf::Font m_font;
-  sf::Text m_text;
   Config m_config;
-  sf::Clock m_deltaClock;
-  int m_currentFrame = 0;
   bool m_running = true;
   SceneManager m_sceneManager;
+  int m_currentFrame = 0;
+  sf::Clock m_deltaClock;
+  sf::Font m_font;
+  sf::RenderWindow m_window;
+  sf::Text m_text;
 
   void init(const std::string &path);
   void spawnTriangle();
@@ -29,5 +29,4 @@ private:
 public:
   Game(const std::string &config);
   void run();
-  void loadScene();
 };

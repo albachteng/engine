@@ -14,6 +14,12 @@ void GameScene::onUnload() {
   m_actionController->unregisterAll();
   m_actionController.reset();
   m_camera.reset();
+  
+  // Clean up new physics systems
+  m_collisionDetectionSystem.reset();
+  m_collisionResolutionSystem.reset();
+  m_boundarySystem.reset();
+  m_movementSystem.reset();
 };
 
 void GameScene::update(float deltaTime) { m_entityManager.update(); };
@@ -23,21 +29,43 @@ void GameScene::sRender() {
 };
 
 GameScene::GameScene(sf::RenderWindow &window) {
-  m_camera = std::make_shared<Camera>(glm::vec3{EngineConstants::Camera::START_X, 
-                                                EngineConstants::Camera::START_Y, 
-                                                EngineConstants::Camera::START_Z});
+  m_camera = std::make_shared<Camera>(glm::vec3{
+      EngineConstants::Camera::START_X, EngineConstants::Camera::START_Y,
+      EngineConstants::Camera::START_Z});
   m_window_size = (Vec2f)window.getSize(); // TODO: handle resize
   m_renderer = std::make_unique<OpenGLRenderer>(m_camera, window);
   m_actionController = std::make_shared<ActionController<SceneActions>>();
-  
+
   // Initialize collision system with uniform grid
   m_collisionSystem = std::make_unique<CollisionSystem>(
-    PartitionType::UNIFORM_GRID,
-    glm::vec3(EngineConstants::World::MIN_BOUND, EngineConstants::World::MIN_BOUND, EngineConstants::World::MIN_BOUND),
-    glm::vec3(EngineConstants::World::MAX_BOUND, EngineConstants::World::MAX_BOUND, EngineConstants::World::MAX_BOUND),
-    EngineConstants::SpatialPartition::DEFAULT_CELL_SIZE
-  );
+      PartitionType::UNIFORM_GRID,
+      glm::vec3(EngineConstants::World::MIN_BOUND,
+                EngineConstants::World::MIN_BOUND,
+                EngineConstants::World::MIN_BOUND),
+      glm::vec3(EngineConstants::World::MAX_BOUND,
+                EngineConstants::World::MAX_BOUND,
+                EngineConstants::World::MAX_BOUND),
+      EngineConstants::SpatialPartition::DEFAULT_CELL_SIZE);
+
+  // Initialize new physics systems
+  m_collisionDetectionSystem = std::make_unique<CollisionDetectionSystem>();
+  m_collisionResolutionSystem = std::make_unique<CollisionResolutionSystem>();
+  m_movementSystem = std::make_unique<MovementSystem>();
   
+  // Initialize boundary system with world bounds
+  BoundaryConstraint worldBounds(
+      glm::vec3(EngineConstants::World::MIN_BOUND),
+      glm::vec3(EngineConstants::World::MAX_BOUND),
+      BoundaryAction::BOUNCE,
+      -EngineConstants::World::COLLISION_DAMPING_FACTOR
+  );
+  m_boundarySystem = std::make_unique<BoundarySystem>(worldBounds);
+  
+  // Configure collision response for triangles
+  m_collisionResolutionSystem->setDefaultResponse(CollisionResponseType::DAMPED, 0.9f);
+  m_collisionResolutionSystem->setEntityResponse(EntityTag::TRIANGLE, 
+      CollisionResponse(CollisionResponseType::DAMPED, 0.9f, 0.1f));
+
   spawnTriangle();
 };
 
@@ -96,28 +124,25 @@ void GameScene::onLoad() {
                                        [this](float deltaTime) {
                                          /* TODO: swap scenes */
                                        });
-  m_actionController->registerAxisListener(SceneActions::PAN,
-                                           [this](float x, float y) {
-                                             m_camera->rotate(x, y);
-                                           });
+  m_actionController->registerAxisListener(
+      SceneActions::PAN, [this](float x, float y) { m_camera->rotate(x, y); });
 };
 
 void GameScene::spawnTriangle() {
   for (int i = 0; i < EngineConstants::World::ENTITY_GRID_SIZE; i++) {
     for (int j = 0; j < EngineConstants::World::ENTITY_GRID_SIZE; j++) {
       for (int k = 0; k < EngineConstants::World::ENTITY_GRID_SIZE; k++) {
-        LOG_DEBUG_STREAM("GameScene: Spawning triangle at position " << i << ", " << j << ", " << k);
+        LOG_DEBUG_STREAM("GameScene: Spawning triangle at position "
+                         << i << ", " << j << ", " << k);
         auto e = m_entityManager.addEntity(EntityTag::TRIANGLE);
         e->add<CTransform3D>(
-            glm::vec3{i * EngineConstants::World::ENTITY_SPACING_X, 
-                      j * EngineConstants::World::ENTITY_SPACING_Y, 
+            glm::vec3{i * EngineConstants::World::ENTITY_SPACING_X,
+                      j * EngineConstants::World::ENTITY_SPACING_Y,
                       k * EngineConstants::World::ENTITY_SPACING_Z},
             glm::vec3{0.0f}, glm::vec3{1.0f});
         e->add<CTriangle>();
-        e->add<CAABB>(glm::vec3{i * EngineConstants::World::ENTITY_SPACING_X, 
-                                j * EngineConstants::World::ENTITY_SPACING_Y, 
-                                k * EngineConstants::World::ENTITY_SPACING_Z},
-                      glm::vec3{i * 1.0f, j * 1.5f, k * 2.0f});
+        e->add<CAABB>(glm::vec3{0.0f, 0.0f, 0.0f}, // Center relative to entity position
+                      glm::vec3{0.5f, 0.5f, 0.5f}); // Half-extents for triangle bounding box
         e->add<CMovement3D>(glm::vec3{i * 1.0f, j * 1.0f, k * 1.0f},
                             glm::vec3{0.5f * j, 0.5f * i, 0.5f * k});
       }
@@ -140,8 +165,10 @@ void GameScene::sInput(sf::Event &event, float deltaTime) {
   case sf::Event::MouseMoved: {
     static float lastX = m_window_size.x / 2;
     static float lastY = m_window_size.y / 2;
-    if (abs(event.mouseMove.x - lastX) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD &&
-        abs(event.mouseMove.y - lastY) < EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD)
+    if (abs(event.mouseMove.x - lastX) <
+            EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD &&
+        abs(event.mouseMove.y - lastY) <
+            EngineConstants::Input::MOUSE_MOVEMENT_THRESHOLD)
       return; // Skip minor movements
     float xOffset = event.mouseMove.x - lastX;
     float yOffset = lastY - event.mouseMove.y; // inverted Y
@@ -180,71 +207,24 @@ bool GameScene::AABBIntersect(const CAABB &a, const CAABB &b) {
 };
 
 void GameScene::sMovement(float deltaTime) {
-  float height = m_window_size.y;
-  float width = m_window_size.x;
-
-  // Update collision system with current entity positions
-  m_collisionSystem->updateEntities(m_entityManager);
-
-  for (auto &e : m_entityManager.getEntities()) {
-    // 2D rotation
-    // if (e->has<CTransform>())
-    //   e->get<CTransform>().angle += 1.0f;
-
-    // 3D rotation and movement
-    if (e->has<CTransform3D>() && e->has<CMovement3D>()) {
-      e->get<CTransform3D>().rotation += glm::vec3{EngineConstants::World::ENTITY_ROTATION_RATE, 
-                                                   EngineConstants::World::ENTITY_ROTATION_RATE, 
-                                                   EngineConstants::World::ENTITY_ROTATION_RATE};
-      e->get<CTransform3D>().position += e->get<CMovement3D>().vel * deltaTime;
-      e->get<CMovement3D>().vel += e->get<CMovement3D>().acc * deltaTime;
-    }
-
-    // 2D circle collision resolution
-    // float radius = e->get<CShape>().circle.getRadius();
-    // auto &transform = e->get<CTransform>();
-    // transform.pos += transform.vel;
-    // if (transform.pos.x > width - radius) {
-    //   transform.pos.x = width - radius;
-    //   transform.vel.x *= -0.9f;
-    // }
-    // if (transform.pos.x < radius) {
-    //   transform.pos.x = radius;
-    //   transform.vel.x *= -0.9f;
-    // }
-    // if (transform.pos.y > height - radius) {
-    //   transform.pos.y = height - radius;
-    //   transform.vel.y *= -0.9f;
-    // }
-    // if (transform.pos.y < radius) {
-    //   transform.pos.y = radius;
-    //   transform.vel.y *= -0.9f;
-    // }
-
-    // 3D AABB collision resolution
-    if (e->has<CAABB>() && e->has<CMovement3D>()) {
-      auto a_move = e->get<CMovement3D>();
-      auto a_pos = e->get<CTransform3D>();
-      // collision with world boundaries
-      if (a_pos.position.x > EngineConstants::World::MAX_BOUND || a_pos.position.x < EngineConstants::World::MIN_BOUND) {
-        a_move.vel.x *= EngineConstants::World::COLLISION_DAMPING_FACTOR;
-      }
-      if (a_pos.position.y > EngineConstants::World::MAX_BOUND || a_pos.position.y < EngineConstants::World::MIN_BOUND) {
-        a_move.vel.y *= EngineConstants::World::COLLISION_DAMPING_FACTOR;
-      }
-      if (a_pos.position.z > EngineConstants::World::MAX_BOUND || a_pos.position.z < EngineConstants::World::MIN_BOUND) {
-        a_move.vel.z *= EngineConstants::World::COLLISION_DAMPING_FACTOR;
-      }
-      // Use optimized collision detection instead of O(N²) loop
-      auto collisions = m_collisionSystem->findCollisionsFor(e, m_entityManager);
-      for (auto &b : collisions) {
-        // Only process collisions with triangles (matching original logic)
-        if (b->tag() == EntityTag::TRIANGLE && b->has<CMovement3D>()) {
-          a_move.vel *= -0.9f;
-          auto b_move = b->get<CMovement3D>();
-          b_move.vel *= -0.9f;
-        }
-      }
-    }
+  if (m_paused) {
+    return; // Skip physics update when paused
   }
+  
+  LOG_DEBUG("GameScene: Running physics update with new systems");
+  
+  // 1. Update movement (position from velocity, velocity from acceleration)
+  m_movementSystem->updateMovement(m_entityManager, deltaTime);
+  
+  // 2. Detect collisions between entities
+  auto collisions = m_collisionDetectionSystem->detectCollisions(m_entityManager);
+  
+  // 3. Resolve collisions (apply physics response)
+  m_collisionResolutionSystem->resolveCollisions(collisions);
+  
+  // 4. Enforce world boundaries
+  m_boundarySystem->enforceBoundaries(m_entityManager);
+  
+  // 5. Update legacy collision system for compatibility (if needed by other systems)
+  m_collisionSystem->updateEntities(m_entityManager);
 };

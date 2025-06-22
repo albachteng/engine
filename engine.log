@@ -39,3 +39,854 @@
 [2025-06-21 15:55:44.408] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'MapScene'
 [2025-06-21 15:55:47.821] [INFO ] [test.cpp:18] Engine: Application shutting down normally
 [2025-06-21 15:55:47.821] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'MapScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 10:27:34.109 ===
+[2025-06-22 10:27:34.110] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 10:27:35.054] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 10:27:35.054] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 10:27:35.054] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 10:27:35.054] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 10:27:35.054] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 10:27:35.076] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 10:27:35.076] [INFO ] [GameScene.cpp:54] GameScene: Initializing scene
+[2025-06-22 10:27:35.077] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 22.177ms
+[2025-06-22 10:27:35.077] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 10:27:35.077] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 10:27:35.077] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 10:28:03.559] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 10:28:03.566] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 10:28:03.566] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 10:30:10.537 ===
+[2025-06-22 10:30:10.537] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 10:30:10.727] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 10:30:10.727] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 10:30:10.727] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 10:30:10.727] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 10:30:10.727] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 10:30:10.734] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 10:30:10.734] [INFO ] [GameScene.cpp:54] GameScene: Initializing scene
+[2025-06-22 10:30:10.734] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 7.337ms
+[2025-06-22 10:30:10.734] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 10:30:10.734] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 10:30:10.734] [INFO ] [Game.cpp:38] Game: Starting main game loop
+
+=== Engine Logger Started: 2025-06-22 10:35:24.567 ===
+[2025-06-22 10:35:24.567] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 10:35:24.781] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 10:35:24.781] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 10:35:24.782] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 10:35:24.782] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 10:35:24.782] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 10:35:24.787] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 10:35:24.787] [INFO ] [GameScene.cpp:54] GameScene: Initializing scene
+[2025-06-22 10:35:24.787] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 5.72399ms
+[2025-06-22 10:35:24.787] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 10:35:24.787] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 10:35:24.787] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 10:36:03.390] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 10:36:03.398] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 10:36:03.398] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 10:36:27.843 ===
+[2025-06-22 10:36:27.843] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 10:36:28.028] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 10:36:28.028] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 10:36:28.028] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 10:36:28.028] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 10:36:28.028] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 10:36:28.033] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 10:36:28.034] [INFO ] [GameScene.cpp:54] GameScene: Initializing scene
+[2025-06-22 10:36:28.034] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 5.63838ms
+[2025-06-22 10:36:28.034] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 10:36:28.034] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 10:36:28.034] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 10:37:16.255] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 10:37:16.260] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 10:37:16.261] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 10:56:50.062 ===
+[2025-06-22 10:56:50.062] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 10:56:50.791] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 10:56:50.791] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 10:56:50.791] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 10:56:50.791] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 10:56:50.791] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 10:56:50.808] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 10:56:50.808] [INFO ] [GameScene.cpp:54] GameScene: Initializing scene
+[2025-06-22 10:56:50.808] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 17.0362ms
+[2025-06-22 10:56:50.808] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 10:56:50.808] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 10:56:50.808] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 10:57:36.706] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 10:57:36.716] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 10:57:36.716] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 11:56:41.475 ===
+[2025-06-22 11:56:41.475] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 11:56:41.682] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 11:56:41.682] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 11:56:41.682] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 11:56:41.682] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 11:56:41.682] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 11:56:41.700] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 11:56:41.700] [INFO ] [GameScene.cpp:79] GameScene: Initializing scene
+[2025-06-22 11:56:41.700] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 17.7959ms
+[2025-06-22 11:56:41.700] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 11:56:41.700] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 11:56:41.700] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 11:57:02.468] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 11:57:02.472] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 11:57:02.472] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 11:57:19.737 ===
+[2025-06-22 11:57:19.737] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 11:57:19.947] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 11:57:19.947] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 11:57:19.947] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 11:57:19.947] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 11:57:19.947] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 11:57:19.954] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 11:57:19.954] [INFO ] [GameScene.cpp:79] GameScene: Initializing scene
+[2025-06-22 11:57:19.954] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 7.05721ms
+[2025-06-22 11:57:19.954] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 11:57:19.954] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 11:57:19.954] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 11:57:26.586] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 11:57:26.594] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 11:57:26.594] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 12:10:24.822 ===
+[2025-06-22 12:10:24.822] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:10:25.040] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:10:25.041] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:10:25.041] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:10:25.041] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:10:25.041] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:10:25.047] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:10:25.047] [INFO ] [GameScene.cpp:79] GameScene: Initializing scene
+[2025-06-22 12:10:25.047] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 6.53812ms
+[2025-06-22 12:10:25.047] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:10:25.047] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:10:25.047] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:10:25.047] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.092] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.108] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.125] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.141] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.158] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.175] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.175] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 0.352423, 0.352423, 0.352423 (delta: 0.016723)
+[2025-06-22 12:10:25.192] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.208] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.225] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.242] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.259] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.275] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.292] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.292] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 0.469453, 0.469453, 0.469453 (delta: 0.016724)
+[2025-06-22 12:10:25.309] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.325] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.342] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.359] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.376] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.392] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.393] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 0.569855, 0.569855, 0.569855 (delta: 0.016725)
+[2025-06-22 12:10:25.409] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.426] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.443] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.459] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.476] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.493] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.509] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.510] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 0.686973, 0.686973, 0.686973 (delta: 0.016729)
+[2025-06-22 12:10:25.526] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.543] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.560] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.576] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.593] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.610] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.626] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.627] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 0.80398, 0.80398, 0.80398 (delta: 0.01673)
+[2025-06-22 12:10:25.643] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.660] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.677] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.693] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.710] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.727] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.727] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 0.904336, 0.904336, 0.904336 (delta: 0.016734)
+[2025-06-22 12:10:25.744] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.760] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.777] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.794] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.811] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.827] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.844] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.844] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 1.02148, 1.02148, 1.02148 (delta: 0.016709)
+[2025-06-22 12:10:25.861] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.877] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.894] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.911] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.928] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.944] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.961] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.961] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 1.13852, 1.13852, 1.13852 (delta: 0.016722)
+[2025-06-22 12:10:25.978] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:25.995] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.011] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.028] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.045] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.062] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.062] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 1.2391, 1.2391, 1.2391 (delta: 0.016976)
+[2025-06-22 12:10:26.078] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.095] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.112] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.129] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.145] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.162] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.179] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.179] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 1.35615, 1.35615, 1.35615 (delta: 0.01672)
+[2025-06-22 12:10:26.195] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.212] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.229] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.245] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.262] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.279] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.296] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.296] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 1.47313, 1.47313, 1.47313 (delta: 0.01672)
+[2025-06-22 12:10:26.312] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.329] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.346] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.362] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.379] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.396] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.396] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 1.57342, 1.57342, 1.57342 (delta: 0.016734)
+[2025-06-22 12:10:26.413] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.429] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.446] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.463] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.479] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.496] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.513] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.513] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 1.69044, 1.69044, 1.69044 (delta: 0.016721)
+[2025-06-22 12:10:26.530] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.546] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.563] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.580] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.597] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.613] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.630] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.630] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 1.8075, 1.8075, 1.8075 (delta: 0.016721)
+[2025-06-22 12:10:26.647] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.664] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.681] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.698] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.714] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.731] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.731] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 1.90844, 1.90844, 1.90844 (delta: 0.016716)
+[2025-06-22 12:10:26.748] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.764] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.781] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.798] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.814] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.831] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.848] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.848] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 2.0254, 2.0254, 2.0254 (delta: 0.016725)
+[2025-06-22 12:10:26.865] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.881] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.898] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.915] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.931] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.948] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.965] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.965] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 2.14242, 2.14242, 2.14242 (delta: 0.016722)
+[2025-06-22 12:10:26.982] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:26.998] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.015] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.032] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.049] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.065] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.065] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 2.24273, 2.24273, 2.24273 (delta: 0.016709)
+[2025-06-22 12:10:27.082] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.099] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.115] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.132] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.149] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.166] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.182] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.182] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 2.35973, 2.35973, 2.35973 (delta: 0.016719)
+[2025-06-22 12:10:27.199] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.216] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.232] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.249] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.266] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.283] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.299] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.299] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 2.47673, 2.47673, 2.47673 (delta: 0.016724)
+[2025-06-22 12:10:27.316] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.333] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.349] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.366] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.383] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.400] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.400] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 2.57706, 2.57706, 2.57706 (delta: 0.016734)
+[2025-06-22 12:10:27.416] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.433] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.450] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.467] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.483] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.500] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.517] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.517] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 2.69411, 2.69411, 2.69411 (delta: 0.016721)
+[2025-06-22 12:10:27.533] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.550] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.567] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.583] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.600] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.617] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.634] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.634] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 2.81112, 2.81112, 2.81112 (delta: 0.016707)
+[2025-06-22 12:10:27.650] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.667] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.684] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.700] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.717] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.734] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.734] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 2.91142, 2.91142, 2.91142 (delta: 0.016704)
+[2025-06-22 12:10:27.751] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.767] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.784] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.801] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.817] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.834] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.851] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.851] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 3.02841, 3.02841, 3.02841 (delta: 0.016714)
+[2025-06-22 12:10:27.868] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.884] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.901] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.918] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.934] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.951] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.968] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:27.968] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 3.14541, 3.14541, 3.14541 (delta: 0.016722)
+[2025-06-22 12:10:27.985] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.001] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.018] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.035] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.052] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.068] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.068] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 3.24577, 3.24577, 3.24577 (delta: 0.016727)
+[2025-06-22 12:10:28.085] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.102] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.118] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.135] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.152] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.169] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.185] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.185] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 3.36281, 3.36281, 3.36281 (delta: 0.016705)
+[2025-06-22 12:10:28.202] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.219] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.235] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.252] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.269] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.286] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.302] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.302] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 3.47978, 3.47978, 3.47978 (delta: 0.016713)
+[2025-06-22 12:10:28.319] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.336] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.352] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.369] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.386] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.403] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.403] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 3.58, 3.58, 3.58 (delta: 0.01672)
+[2025-06-22 12:10:28.419] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.436] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.453] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.469] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.486] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.503] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.520] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.520] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 3.69703, 3.69703, 3.69703 (delta: 0.016727)
+[2025-06-22 12:10:28.536] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.553] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.570] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.586] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.603] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.620] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.637] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.637] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 3.81407, 3.81407, 3.81407 (delta: 0.016736)
+[2025-06-22 12:10:28.653] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.670] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.687] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.703] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.720] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.737] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.737] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 3.91438, 3.91438, 3.91438 (delta: 0.016743)
+[2025-06-22 12:10:28.754] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.770] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.787] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.804] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.820] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.837] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.854] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.854] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 4.0314, 4.0314, 4.0314 (delta: 0.016723)
+[2025-06-22 12:10:28.871] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.887] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.904] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.921] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.938] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.954] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.971] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:28.971] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 4.14842, 4.14842, 4.14842 (delta: 0.01669)
+[2025-06-22 12:10:28.988] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.005] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.021] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.038] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.055] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.071] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.071] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 4.24876, 4.24876, 4.24876 (delta: 0.016708)
+[2025-06-22 12:10:29.088] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.105] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.121] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.138] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.155] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.172] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.188] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.188] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 4.3658, 4.3658, 4.3658 (delta: 0.01672)
+[2025-06-22 12:10:29.205] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.222] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.238] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.255] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.272] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.289] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.305] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.305] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 4.48282, 4.48282, 4.48282 (delta: 0.016707)
+[2025-06-22 12:10:29.322] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.339] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.355] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.372] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.389] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.406] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.406] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 4.58307, 4.58307, 4.58307 (delta: 0.016698)
+[2025-06-22 12:10:29.422] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.439] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.456] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.473] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.489] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.506] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.523] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.523] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 4.70013, 4.70013, 4.70013 (delta: 0.016704)
+[2025-06-22 12:10:29.539] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.556] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.573] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.590] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.606] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.623] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.640] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.640] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 4.81714, 4.81714, 4.81714 (delta: 0.016711)
+[2025-06-22 12:10:29.656] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.673] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.690] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.707] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.723] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.740] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.740] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 4.91744, 4.91744, 4.91744 (delta: 0.016715)
+[2025-06-22 12:10:29.757] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.773] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.790] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.807] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.824] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.840] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.857] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.857] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 5.03442, 5.03442, 5.03442 (delta: 0.016696)
+[2025-06-22 12:10:29.874] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.890] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.907] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.924] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.941] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.957] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.974] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:29.974] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 5.15145, 5.15145, 5.15145 (delta: 0.016716)
+[2025-06-22 12:10:29.991] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.007] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.024] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.041] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.058] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.074] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.074] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 5.25173, 5.25173, 5.25173 (delta: 0.016703)
+[2025-06-22 12:10:30.091] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.108] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.124] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.141] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.158] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.175] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.191] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.191] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 5.36871, 5.36871, 5.36871 (delta: 0.016709)
+[2025-06-22 12:10:30.208] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.225] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.241] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.258] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.275] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.292] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.309] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.309] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 5.4858, 5.4858, 5.4858 (delta: 0.01672)
+[2025-06-22 12:10:30.325] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.342] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.358] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.375] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.392] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.409] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.409] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 5.58608, 5.58608, 5.58608 (delta: 0.016719)
+[2025-06-22 12:10:30.425] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.442] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.459] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.475] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.492] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.509] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.526] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.526] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 5.70316, 5.70316, 5.70316 (delta: 0.01672)
+[2025-06-22 12:10:30.542] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.559] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.576] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.592] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.609] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.626] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.643] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.643] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 5.82012, 5.82012, 5.82012 (delta: 0.016707)
+[2025-06-22 12:10:30.659] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.676] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.693] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.709] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.726] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.743] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.743] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 5.92041, 5.92041, 5.92041 (delta: 0.016727)
+[2025-06-22 12:10:30.760] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.776] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.793] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.810] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.827] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.843] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.860] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.860] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 6.03751, 6.03751, 6.03751 (delta: 0.016714)
+[2025-06-22 12:10:30.877] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.893] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.910] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.927] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.944] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.960] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.977] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:30.977] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 6.15456, 6.15456, 6.15456 (delta: 0.016704)
+[2025-06-22 12:10:30.994] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.010] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.027] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.044] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.061] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.077] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.077] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 6.25485, 6.25485, 6.25485 (delta: 0.016721)
+[2025-06-22 12:10:31.094] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.111] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.127] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.144] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.161] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.178] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.194] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.195] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 6.37198, 6.37198, 6.37198 (delta: 0.01671)
+[2025-06-22 12:10:31.211] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.228] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.245] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.262] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.278] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.295] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.312] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.312] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 6.48919, 6.48919, 6.48919 (delta: 0.016707)
+[2025-06-22 12:10:31.329] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.345] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.362] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.380] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.395] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.412] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.412] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 6.58948, 6.58948, 6.58948 (delta: 0.016712)
+[2025-06-22 12:10:31.429] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.445] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.462] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.479] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.496] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.512] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.529] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.529] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 6.70646, 6.70646, 6.70646 (delta: 0.016731)
+[2025-06-22 12:10:31.546] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.563] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.579] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.596] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.612] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.629] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.646] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.646] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 6.82334, 6.82334, 6.82334 (delta: 0.016677)
+[2025-06-22 12:10:31.663] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.680] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.696] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.713] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.730] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.747] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.747] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 6.92477, 6.92477, 6.92477 (delta: 0.017629)
+[2025-06-22 12:10:31.764] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.781] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.797] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.814] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.831] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.848] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.864] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.864] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 7.04172, 7.04172, 7.04172 (delta: 0.016699)
+[2025-06-22 12:10:31.881] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.898] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.914] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.931] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.948] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.964] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.982] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:31.982] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 7.15871, 7.15871, 7.15871 (delta: 0.016713)
+[2025-06-22 12:10:31.998] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.015] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.031] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.048] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.065] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.082] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.082] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 7.25902, 7.25902, 7.25902 (delta: 0.01671)
+[2025-06-22 12:10:32.098] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.115] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.132] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.148] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.165] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.182] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.199] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.199] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 7.37606, 7.37606, 7.37606 (delta: 0.016724)
+[2025-06-22 12:10:32.215] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.232] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.249] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.265] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.282] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.299] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.316] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.316] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 7.49301, 7.49301, 7.49301 (delta: 0.016687)
+[2025-06-22 12:10:32.332] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.349] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.366] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.382] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.399] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.416] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.416] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 7.59339, 7.59339, 7.59339 (delta: 0.016737)
+[2025-06-22 12:10:32.433] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.449] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.466] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.483] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.500] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.516] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.533] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.533] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 7.71045, 7.71045, 7.71045 (delta: 0.016702)
+[2025-06-22 12:10:32.550] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.566] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.583] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.600] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.617] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.633] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.650] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.650] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 7.8275, 7.8275, 7.8275 (delta: 0.016719)
+[2025-06-22 12:10:32.667] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.683] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.700] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.717] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.734] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.750] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.750] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 7.92781, 7.92781, 7.92781 (delta: 0.016727)
+[2025-06-22 12:10:32.767] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.784] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.800] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.817] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.834] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.851] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.867] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.867] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 8.04487, 8.04487, 8.04487 (delta: 0.016723)
+[2025-06-22 12:10:32.884] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.901] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.918] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.934] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.951] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.968] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.985] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:32.985] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 8.16205, 8.16205, 8.16205 (delta: 0.016712)
+[2025-06-22 12:10:33.001] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.018] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.035] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.052] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.068] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.085] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.085] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 8.26239, 8.26239, 8.26239 (delta: 0.016728)
+[2025-06-22 12:10:33.102] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.118] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.135] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.152] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.169] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.185] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.202] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.202] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 8.37942, 8.37942, 8.37942 (delta: 0.016713)
+[2025-06-22 12:10:33.219] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.235] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.252] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.269] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.286] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.302] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.319] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.319] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 8.49645, 8.49645, 8.49645 (delta: 0.016738)
+[2025-06-22 12:10:33.336] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.352] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.369] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.386] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.402] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.419] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.419] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 8.59668, 8.59668, 8.59668 (delta: 0.016721)
+[2025-06-22 12:10:33.436] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.453] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.469] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.486] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.503] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.520] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.537] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.537] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 8.71401, 8.71401, 8.71401 (delta: 0.016725)
+[2025-06-22 12:10:33.553] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.570] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.587] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.603] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.620] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.637] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.654] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.654] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 8.83114, 8.83114, 8.83114 (delta: 0.016707)
+[2025-06-22 12:10:33.670] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.687] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.704] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.721] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.737] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.754] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.754] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 8.93143, 8.93143, 8.93143 (delta: 0.016699)
+[2025-06-22 12:10:33.771] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.787] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.804] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.821] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.838] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.854] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.871] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.871] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 9.04848, 9.04848, 9.04848 (delta: 0.016712)
+[2025-06-22 12:10:33.888] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.904] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.921] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.938] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.955] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.971] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.988] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:33.988] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 9.16561, 9.16561, 9.16561 (delta: 0.016765)
+[2025-06-22 12:10:34.005] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.022] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.038] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.055] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.072] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.088] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.089] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 9.26598, 9.26598, 9.26598 (delta: 0.016716)
+[2025-06-22 12:10:34.105] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.122] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.139] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.155] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.172] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.189] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.205] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.206] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 9.38295, 9.38295, 9.38295 (delta: 0.016693)
+[2025-06-22 12:10:34.222] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.239] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.256] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.272] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.289] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.306] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.323] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.323] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 9.49998, 9.49998, 9.49998 (delta: 0.016718)
+[2025-06-22 12:10:34.339] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.356] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.373] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.389] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.406] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.423] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.423] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 9.60034, 9.60034, 9.60034 (delta: 0.016706)
+[2025-06-22 12:10:34.440] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.456] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.473] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.490] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.506] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.523] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.540] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.540] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 17 rotation: 9.71739, 9.71739, 9.71739 (delta: 0.01673)
+[2025-06-22 12:10:34.557] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.573] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.590] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.607] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.623] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.640] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.657] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.657] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 8 rotation: 9.83441, 9.83441, 9.83441 (delta: 0.016729)
+[2025-06-22 12:10:34.674] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.690] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.707] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.724] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.740] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.757] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.757] [INFO ] [MovementSystem.cpp:130] MovementSystem: Entity 26 rotation: 9.93471, 9.93471, 9.93471 (delta: 0.016739)
+[2025-06-22 12:10:34.774] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.791] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+[2025-06-22 12:10:34.807] [INFO ] [MovementSystem.cpp:9] MovementSystem: updateMovement called with 27 entities
+
+=== Engine Logger Started: 2025-06-22 12:12:36.004 ===
+[2025-06-22 12:12:36.004] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:12:36.230] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:12:36.230] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:12:36.230] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:12:36.230] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:12:36.230] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:12:36.236] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:12:36.236] [INFO ] [GameScene.cpp:79] GameScene: Initializing scene
+[2025-06-22 12:12:36.236] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 6.043ms
+[2025-06-22 12:12:36.236] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:12:36.236] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:12:36.236] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:12:47.881] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 12:12:47.889] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 12:12:47.889] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 12:13:18.248 ===
+[2025-06-22 12:13:18.248] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:13:18.451] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:13:18.451] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:13:18.451] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:13:18.451] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:13:18.451] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:13:18.456] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:13:18.456] [INFO ] [GameScene.cpp:79] GameScene: Initializing scene
+[2025-06-22 12:13:18.456] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 5.7386ms
+[2025-06-22 12:13:18.456] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:13:18.456] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:13:18.456] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:13:40.066] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 12:13:40.071] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 12:13:40.071] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown
+
+=== Engine Logger Started: 2025-06-22 12:14:00.483 ===
+[2025-06-22 12:14:00.483] [INFO ] [test.cpp:9] Engine: Starting application
+[2025-06-22 12:14:00.704] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'MapScene'
+[2025-06-22 12:14:00.704] [INFO ] [SceneManager.cpp:41] SceneManager: Registered scene factory 'GameScene'
+[2025-06-22 12:14:00.704] [INFO ] [SceneManager.cpp:66] SceneManager: Queued transition to scene 'GameScene'
+[2025-06-22 12:14:00.704] [INFO ] [SceneManager.cpp:90] SceneManager: Processing transition to 'GameScene'
+[2025-06-22 12:14:00.704] [INFO ] [SceneManager.cpp:127] SceneManager: Loading scene 'GameScene'
+[2025-06-22 12:14:00.709] [INFO ] [CollisionSystem.cpp:17] CollisionSystem: Initialized with UniformGrid strategy
+[2025-06-22 12:14:00.709] [INFO ] [GameScene.cpp:79] GameScene: Initializing scene
+[2025-06-22 12:14:00.709] [INFO ] [SceneManager.cpp:152] SceneManager: Scene 'GameScene' loaded successfully in 5.57971ms
+[2025-06-22 12:14:00.709] [INFO ] [SceneManager.cpp:102] SceneManager: Successfully transitioned to 'GameScene'
+[2025-06-22 12:14:00.709] [INFO ] [Game.cpp:34] Game: Scene initialization complete
+[2025-06-22 12:14:00.709] [INFO ] [Game.cpp:38] Game: Starting main game loop
+[2025-06-22 12:14:15.138] [INFO ] [test.cpp:18] Engine: Application shutting down normally
+[2025-06-22 12:14:15.146] [INFO ] [GameScene.cpp:9] GameScene: Unloading scene and cleaning up resources
+[2025-06-22 12:14:15.146] [INFO ] [SceneManager.cpp:14] SceneManager: Successfully unloaded scene 'GameScene' during shutdown

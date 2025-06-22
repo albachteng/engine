@@ -6,6 +6,10 @@
 #include "InputController.hpp"
 #include "OpenGLRenderer.hpp"
 #include "CollisionSystem.hpp"
+#include "CollisionDetectionSystem.hpp"
+#include "CollisionResolutionSystem.hpp"
+#include "BoundarySystem.hpp"
+#include "MovementSystem.hpp"
 #include <cstddef>
 #include <glm/ext/vector_float3.hpp>
 #include <memory>
@@ -20,6 +24,13 @@ private:
   std::shared_ptr<ActionController<SceneActions>> m_actionController;
   std::unique_ptr<OpenGLRenderer> m_renderer;
   std::unique_ptr<CollisionSystem> m_collisionSystem;
+  
+  // New physics systems
+  std::unique_ptr<CollisionDetectionSystem> m_collisionDetectionSystem;
+  std::unique_ptr<CollisionResolutionSystem> m_collisionResolutionSystem;
+  std::unique_ptr<BoundarySystem> m_boundarySystem;
+  std::unique_ptr<MovementSystem> m_movementSystem;
+  
   void spawnTriangle();
   Vec2f m_window_size;
   EntityManager m_entityManager;

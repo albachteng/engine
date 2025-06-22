@@ -16,7 +16,7 @@ std::shared_ptr<Entity> EntityManager::addEntity(const EntityTag &tag) {
   struct EntityBuilder : public Entity {
     EntityBuilder(size_t id, const EntityTag &tag) : Entity(id, tag) {}
   };
-  
+
   auto e = std::make_shared<EntityBuilder>(m_totalEntities++, tag);
   m_toAdd.push_back(e); // delay for iterator invalidation
   return e;
@@ -28,17 +28,16 @@ void EntityManager::update() {
     m_entities.push_back(e);
     m_entityMap[e->tag()].push_back(e);
   }
-  // Remove inactive entities from main vector and clean up their components
-  auto it = std::remove_if(
-      m_entities.begin(), m_entities.end(),
-      [](const std::shared_ptr<Entity> &e) { 
-        if (!e->isActive()) {
-          // Clean up entity's components before removing
-          e->removeAllComponents();
-          return true;
-        }
-        return false;
-      });
+  // Remove inactive entities from main vector
+  auto it = std::remove_if(m_entities.begin(), m_entities.end(),
+                           [](const std::shared_ptr<Entity> &e) {
+                             if (!e->isActive()) {
+                               // Clean up entity's components before removing
+                               e->removeAllComponents();
+                               return true;
+                             }
+                             return false;
+                           });
   m_entities.erase(it, m_entities.end());
 
   // Remove inactive entities from each tag group
@@ -70,21 +69,20 @@ const EntityVec &EntityManager::getEntities(const EntityTag &tag) const {
 }
 
 std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) const {
-  auto it = std::find_if(m_entities.begin(), m_entities.end(),
-                        [id](const std::shared_ptr<Entity>& e) {
-                            return e->id() == id;
-                        });
-  
+  auto it = std::find_if(
+      m_entities.begin(), m_entities.end(),
+      [id](const std::shared_ptr<Entity> &e) { return e->id() == id; });
+
   if (it != m_entities.end()) {
     return *it;
   }
-  
+
   return nullptr;
 }
 
 std::shared_ptr<Entity> EntityManager::getEntityById(size_t id) {
   // Implement non-const version in terms of const version to avoid duplication
-  return const_cast<const EntityManager*>(this)->getEntityById(id);
+  return const_cast<const EntityManager *>(this)->getEntityById(id);
 }
 
 bool EntityManager::hasTag(const EntityTag &tag) const {
@@ -96,7 +94,7 @@ void EntityManager::clear() {
   m_entityMap.clear();
   m_toAdd.clear();
   m_totalEntities = 0;
-  
+
   // Clear component system
   if (Entity::getComponentManager()) {
     Entity::getComponentManager()->clear();
