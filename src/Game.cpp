@@ -21,7 +21,7 @@ Game::Game(const std::string &config) {
   m_sceneManager.registerScene(
       "MapScene", std::function<std::shared_ptr<BaseScene>()>([this]() {
         return std::static_pointer_cast<BaseScene>(
-            std::make_shared<MapScene>(m_window));
+            std::make_shared<VoronoiMapScene>(m_window));
       }));
   m_sceneManager.registerScene(
       "GameScene", std::function<std::shared_ptr<BaseScene>()>([this]() {

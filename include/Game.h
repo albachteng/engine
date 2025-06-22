@@ -2,6 +2,7 @@
 #include "../include/EntityManager.h"
 #include "../include/GameScene.h"
 #include "../include/MapScene.h"
+#include "../include/VoronoiMapScene.h"
 #include "Component.h"
 #include "InputEvent.hpp"
 #include "Renderer.h"

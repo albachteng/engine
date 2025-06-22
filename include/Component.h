@@ -165,3 +165,53 @@ public:
   CMapNode(int id, const Vec2f& pos, NodeShape nodeShape = NodeShape::CIRCLE, 
            bool navigable = true, float nodeSize = 20.0f);
 };
+
+class CVoronoiRegion : public Component {
+public:
+  int regionId;
+  Vec2f centroid;                      // Navigation center
+  std::vector<Vec2f> originalVertices; // Clean Voronoi boundary
+  std::vector<Vec2f> distortedBoundary; // Noise-distorted boundary
+  std::vector<int> neighborIds;        // Adjacent regions
+  float area;
+  bool isSelected = false;
+  bool isNavigable = true;
+  
+  // Visual properties
+  sf::Color baseColor;
+  sf::Color selectedColor;
+  sf::Color borderColor;
+  float pulseTimer = 0.0f;
+  
+  // Fantasy theming
+  std::string regionName;
+  std::string regionType;  // "Forest", "Mountains", "Plains", etc.
+  
+  CVoronoiRegion();
+  CVoronoiRegion(int id, const Vec2f& center, const std::vector<Vec2f>& vertices);
+  
+  // Utility methods
+  bool containsPoint(const Vec2f& point) const;
+  void calculateCentroid();
+  void calculateArea();
+  Vec2f getClosestBoundaryPoint(const Vec2f& point) const;
+  
+private:
+  bool pointInPolygon(const Vec2f& point, const std::vector<Vec2f>& polygon) const;
+};
+
+// Enhanced rendering component for complex shapes
+class CComplexShape : public Component {
+public:
+  enum ShapeType { CIRCLE, POLYGON, VORONOI_REGION };
+  
+  ShapeType type;
+  std::vector<Vec2f> vertices;    // For polygons/regions
+  sf::Color fillColor;
+  sf::Color outlineColor;
+  float outlineThickness;
+  bool showVertices = false;      // Debug mode
+  
+  CComplexShape();
+  CComplexShape(const std::vector<Vec2f>& verts, sf::Color fill, sf::Color outline, float thickness);
+};
