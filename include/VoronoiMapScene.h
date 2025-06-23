@@ -6,7 +6,6 @@
 #include "InputController.hpp"
 #include "SFMLRenderer.h"
 #include "VoronoiGenerator.h"
-#include "NoiseGenerator.h"
 #include <memory>
 #include <vector>
 #include <unordered_map>
@@ -24,9 +23,6 @@ struct VoronoiMapConfig {
     Vec2f mapSize = Vec2f(800, 600);
     unsigned int seed = 42;
     float minRegionDistance = 60.0f;
-    float boundaryRoughness = 0.3f;
-    float noiseFrequency = 0.02f;
-    int boundarySubdivisions = 2;
     int relaxationIterations = 2;
     bool showBoundaries = true;
     bool showCenters = false;
@@ -42,8 +38,6 @@ private:
     
     VoronoiMapConfig m_config;
     std::unique_ptr<VoronoiGenerator> m_voronoiGen;
-    std::unique_ptr<NoiseGenerator> m_noiseGen;
-    std::unique_ptr<BoundaryDistorter> m_distorter;
     
     Vec2f m_window_size;
     bool m_paused = false;
@@ -72,7 +66,6 @@ public:
     // Map generation
     void generateVoronoiMap();
     void regenerateWithNewSeed();
-    void applyFantasyTheme();
     
     // Navigation (public for testing)
     void navigateInDirection(Direction dir);
@@ -82,7 +75,6 @@ public:
     // Visual controls
     void toggleBoundaryDisplay();
     void toggleCenterDisplay();
-    void cycleVisualStyle();
     
     // Utility
     void updateRegionVisuals(float deltaTime);
@@ -95,8 +87,9 @@ public:
     VoronoiMapConfig& getConfig() { return m_config; }
     const std::vector<int>& getRegionIds() const { return m_regionIds; }
     int getCurrentRegionId() const { return m_currentRegionId; }
+    sf::Color getFantasyColor(int regionId);
+    EntityManager& getEntityManager() { return m_entityManager; }
     
 private:
     // Helper methods
-    sf::Color getFantasyColor(int regionId);
 };
